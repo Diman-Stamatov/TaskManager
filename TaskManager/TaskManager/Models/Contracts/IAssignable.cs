@@ -11,3 +11,4 @@ namespace TaskManager.Models.Contracts
         bool IsAssigned { get; }
     }
 }
+
