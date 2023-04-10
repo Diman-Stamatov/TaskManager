@@ -10,6 +10,7 @@ namespace TaskManager.Models.Enums
     {
         New,
         Unscheduled,
-        Scheduled
+        Scheduled,
+        Done
     }
 }

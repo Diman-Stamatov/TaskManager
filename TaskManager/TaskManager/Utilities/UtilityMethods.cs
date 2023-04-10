@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Models;
 using TaskManager.Models.Enums;
 
 namespace TaskManager.Utilities
@@ -43,6 +44,11 @@ namespace TaskManager.Utilities
         {
             string commandNames = String.Join(", ", Enum.GetNames(typeof(StoryStatustype)));
             return commandNames;
+        }
+
+        public static string StringGenerator(char simbol,int num)
+        {
+            return new string(simbol, num);
         }
     }
 }

@@ -57,8 +57,25 @@ namespace TaskManager.Models
 
         public override string ToString()
         {
-            return $"{Name}";
-            //TODO
+           StringBuilder memberOutput = new StringBuilder();
+            memberOutput.AppendLine($"Member: {Name}");
+            memberOutput.AppendLine("Tcks:");
+            int num = 1;
+            foreach (var task in tasks)
+            {
+                memberOutput.AppendLine($"{num++}. {task.ToString()}");
+                memberOutput.AppendLine(StringGenerator('-', 10));
+            } 
+            memberOutput.AppendLine(StringGenerator('-',10));
+            memberOutput.AppendLine($"Activity History:");
+            num = 1;
+            foreach (var activity in activityHistory)
+            {
+                memberOutput.AppendLine($"{num++}. {activity}");
+                memberOutput.AppendLine(StringGenerator('-', 10));
+            }
+            
+            return memberOutput.ToString();
         }
     }
 }
