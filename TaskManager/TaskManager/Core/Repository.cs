@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TaskManager.Classes.Interfaces;
-using TaskManager.Classes.Types;
+using TaskManager.Models;
+using TaskManager.Models.Contracts;
+using TaskManager.Models.Enums;
 using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Core

@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Models.Contracts
 {
-    internal interface IComment
+    public interface IComment
     {
+        string Author { get; }
+
+        string Content { get; }
     }
 }

@@ -4,17 +4,62 @@ using System.Linq;
 using System.Text;
 using TaskManager.Models.Enums;
 using TaskManager.Models.Contracts;
+using static TaskManager.Utilities.UtilityMethods;
+using static TaskManager.Utilities.Validation;
 
 namespace TaskManager.Models
 {
-    internal class Member : IMember
+    public class Member : IMember
     {
-        public string Name => throw new NotImplementedException();
+        private const int MinNameLength = 5;
+        private const int MaxNameLength = 15;
+        private readonly IList<string> activityHistory;
+        private readonly IList<ITask> tasks;
+        private string name;
 
-        public IList<string> ActivityHistory => throw new NotImplementedException();
+        public Member(string name)
+        {
+            Name = name;
+            activityHistory = new List<string>();
+            tasks = new List<ITask>();
+        }
+        public string Name
+        { 
+            get => name;
+            private set 
+            {
+                ValidateStringPropertyLength(
+                 value,
+                 GetType().Name,
+                 GetCommandTypeNames(),
+                 MinNameLength, 
+                 MaxNameLength);
+                name = value;
+            }
+        }
 
-        public bool IsAssigned => throw new NotImplementedException();
+        public IList<ITask> Tasks { get => new List<ITask>(tasks); }
 
-        IList<ITask> IMember.Tasks => throw new NotImplementedException();
+        public IList<string> ActivityHistory { get => new List<string>(activityHistory); }
+        //ActivityHistory ще връща копие на листа, за да не може да се правят неволни промени в него
+        public bool IsAssigned { get; set; }
+
+        //Добавяме през метод, за да защитим списъка
+        public void AddActivityHistory(string logHistory)
+        {
+            activityHistory.Add(logHistory);
+        }
+
+        public void AddTask(Task task)
+        {
+            tasks.Add(task);
+        }
+
+        public override string ToString()
+        {
+            return $"{Name}";
+            //TODO
+        }
     }
 }
+

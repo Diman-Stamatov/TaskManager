@@ -7,7 +7,7 @@ using TaskManager.Models.Contracts;
 
 namespace TaskManager.Models
 {
-    internal abstract class Task : ITask
+    public abstract class Task : ITask
     {
         public string Title => throw new NotImplementedException();
 

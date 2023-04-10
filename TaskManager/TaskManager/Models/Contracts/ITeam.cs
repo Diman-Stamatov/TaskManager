@@ -9,8 +9,8 @@ namespace TaskManager.Models.Contracts
     public interface ITeam
     {
         string Name { get; }
-        ICollection<IMember> Members { get; }
-        ICollection<IBoard> Boards { get; }
+        IList<IMember> Members { get; }
+        IList<IBoard> Boards { get; }
 
     }
 }

@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Models.Contracts
 {
-    internal interface IAssigneble
+    public interface IAssignable
     {
+        bool IsAssigned { get; }
     }
 }
