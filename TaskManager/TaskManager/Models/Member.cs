@@ -31,7 +31,7 @@ namespace TaskManager.Models
                 ValidateStringPropertyLength(
                  value,
                  GetType().Name,
-                 GetCommandTypeNames(),
+                 GetMethodName(),
                  MinNameLength, 
                  MaxNameLength);
                 name = value;
