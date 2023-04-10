@@ -13,7 +13,7 @@ using static TaskManager.Utilities.UtilityMethods;
 
 namespace TaskManager.Core
 {
-    internal class CommandFactory : ICommandFactory
+    public class CommandFactory : ICommandFactory
     {
         private const char SplitCommandSymbol = ' ';
 
@@ -30,6 +30,7 @@ namespace TaskManager.Core
             CommandType commandType = ParseCommandType(commandLine);
             ICollection<string> commandParameters = this.ExtractCommandParameters(commandLine);
             ICommand command = null;
+
             switch (commandType)
             {
                 case CommandType.AddTaskComment:
@@ -86,9 +87,9 @@ namespace TaskManager.Core
                     throw new NotImplementedException();
                 case CommandType.UnassignTask:
                     throw new NotImplementedException();
-
+                default:
+                    throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
             }
-            return command;
         }
 
         // Receives a full line and extracts the command to be executed from it.

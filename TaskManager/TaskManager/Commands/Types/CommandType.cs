@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Commands.Types
 {
-    internal enum CommandType
+    public enum CommandType
     {
         CreateMember,
         ShowMembers,

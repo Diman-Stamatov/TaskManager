@@ -1,4 +1,5 @@
-﻿using TaskManager.Models;
+﻿using System.Net.Http.Headers;
+using TaskManager.Models;
 
 
 namespace TaskManager
@@ -7,8 +8,9 @@ namespace TaskManager
     {
         static void Main(string[] args)
         {
-            Member m = new Member("rrr");
+            Member m = new Member("rfffffffr");
             Console.WriteLine(m);
+            Comment coment = new Comment(m.Name, String.Empty);
         }
     }
 };
