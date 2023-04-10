@@ -1,5 +1,6 @@
 ﻿using System.Net.Http.Headers;
 using TaskManager.Models;
+using TaskManager.Models.Enums;
 
 
 namespace TaskManager
@@ -8,9 +9,11 @@ namespace TaskManager
     {
         static void Main(string[] args)
         {
-            Member m = new Member("rfffffffr");
-            Console.WriteLine(m);
-            Comment coment = new Comment(m.Name, String.Empty);
+            var story = new Story("sadsd", "fsdfd", PriorityType.Low, SizeType.Small, StoryStatusType.Done);
+            story.RevertSize();
+            
+            
+            Console.WriteLine(story.Priority);
         }
     }
-};
+}
