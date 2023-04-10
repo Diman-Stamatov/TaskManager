@@ -7,7 +7,8 @@ namespace TaskManager
     {
         static void Main(string[] args)
         {
-
+            Member m = new Member("rrr");
+            Console.WriteLine(m);
         }
     }
 };
