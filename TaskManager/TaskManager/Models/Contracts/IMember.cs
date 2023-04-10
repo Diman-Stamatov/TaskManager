@@ -6,7 +6,7 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models.Contracts
 {
-    public interface IMember : IAssigneble
+    public interface IMember : IAssignable
     {
         string Name { get; }
         IList<ITask> Tasks { get; }
