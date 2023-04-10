@@ -98,7 +98,6 @@ namespace TaskManager.Models
         {
             return "не съм сигурен какво се очаква да направя тук";
         }
-        protected abstract void PrioritySet();
 
         public IList<IComment> Comments { get => new List<IComment>(comments); }                
    
