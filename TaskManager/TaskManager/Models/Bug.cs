@@ -8,12 +8,11 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models
 {
-    internal class Bug : IBug
+    public class Bug : IBug
     {
         public string Title => throw new NotImplementedException();
 
         public string Description => throw new NotImplementedException();
-        public ICollection<string> StepsToReproduce => throw new NotImplementedException();
 
         public PriorityType Priority => throw new NotImplementedException();
 
@@ -22,10 +21,11 @@ namespace TaskManager.Models
         public BugStatusType StatusType => throw new NotImplementedException();
 
         public IMember Assignee => throw new NotImplementedException();
-        
 
-        public ICollection<string> Comments => throw new NotImplementedException();
+        public IList<string> StepsToReproduce => throw new NotImplementedException();
 
-        public ICollection<string> ChangeLog => throw new NotImplementedException();
+        public IList<IComment> Comments => throw new NotImplementedException();
+
+        public IList<string> ChangesHistory => throw new NotImplementedException();
     }
 }

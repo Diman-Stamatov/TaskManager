@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace TaskManager.Models.Contracts
 {
-    internal interface IBoard
+    public interface IBoard
     {
         string Name { get; }
-        ICollection<ITask> Tasks { get; }
-        ICollection<string> ActivityLog { get; }
+        IList<ITask> Tasks { get; }
+        IList<string> ActivityHistory { get; }
     }
 }

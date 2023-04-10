@@ -11,8 +11,8 @@ namespace TaskManager.Models
     {
         public string Name => throw new NotImplementedException();
 
-        public ICollection<ITask> Tasks => throw new NotImplementedException();
+        public IList<string> ActivityHistory => throw new NotImplementedException();
 
-        public ICollection<string> ActivityLog => throw new NotImplementedException();
+        IList<ITask> IBoard.Tasks => throw new NotImplementedException();
     }
 }

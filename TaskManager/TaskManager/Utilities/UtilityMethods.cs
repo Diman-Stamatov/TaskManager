@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Utilities
 {
-    internal class UtilityMethods
+    public class UtilityMethods
     {
         public static string GetCommandTypeNames() => throw new NotImplementedException();
+
+        public static string GetMethodName () => throw new NotImplementedException();
     }
 }

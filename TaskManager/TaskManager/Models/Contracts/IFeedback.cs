@@ -7,7 +7,7 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models.Contracts
 {
-    internal interface IFeedback :ITask
+    public interface IFeedback :ITask
     {
         int Rating { get; }
         FeedbackStatusType Status { get; }

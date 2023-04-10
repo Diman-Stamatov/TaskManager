@@ -6,7 +6,7 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models.Contracts
 {
-    internal interface ITeam
+    public interface ITeam
     {
         string Name { get; }
         ICollection<IMember> Members { get; }

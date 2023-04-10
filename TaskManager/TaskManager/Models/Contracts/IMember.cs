@@ -6,10 +6,10 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models.Contracts
 {
-    internal interface IMember
+    public interface IMember : IAssignable
     {
         string Name { get; }
-        ICollection<ITask> Tasks { get; }
-        ICollection<string> ActivityLog { get; }
+        IList<ITask> Tasks { get; }
+        IList<string> ActivityHistory { get; }
     }
 }

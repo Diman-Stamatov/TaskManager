@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Exceptions
 {
-    internal class EntryNotFoundException:ApplicationException
+    public class EntryNotFoundException : ApplicationException
     {
         public EntryNotFoundException(string message):base(message) 
         { }

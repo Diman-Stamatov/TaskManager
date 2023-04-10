@@ -18,8 +18,8 @@ namespace TaskManager.Models
 
         public string Description => throw new NotImplementedException();
 
-        public ICollection<string> Comments => throw new NotImplementedException();
+        public IList<IComment> Comments => throw new NotImplementedException();
 
-        public ICollection<string> ChangeLog => throw new NotImplementedException();
+        public IList<string> ChangesHistory => throw new NotImplementedException();
     }
 }

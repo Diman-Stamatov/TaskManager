@@ -7,12 +7,12 @@ using TaskManager.Models.Contracts;
 
 namespace TaskManager.Models
 {
-    internal class Team : ITeam
+    public class Team : ITeam
     {
         public string Name => throw new NotImplementedException();
 
-        public ICollection<IMember> Members => throw new NotImplementedException();
+        IList<IMember> ITeam.Members => throw new NotImplementedException();
 
-        public ICollection<IBoard> Boards => throw new NotImplementedException();
+        IList<IBoard> ITeam.Boards => throw new NotImplementedException();
     }
 }

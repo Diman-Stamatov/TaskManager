@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManager.Models.Enums
+namespace TaskManager.Models
 {
-    public enum SizeType
+    internal class Comment
     {
-        Small,
-        Medium,
-        Large
     }
 }

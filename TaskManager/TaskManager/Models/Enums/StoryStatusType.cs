@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Models.Enums
 {
-    internal enum StoryStatustype
+    public enum StoryStatustype
     {
         NotDone,
         InProgress,

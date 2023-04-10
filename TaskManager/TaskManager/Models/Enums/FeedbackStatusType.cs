@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Models.Enums
 {
-    internal enum FeedbackStatusType
+    public enum FeedbackStatusType
     {
         New,
         Unscheduled,

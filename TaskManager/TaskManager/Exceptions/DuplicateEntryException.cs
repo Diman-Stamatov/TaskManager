@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Exceptions
 {
-    internal class DuplicateEntryException:ApplicationException
+    public class DuplicateEntryException : ApplicationException
     {
         public DuplicateEntryException(string message) : base(message)
         { }

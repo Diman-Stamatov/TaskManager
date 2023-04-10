@@ -7,7 +7,7 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models.Contracts
 {
-    internal interface IStory : ITask
+    public interface IStory : ITask
     {
         PriorityType Priority { get; }
         SizeType Size { get; }
