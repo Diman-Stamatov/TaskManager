@@ -129,5 +129,7 @@ namespace TaskManager.Models
             this.status--;
         }
 
+        public override string ToString() => throw new NotImplementedException();
+
     }
 }
