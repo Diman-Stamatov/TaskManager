@@ -100,8 +100,8 @@ namespace TaskManager.Core
             {
                 return result;
             }
-            string commandTypes = GetCommandTypeNames();
-            throw new InvalidUserInputException($"Invalid command. Please use one of the following: {commandTypes}.");
+            
+            throw new InvalidUserInputException($"Invalid command. Please use a valid command.");
         }
 
         // Receives a full line and extracts the parameters that are needed for the command to execute.
