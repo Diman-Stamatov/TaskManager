@@ -66,7 +66,7 @@ namespace TaskManager.Models
                 memberOutput.AppendLine($"{num++}. {task.ToString()}");
                 memberOutput.AppendLine(StringGenerator('-', 10));
             } 
-            memberOutput.AppendLine(StringGenerator('-',10));
+
             memberOutput.AppendLine($"Activity History:");
             num = 1;
             foreach (var activity in activityHistory)
