@@ -1,6 +1,15 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\TaskManager",
+    "\\TaskManager\\TaskManager",
+    "\\TaskManager\\TaskManager\\Classes",
+    "\\TaskManager\\TaskManager\\Classes\\Interfaces",
+    "\\TaskManager\\TaskManager\\Commands",
+    "\\TaskManager\\TaskManager\\Core",
+    "\\TaskManager\\TaskManager\\Exceptions",
+    "\\TaskManager\\TaskManager\\Utilities"
   ],
+  "SelectedNode": "\\TaskManager\\TaskManager\\Utilities\\UtilityMethods.cs",
   "PreviewInSolutionExplorer": false
 }
