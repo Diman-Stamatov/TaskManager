@@ -1,15 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Models.Enums;
 
 namespace TaskManager.Utilities
 {
     public class UtilityMethods
     {
-        public static string GetCommandTypeNames() => throw new NotImplementedException();
-
-        public static string GetMethodName () => throw new NotImplementedException();
+        public static string GetMethodName([CallerMemberName] string memberName = null)
+        {
+            return memberName.ToLower();
+        }
+        public static string GetBugStatusTypeNames()
+        {
+            string commandNames = String.Join(", ", Enum.GetNames(typeof(BugStatusType)));
+            return commandNames;
+        }
+        public static string GetFeedbackStatusTypeNames()
+        {
+            string commandNames = String.Join(", ", Enum.GetNames(typeof(FeedbackStatusType)));
+            return commandNames;
+        }
+        public static string GetPriorityTypeNames()
+        {
+            string commandNames = String.Join(", ", Enum.GetNames(typeof(PriorityType)));
+            return commandNames;
+        }
+        public static string GetSeverityTypeNames()
+        {
+            string commandNames = String.Join(", ", Enum.GetNames(typeof(SeverityType)));
+            return commandNames;
+        }
+        public static string GetSizeTypeNames()
+        {
+            string commandNames = String.Join(", ", Enum.GetNames(typeof(SizeType)));
+            return commandNames;
+        }
+        public static string GetStoryStatusTypeNames()
+        {
+            string commandNames = String.Join(", ", Enum.GetNames(typeof(StoryStatustype)));
+            return commandNames;
+        }
     }
 }

@@ -11,8 +11,8 @@ namespace TaskManager.Models
     {
         public string Name => throw new NotImplementedException();
 
-        IList<IMember> ITeam.Members => throw new NotImplementedException();
+        public IList<IMember> Members => throw new NotImplementedException();
 
-        IList<IBoard> ITeam.Boards => throw new NotImplementedException();
+        public IList<IBoard> Boards => throw new NotImplementedException();
     }
 }
