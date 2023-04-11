@@ -34,7 +34,7 @@ namespace TaskManager.Models
             Severity = severity;
             stepsToReproduce = new List<string>();
 
-            AddToChangeHistory($"'Bug' with title '{title}' was created at {TimeNow}.");
+            AddToChangeHistory($"'Bug' with title '{title}' was created");
         }
 
         public PriorityType Priority
@@ -45,7 +45,7 @@ namespace TaskManager.Models
             {
                 priority = value;
 
-                AddToChangeHistory("Priority");
+                AddToChangeHistory($"Priority set to {value}");
             }
         }
 
@@ -57,7 +57,7 @@ namespace TaskManager.Models
             {
                 status = value;
 
-                AddToChangeHistory("Status");
+                AddToChangeHistory($"Status set to {value}");
             }
         }
 
@@ -68,7 +68,7 @@ namespace TaskManager.Models
             {
                 severity = value;
 
-                AddToChangeHistory("Severity");
+                AddToChangeHistory($"Severity set to {value}");
             }
         }
         public IMember Assignee
@@ -79,7 +79,7 @@ namespace TaskManager.Models
                 ValidateAssignee(assignee, value);
                 assignee = value;
 
-                AddToChangeHistory("Severity");
+                AddToChangeHistory($"Severity set to {value}");
             }
         }
 
@@ -93,7 +93,7 @@ namespace TaskManager.Models
             stepsToReproduce.Add(stepToReproduce);
 
             AddToChangeHistory(
-                $"Step: '{stepsToReproduce}' added at {TimeNow()}");
+                $"Step: '{stepsToReproduce}' added");
         }       
       
         public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }

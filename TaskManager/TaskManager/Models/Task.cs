@@ -56,7 +56,7 @@ namespace TaskManager.Models
                  TaskTitleMinLenght,
                  TaskTitleMaxLenght);
                 title = value;
-                AddToChangeHistory($"Title set to {title} at {TimeNow}");
+                AddToChangeHistory($"Title set to {title}");
             }
         }
         public string Description
@@ -74,20 +74,20 @@ namespace TaskManager.Models
                  DiscriptionNameMinLenght,
                  discriptionNameMaxLenght);
                 description = value;
-                AddToChangeHistory($"Description set at {TimeNow}");
+                AddToChangeHistory($"Description set");
             }
         }
 
         public void AddComment(Comment comment)
         {
             comments.Add(comment);
-            AddToChangeHistory($"Comment added at {TimeNow}");
+            AddToChangeHistory($"Comment: '{comment}' added");
         }
 
         protected void AddToChangeHistory(string newEvent)
         {
             //вариант
-            changesHistory.Add($"{newEvent} set at {TimeNow()}");
+            changesHistory.Add($"{newEvent} at {TimeNow()}");
         }
         protected string TimeNow()
         {
