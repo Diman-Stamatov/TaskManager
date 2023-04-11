@@ -13,7 +13,7 @@ namespace TaskManager.Models.Contracts
         PriorityType Priority { get; }
         SeverityType Severity { get; }
         BugStatusType StatusType { get; }
-        IMember Assignee { get; }
+        IMember Assignee { get; set; }
 
     }
 }

@@ -35,7 +35,7 @@ namespace TaskManager.Core
             switch (commandType)
             {
                 case CommandType.AddTaskComment:
-                    return new AddTaskComment(commandParameters, repository);
+                    return new AddTaskCommentCommand(commandParameters, repository);
                 case CommandType.AssignTask:
                     throw new NotImplementedException();
                 case CommandType.ChangeBugPriority:

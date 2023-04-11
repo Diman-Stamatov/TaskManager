@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Commands
 {
-    internal class ChangeStoryStatus
+    internal class ChangeBugPriorityCommand
     {
     }
 }

@@ -7,12 +7,12 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class ChangeBugStatus : BaseCommand
+    public class ChangeBugStatusCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ChangeBugStatus(IList<string> commandParameters, IRepository repository)
+        public ChangeBugStatusCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }

@@ -12,12 +12,12 @@ using static TaskManager.Utilities.Validation;
 
 namespace TaskManager.Commands
 {
-    public class AddTaskComment : BaseCommand
+    public class AddTaskCommentCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 3;
         
 
-        public AddTaskComment(IList<string> commandParameters, IRepository repository)
+        public AddTaskCommentCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
@@ -30,10 +30,10 @@ namespace TaskManager.Commands
             string content = CommandParameters[1];
             string author = CommandParameters[2];           
 
-            return AddComment(taskId, content, author);
+            return AddTaskComment(taskId, content, author);
         }
 
-        private string AddComment(int id, string content, string author)
+        private string AddTaskComment(int id, string content, string author)
         {
             var foundMember = Repository.GetMember(author);
             ITask foundTask = Repository.GetTask(id);

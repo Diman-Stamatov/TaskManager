@@ -54,7 +54,12 @@ namespace TaskManager.Models
         public IMember Assignee
         {
             get => assignee;
-            
+            set
+            {
+                ValidateAssignee(assignee, value);
+                assignee = value;
+            }
+
         }
 
 
