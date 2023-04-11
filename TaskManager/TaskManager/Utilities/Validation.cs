@@ -93,15 +93,7 @@ namespace TaskManager.Utilities
                 throw new DuplicateEntryException(errorMessage);
             }
         }
-        public static void ValidateAssignedStatus(IMember member, string teamName)
-        {
-            if (member.IsAssigned == true)
-            {
-                string memberName = member.Name;
-                string errorMessage = string.Format(NotAssignedToTeamMessage, memberName, teamName);
-                throw new EntryNotFoundException(errorMessage);
-            }
-        }
+        
         public static void ValidateAssignee(IMember currentAssignee, IMember newAssignee)
         {
             string currentName = currentAssignee.Name;
