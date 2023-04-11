@@ -35,7 +35,7 @@ namespace TaskManager.Models
 
         public FeedbackStatusType Status { get; private set; }
         
-        public void AdvanceFeedbackStatus()
+        public override void AdvanceStatus()
         {
             switch (Status)
             {
@@ -60,7 +60,8 @@ namespace TaskManager.Models
             }
         }
 
-        public void RevertFeedbackStatus()
+
+        public override void RevertStatus()
         {
             switch (Status)
             {
@@ -84,5 +85,6 @@ namespace TaskManager.Models
                     throw new ArgumentException($"Feedbag status can only be one of the following: New, Unscheduled, Scheduled, Done");
             }
         }
+
     }
 }

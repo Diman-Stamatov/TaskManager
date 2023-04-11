@@ -19,7 +19,7 @@ namespace TaskManager.Models
         private StoryStatusType status;
         private IMember assignee;
         public Story(string title, string description, PriorityType priority, SizeType size, StoryStatusType status)
-            /*: base (title, description)*/
+            : base (title, description)
         {
             this.Priority = priority;
             this.Size = size;
@@ -110,7 +110,7 @@ namespace TaskManager.Models
             ValidateRevertMethod(type, currentValue, propertyName);
             this.size--;
         }
-        public void AdvanceStatus()
+        public override void AdvanceStatus()
         {
             var type = this.priority.GetType();
             int currentValue = (int)this.Priority;
@@ -119,7 +119,7 @@ namespace TaskManager.Models
             ValidateAdvanceMethod(type, currentValue, propertyName);
             this.status++;
         }
-        public void RevertStatus()
+        public override void RevertStatus()
         {
             var type = this.priority.GetType();
             int currentValue = (int)this.Priority;
@@ -131,5 +131,6 @@ namespace TaskManager.Models
 
         public override string ToString() => throw new NotImplementedException();
 
+        
     }
 }
