@@ -19,8 +19,8 @@ namespace TaskManager.Models
         private SizeType size;
         private StoryStatusType status;
         private IMember assignee;
-        public Story(string title, string description, PriorityType priority, SizeType size)
-            : base (title, description)
+        public Story(int id,string title, string description, PriorityType priority, SizeType size)
+            : base (id,title, description)
         {
             Priority = priority;
             Size = size;

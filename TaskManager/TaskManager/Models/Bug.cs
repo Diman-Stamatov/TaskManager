@@ -22,11 +22,12 @@ namespace TaskManager.Models
         private IMember assignee;
 
         public Bug(
+            int id,
             string title, 
             string description, 
             PriorityType priority,  
             SeverityType severity) 
-            : base(title, description)
+            : base(id, title, description)
         {
             Priority = priority;
             status = initialBugStatus;
@@ -106,10 +107,6 @@ namespace TaskManager.Models
         }
 
         public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }
-
-        public IList<IComment> Comments => throw new NotImplementedException();
-
-        public IList<string> ChangesHistory => throw new NotImplementedException();
 
         public BugStatusType StatusType => throw new NotImplementedException();
     }

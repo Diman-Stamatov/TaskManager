@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TaskManager.Commands.Interfaces
+namespace TaskManager.Commands
 {
-    public interface ICommand
+    internal class ChangeBugPriority
     {
-        string Execute();
     }
 }

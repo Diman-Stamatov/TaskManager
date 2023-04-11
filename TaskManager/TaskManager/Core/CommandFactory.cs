@@ -10,6 +10,7 @@ using TaskManager.Core.Interfaces;
 using TaskManager.Exceptions;
 using TaskManager.Commands.Types;
 using static TaskManager.Utilities.UtilityMethods;
+using TaskManager.Commands;
 
 namespace TaskManager.Core
 {
@@ -28,13 +29,13 @@ namespace TaskManager.Core
         {
 
             CommandType commandType = ParseCommandType(commandLine);
-            ICollection<string> commandParameters = this.ExtractCommandParameters(commandLine);
+            IList<string> commandParameters = this.ExtractCommandParameters(commandLine);
             ICommand command = null;
 
             switch (commandType)
             {
                 case CommandType.AddTaskComment:
-                    throw new NotImplementedException();
+                    return new AddTaskComment(commandParameters, repository);
                 case CommandType.AssignTask:
                     throw new NotImplementedException();
                 case CommandType.ChangeBugPriority:
@@ -114,7 +115,7 @@ namespace TaskManager.Core
         // Receives a full line and extracts the parameters that are needed for the command to execute.
         // For example, if the input line is "FilterBy Assignee John",
         // the method will return a list of ["Assignee", "John"].
-        private ICollection<string> ExtractCommandParameters(string commandLine)
+        private IList<string> ExtractCommandParameters(string commandLine)
         {
             IList<string> parameters = commandLine.Split(SplitCommandSymbol).ToList();
             parameters.RemoveAt(0);

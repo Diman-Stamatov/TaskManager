@@ -7,16 +7,13 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models.Contracts
 {
-    public interface IBug :ITask
+    public interface IBug : ITask
     {
         IList<string> StepsToReproduce { get; }
         PriorityType Priority { get; }
         SeverityType Severity { get; }
         BugStatusType StatusType { get; }
         IMember Assignee { get; }
-
-
-
 
     }
 }

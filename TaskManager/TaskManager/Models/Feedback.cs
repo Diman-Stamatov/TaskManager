@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,12 @@ namespace TaskManager.Models
         private const int RatingMinValue = 0;
         private const int RatingMaxValue = 10;
         private int rating;
-
-        public Feedback(string title, string description, int rating)
-            : base(title, description)
+        private const FeedbackStatusType InitialStatus = FeedbackStatusType.New;
+        public Feedback(int id, string title, string description, int rating)
+            : base(id, title, description)
         {
             Rating = rating;
-            Status =  FeedbackStatusType.New;
+            Status = InitialStatus;
         }
 
         public int Rating 
@@ -37,54 +38,35 @@ namespace TaskManager.Models
         
         public override void AdvanceStatus()
         {
-            switch (Status)
-            {
-                case FeedbackStatusType.New:
-                    Status = FeedbackStatusType.Unscheduled;
-                    LogChanges($"Status changed from {FeedbackStatusType.New} to {FeedbackStatusType.Unscheduled}");
-                    break;
-                case FeedbackStatusType.Unscheduled:
-                    Status = FeedbackStatusType.Scheduled;
-                    LogChanges($"Status changed from {FeedbackStatusType.Unscheduled} to {FeedbackStatusType.Scheduled}");
-                    break;
-                case FeedbackStatusType.Scheduled:
-                    Status = FeedbackStatusType.Done;
-                    LogChanges($"Status changed from {FeedbackStatusType.Scheduled} to {FeedbackStatusType.Done}");
-                    break;
-                case FeedbackStatusType.Done:
-                    string message = $"Status is already at Done, can't advance any further";
-                    LogChanges(message);
-                    throw new ArgumentException(message);
-                default:
-                    throw new ArgumentException($"Feedbag status can only be one of the following: New, Unscheduled, Scheduled, Done");
-            }
-        }
+            var type = Status.GetType();
+            int currentValue = (int)this.Status;
+            string propertyName = GetMethodName().TrimAdvance();
 
+            ValidateAdvanceMethod(type, currentValue, propertyName);
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName));
+
+            Status++;
+        }
 
         public override void RevertStatus()
         {
-            switch (Status)
-            {
-                case FeedbackStatusType.Done:
-                    Status = FeedbackStatusType.Scheduled;
-                    LogChanges($"Status changed from {FeedbackStatusType.Done} to {FeedbackStatusType.Scheduled}");
-                    break;
-                case FeedbackStatusType.Scheduled:
-                    Status = FeedbackStatusType.Unscheduled;
-                    LogChanges($"Status changed from {FeedbackStatusType.Scheduled} to {FeedbackStatusType.Unscheduled}");
-                    break;
-                case FeedbackStatusType.Unscheduled:
-                    Status = FeedbackStatusType.New;
-                    LogChanges($"Status changed from {FeedbackStatusType.Unscheduled} to {FeedbackStatusType.New}");
-                    break;
-                case FeedbackStatusType.New:
-                    string message = $"Status is already at New, can't revert any further";
-                    LogChanges(message);
-                    throw new ArgumentException(message);
-                default:
-                    throw new ArgumentException($"Feedbag status can only be one of the following: New, Unscheduled, Scheduled, Done");
-            }
+            var type = Status.GetType();
+            int currentValue = (int)this.Status;
+            string propertyName = GetMethodName().TrimRevert();
+
+            ValidateRevertMethod(type, currentValue, propertyName);
+            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName));
+            Status--;
         }
 
+        public override string ToString()
+        {
+            StringBuilder feedbackInfo = new StringBuilder();
+            feedbackInfo.Append(base.ToString());
+            feedbackInfo.AppendLine($"Feedback:");
+            feedbackInfo.AppendLine($"Rating: {Rating}");
+            feedbackInfo.AppendLine($"Status: {Status}");
+            return feedbackInfo.ToString().Trim();
+        }
     }
 }

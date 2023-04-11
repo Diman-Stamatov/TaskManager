@@ -14,14 +14,12 @@ namespace TaskManager.Models
     {
         private const int MinNameLength = 5;
         private const int MaxNameLength = 15;
-        private readonly IList<string> activityHistory;
         private readonly IList<ITask> tasks;
         private string name;
 
         public Member(string name)
         {
             Name = name;
-            activityHistory = new List<string>();
             tasks = new List<ITask>();
         }
         public string Name
@@ -40,27 +38,7 @@ namespace TaskManager.Models
         }
 
         public IList<ITask> Tasks { get => new List<ITask>(tasks); }
-
-        public IList<string> ActivityHistory { get => new List<string>(activityHistory); }
-        //метод
-        public string ActivityLog()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Member {Name}");
-            sb.AppendLine("Activities");
-            foreach (var item in tasks.)
-            {
-                //sb.AppendLine(item);
-            }
-
-            return sb.ToString();
-        }
-
-        public void AddActivityHistory(string logHistory)
-        {
-            activityHistory.Add(logHistory);
-        }
-
+      
         public void AddTask(Task task)
         {
             tasks.Add(task);
@@ -80,19 +58,17 @@ namespace TaskManager.Models
             return taskOutput.ToString().Trim();
         }
 
-        public string PtintActivity()
+        public string ActivityLog()
         {
-            StringBuilder activityOutput = new StringBuilder();
-            activityOutput.AppendLine($"Activity History:");
-            int num = 1;
-            activityOutput.AppendLine(StringGenerator('-', 10));
-            foreach (var activity in activityHistory)
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Member {Name}");
+            sb.AppendLine("Activities");
+            foreach (var task in Tasks)
             {
-                activityOutput.AppendLine($"{num++}. {activity}");
-                activityOutput.AppendLine(StringGenerator('-', 10));
+                sb.AppendLine(task.PrintChangesLog());
             }
 
-            return activityOutput.ToString().Trim();
+            return sb.ToString();
         }
 
         public override string ToString()
@@ -100,7 +76,7 @@ namespace TaskManager.Models
            StringBuilder memberOutput = new StringBuilder();
             memberOutput.AppendLine($"Member: {Name}");
             memberOutput.Append(PrintTasks());
-            memberOutput.Append(PtintActivity());
+            memberOutput.Append(ActivityLog());
             return memberOutput.ToString().Trim();
         }
     }

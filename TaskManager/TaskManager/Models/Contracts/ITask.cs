@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Agency.Models.Contracts;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models.Contracts
 {
-    public interface ITask
+    public interface ITask : IHasId
     {
         string Title { get; }
         string Description { get; }
@@ -14,7 +15,10 @@ namespace TaskManager.Models.Contracts
         IList<string> ChangesHistory { get; }
         void RevertStatus();
         void AdvanceStatus();
-        
+
+        string PrintChangesLog();
+
+        string PrintComments();
 
     }
 }
