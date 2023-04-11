@@ -56,10 +56,7 @@ namespace TaskManager.Models
         }
         public string Description
         {
-            get
-            {
-                return this.description;
-            }
+            get => description;            
             private set
             {
                 ValidateStringPropertyLength(
@@ -76,7 +73,7 @@ namespace TaskManager.Models
         public void AddComment(Comment comment)
         {
             comments.Add(comment);
-            LogChanges($"Comment: '{comment}' added");
+            LogChanges($"Comment: \"{comment}\" added");
         }
 
         protected void LogChanges(string newEvent)
@@ -94,7 +91,27 @@ namespace TaskManager.Models
    
         public IList<string> ChangesHistory { get => new List<string>(changesLog); }
 
-        
+        public override string ToString()
+        {
+            StringBuilder sb= new StringBuilder();
+            sb.AppendLine($"Task: {GetType().Name}");
+            sb.AppendLine($"Title: {Title}");
+            sb.AppendLine($"Description: {Description}");
+            return sb.ToString().Trim();
 
+        }
+        public string PrintComments()
+        {
+            StringBuilder sb= new StringBuilder();
+            int number = 1;
+            sb.AppendLine("Comments:");
+            sb.AppendLine(StringGenerator('*', 10));
+            foreach (var comment in Comments)
+            {
+                sb.AppendLine($"{number++}. {comment}");
+                sb.AppendLine(StringGenerator('*', 10));
+            }
+            return sb.ToString().Trim();
+        }
     }
 }
