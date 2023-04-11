@@ -7,6 +7,7 @@ using TaskManager.Models.Contracts;
 using static TaskManager.Utilities.UtilityMethods;
 using static TaskManager.Utilities.Validation;
 
+
 namespace TaskManager.Models
 {
     public class Member : IMember
@@ -41,8 +42,21 @@ namespace TaskManager.Models
         public IList<ITask> Tasks { get => new List<ITask>(tasks); }
 
         public IList<string> ActivityHistory { get => new List<string>(activityHistory); }
-   
+        //метод
+        public string ActivityLog()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Member {Name}");
+            sb.AppendLine("Activities");
+            foreach (var item in tasks)
+            {
+                //sb.AppendLine(item);
+            }
+
+            return sb.ToString();
+        }
         public bool IsAssigned { get; set; }
+        //Какво ще проверяваме и валидираме с него
 
         public void AddActivityHistory(string logHistory)
         {
@@ -54,7 +68,7 @@ namespace TaskManager.Models
             tasks.Add(task);
         }
 
-        public string PrintTaska()
+        public string PrintTasks()
         {
             StringBuilder taskOutput = new StringBuilder();
             int num = 1;
@@ -87,7 +101,7 @@ namespace TaskManager.Models
         {
            StringBuilder memberOutput = new StringBuilder();
             memberOutput.AppendLine($"Member: {Name}");
-            memberOutput.Append(PrintTaska());
+            memberOutput.Append(PrintTasks());
             memberOutput.Append(PtintActivity());
             return memberOutput.ToString().Trim();
         }
