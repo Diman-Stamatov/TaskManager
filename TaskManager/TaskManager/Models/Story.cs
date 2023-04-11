@@ -27,10 +27,8 @@ namespace TaskManager.Models
         }
         public PriorityType Priority
         {
-            get
-            {
-                return this.priority;
-            }
+            get => priority;
+
             private set
             {
                 this.priority = value;
@@ -73,6 +71,7 @@ namespace TaskManager.Models
                 this.assignee = value;
             }
         }
+
 
         public void AdvancePriority()
         {

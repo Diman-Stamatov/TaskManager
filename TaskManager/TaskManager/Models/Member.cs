@@ -48,15 +48,13 @@ namespace TaskManager.Models
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Member {Name}");
             sb.AppendLine("Activities");
-            foreach (var item in tasks)
+            foreach (var item in tasks.)
             {
                 //sb.AppendLine(item);
             }
 
             return sb.ToString();
         }
-        public bool IsAssigned { get; set; }
-        //Какво ще проверяваме и валидираме с него
 
         public void AddActivityHistory(string logHistory)
         {
