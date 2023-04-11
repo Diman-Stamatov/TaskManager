@@ -41,19 +41,19 @@ namespace TaskManager.Models
             {
                 case FeedbackStatusType.New:
                     Status = FeedbackStatusType.Unscheduled;
-                    AddToChangeHistory($"Status changed from {FeedbackStatusType.New} to {FeedbackStatusType.Unscheduled}");
+                    LogChanges($"Status changed from {FeedbackStatusType.New} to {FeedbackStatusType.Unscheduled}");
                     break;
                 case FeedbackStatusType.Unscheduled:
                     Status = FeedbackStatusType.Scheduled;
-                    AddToChangeHistory($"Status changed from {FeedbackStatusType.Unscheduled} to {FeedbackStatusType.Scheduled}");
+                    LogChanges($"Status changed from {FeedbackStatusType.Unscheduled} to {FeedbackStatusType.Scheduled}");
                     break;
                 case FeedbackStatusType.Scheduled:
                     Status = FeedbackStatusType.Done;
-                    AddToChangeHistory($"Status changed from {FeedbackStatusType.Scheduled} to {FeedbackStatusType.Done}");
+                    LogChanges($"Status changed from {FeedbackStatusType.Scheduled} to {FeedbackStatusType.Done}");
                     break;
                 case FeedbackStatusType.Done:
                     string message = $"Status is already at Done, can't advance any further";
-                    AddToChangeHistory(message);
+                    LogChanges(message);
                     throw new ArgumentException(message);
                 default:
                     throw new ArgumentException($"Feedbag status can only be one of the following: New, Unscheduled, Scheduled, Done");
@@ -66,19 +66,19 @@ namespace TaskManager.Models
             {
                 case FeedbackStatusType.Done:
                     Status = FeedbackStatusType.Scheduled;
-                    AddToChangeHistory($"Status changed from {FeedbackStatusType.Done} to {FeedbackStatusType.Scheduled}");
+                    LogChanges($"Status changed from {FeedbackStatusType.Done} to {FeedbackStatusType.Scheduled}");
                     break;
                 case FeedbackStatusType.Scheduled:
                     Status = FeedbackStatusType.Unscheduled;
-                    AddToChangeHistory($"Status changed from {FeedbackStatusType.Scheduled} to {FeedbackStatusType.Unscheduled}");
+                    LogChanges($"Status changed from {FeedbackStatusType.Scheduled} to {FeedbackStatusType.Unscheduled}");
                     break;
                 case FeedbackStatusType.Unscheduled:
                     Status = FeedbackStatusType.New;
-                    AddToChangeHistory($"Status changed from {FeedbackStatusType.Unscheduled} to {FeedbackStatusType.New}");
+                    LogChanges($"Status changed from {FeedbackStatusType.Unscheduled} to {FeedbackStatusType.New}");
                     break;
                 case FeedbackStatusType.New:
                     string message = $"Status is already at New, can't revert any further";
-                    AddToChangeHistory(message);
+                    LogChanges(message);
                     throw new ArgumentException(message);
                 default:
                     throw new ArgumentException($"Feedbag status can only be one of the following: New, Unscheduled, Scheduled, Done");
