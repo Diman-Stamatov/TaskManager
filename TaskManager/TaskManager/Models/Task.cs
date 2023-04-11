@@ -85,11 +85,6 @@ namespace TaskManager.Models
             changesLog.Add($"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]");
         }
      
-        public override string ToString()
-        {
-            return "не съм сигурен какво се очаква да направя тук";
-        }
-
         public abstract void AdvanceStatus();
         
         public abstract void RevertStatus();
@@ -98,6 +93,8 @@ namespace TaskManager.Models
         public IList<IComment> Comments { get => new List<IComment>(comments); }                
    
         public IList<string> ChangesHistory { get => new List<string>(changesLog); }
+
+        
 
     }
 }
