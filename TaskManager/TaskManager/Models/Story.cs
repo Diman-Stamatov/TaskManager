@@ -81,6 +81,7 @@ namespace TaskManager.Models
             string propertyName = GetMethodName().TrimAdvance();
             
             ValidateAdvanceMethod(type, currentValue, propertyName);
+            
             this.priority++;
         }
         public void RevertPriority()
@@ -99,6 +100,7 @@ namespace TaskManager.Models
             string propertyName = GetMethodName().TrimAdvance();
 
             ValidateAdvanceMethod(type, currentValue, propertyName);
+            
             this.size++;
         }
         public void RevertSize()
@@ -117,6 +119,7 @@ namespace TaskManager.Models
             string propertyName = GetMethodName().TrimAdvance();
 
             ValidateAdvanceMethod(type, currentValue, propertyName);
+            
             this.status++;
         }
         public override void RevertStatus()

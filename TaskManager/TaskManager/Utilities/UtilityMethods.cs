@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Exceptions;
 using TaskManager.Models;
 using TaskManager.Models.Enums;
 
@@ -11,6 +12,85 @@ namespace TaskManager.Utilities
 {
     public static class UtilityMethods
     {
+        private const string AdvanceMethodLogMessage = "The {0} was advanced from {1} to {2}.";
+        private const string RevertMethodLogMessage = "The {0} was reverted from {1} to {2}.";
+        public static string GenerateAdvanceMethodMessage(Type type, int currentValue, string propertyName)
+        {
+            int nextValue = currentValue+1;
+            string nextValueName = "";
+            string currentValueName = "";
+            if (type == typeof(BugStatusType))
+            {                
+                nextValueName = ((BugStatusType)nextValue).ToString();
+                currentValueName = ((BugStatusType)currentValue).ToString();
+            }
+            else if (type == typeof(FeedbackStatusType))
+            {
+                nextValueName = ((FeedbackStatusType)nextValue).ToString();
+                currentValueName = ((FeedbackStatusType)currentValue).ToString();
+            }
+            else if (type == typeof(PriorityType))
+            {
+                nextValueName = ((PriorityType)nextValue).ToString();
+                currentValueName = (((PriorityType)currentValue).ToString());
+            }
+            else if (type == typeof(SeverityType))
+            {
+                nextValueName = ((SeverityType)nextValue).ToString();
+                currentValueName = ((SeverityType)currentValue).ToString();
+            }
+            else if (type == typeof(SizeType))
+            {
+                nextValueName = ((SizeType)nextValue).ToString();
+                currentValueName = ((SizeType)currentValue).ToString();
+            }
+            else if (type == typeof(StoryStatusType))
+            {
+                nextValueName = ((StoryStatusType)nextValue).ToString();
+                currentValueName = ((StoryStatusType)currentValue).ToString();
+            }
+            string logMessage = string.Format(AdvanceMethodLogMessage, propertyName, currentValueName, nextValueName);
+            return logMessage;             
+        }
+
+        public static string GenerateRevertMethodMessage(Type type, int currentValue, string propertyName)
+        {
+            int nextValue = currentValue - 1;
+            string nextValueName = "";
+            string currentValueName = "";
+            if (type == typeof(BugStatusType))
+            {
+                nextValueName = ((BugStatusType)nextValue).ToString();
+                currentValueName = ((BugStatusType)currentValue).ToString();
+            }
+            else if (type == typeof(FeedbackStatusType))
+            {
+                nextValueName = ((FeedbackStatusType)nextValue).ToString();
+                currentValueName = ((FeedbackStatusType)currentValue).ToString();
+            }
+            else if (type == typeof(PriorityType))
+            {
+                nextValueName = ((PriorityType)nextValue).ToString();
+                currentValueName = (((PriorityType)currentValue).ToString());
+            }
+            else if (type == typeof(SeverityType))
+            {
+                nextValueName = ((SeverityType)nextValue).ToString();
+                currentValueName = ((SeverityType)currentValue).ToString();
+            }
+            else if (type == typeof(SizeType))
+            {
+                nextValueName = ((SizeType)nextValue).ToString();
+                currentValueName = ((SizeType)currentValue).ToString();
+            }
+            else if (type == typeof(StoryStatusType))
+            {
+                nextValueName = ((StoryStatusType)nextValue).ToString();
+                currentValueName = ((StoryStatusType)currentValue).ToString();
+            }
+            string logMessage = string.Format(RevertMethodLogMessage, propertyName, currentValueName, nextValueName);
+            return logMessage;
+        }
         public static string TrimAdvance(this string methodName)
         {
             int toSkip = "Advance".Length;
