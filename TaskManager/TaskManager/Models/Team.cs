@@ -17,12 +17,16 @@ namespace TaskManager.Models
         private string name;
         private IList<IMember> members;
         private IList<IBoard> boards;
+        
+        public Team(string name)
+        {
+            Name = name;
+            members = new List<IMember>();
+            boards = new List<IBoard>();
+        }
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get => name;
             private set
             {
                 string className = this.GetType().Name;
@@ -47,6 +51,20 @@ namespace TaskManager.Models
             {
                 return new List<IBoard>(this.boards);
             }
+        }
+
+        public void CreateBoard(string boardName)
+        {
+            string teamName = Name;
+            ValidateDuplicateBoard(boardName, Boards, teamName);
+            var board = new Board(boardName);
+            boards.Add(board);
+        }
+        public string ShowBoards()
+        {
+            var allBoardsInfo = new StringBuilder();
+
+            return allBoardsInfo.ToString();
         }
     }
 }

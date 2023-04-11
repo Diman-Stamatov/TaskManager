@@ -28,10 +28,8 @@ namespace TaskManager.Models
         }
         public PriorityType Priority
         {
-            get
-            {
-                return this.priority;
-            }
+            get => priority;
+
             private set
             {
                 priority = value;
@@ -40,10 +38,8 @@ namespace TaskManager.Models
 
         public SizeType Size
         {
-            get
-            {
-                return this.size;
-            }
+            get => size;
+
             private set
             {
                 size = value;
@@ -52,19 +48,12 @@ namespace TaskManager.Models
 
         public StoryStatusType Status
         {
-            get
-            {
-                return this.status;
-            }
-            
+            get => status;
         }
 
         public IMember Assignee
         {
-            get
-            {
-                return this.assignee;
-            }
+            get => assignee;
             
         }
 
@@ -77,62 +66,74 @@ namespace TaskManager.Models
             ValidateAdvanceMethod(type, currentValue, propertyName);
             LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName));
             
-            this.priority++;
+            priority++;
         }
         public void RevertPriority()
         {
-            var type = this.priority.GetType();
-            int currentValue = (int)this.Priority;
+            var type = priority.GetType();
+            int currentValue = (int)Priority;
             string propertyName = GetMethodName().TrimRevert();
 
             ValidateRevertMethod(type, currentValue, propertyName);
-            this.priority--;
+            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName));
+            priority--;
         }
         public void AdvanceSize()
         {
             var type = size.GetType();
-            int currentValue = (int)this.Priority;
+            int currentValue = (int)Size;
             string propertyName = GetMethodName().TrimAdvance();
 
             ValidateAdvanceMethod(type, currentValue, propertyName);
-            
-            this.size++;
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName));
+
+            size++;
         }
         public void RevertSize()
         {
-            var type = this.priority.GetType();
-            int currentValue = (int)this.Priority;
+            var type = size.GetType();
+            int currentValue = (int)Size;
             string propertyName = GetMethodName().TrimRevert();
 
             ValidateRevertMethod(type, currentValue, propertyName);
-            this.size--;
+            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName));
+            size--;
         }
         public override void AdvanceStatus()
         {
-            var type = this.priority.GetType();
-            int currentValue = (int)this.Priority;
+            var type = status.GetType();
+            int currentValue = (int)Status;
             string propertyName = GetMethodName().TrimAdvance();
 
             ValidateAdvanceMethod(type, currentValue, propertyName);
-            
-            this.status++;
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName));
+
+            status++;
         }
         public override void RevertStatus()
         {
-            var type = this.priority.GetType();
-            int currentValue = (int)this.Priority;
+            var type = status.GetType();
+            int currentValue = (int)Status;
             string propertyName = GetMethodName().TrimRevert();
 
             ValidateRevertMethod(type, currentValue, propertyName);
-            this.status--;
+            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName));
+            status--;
         }
-        public void AssignToMember(IMember member)
+        public void AssignTask(IMember member)
         {
             ValidateAssignee(Assignee, member);
             assignee = member;
         }
-        public override string ToString() => throw new NotImplementedException();
-
-        
+        public override string ToString()
+        {
+            StringBuilder storyInfo = new StringBuilder();
+            storyInfo.Append(base.ToString());
+            storyInfo.AppendLine($"Priority: {Priority}");
+            storyInfo.AppendLine($"Size: {Size}");
+            storyInfo.AppendLine($"Status: {Status}");
+            storyInfo.AppendLine($"Assigned to: {Assignee.Name}");
+            return storyInfo.ToString().Trim();
+        }        
     }
 }

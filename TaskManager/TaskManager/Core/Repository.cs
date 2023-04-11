@@ -12,10 +12,14 @@ namespace TaskManager.Core
 {
     internal class Repository : IRepository
     {
+        private IList<ITeam> teams;
+        private IList<IMember> members;
+        private IList<ITask> tasks;
+        public IList<ITeam> Teams => throw new NotImplementedException();
 
-        IList<ITeam> IRepository.Teams => throw new NotImplementedException();
+        public IList<IMember> Members => throw new NotImplementedException();
 
-        IList<IMember> IRepository.Members => throw new NotImplementedException();
+        public IList<ITask> Tasks => throw new NotImplementedException();
 
         public void AddMember(IMember member)
         {

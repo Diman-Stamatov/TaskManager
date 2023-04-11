@@ -13,6 +13,7 @@ namespace TaskManager.Core.Interfaces
     {
         IList<ITeam> Teams { get; }
         IList<IMember> Members { get; }
+        IList<ITask> Tasks { get; }
         void AddTeam(ITeam team);
         ITeam GetTeam(string name);
         void AddMember(IMember member);

@@ -20,6 +20,7 @@ namespace TaskManager.Utilities
         private const string DuplicateTeamMessage = "A team with the name \"{0}\" already exists!";
         private const string DuplicateTeamMemberMessage = "{0} is already part of team \"{1}\"!";
         private const string DuplicateEmployeeMessage = "{0} is already in the system!";
+        private const string DuplicateBoardMessage = "Team {0} already has a board called {1}!";
         private const string NotAssignedToTeamMessage = "{0} is not on team \"{1}\"!";
         private const string CannotAdvanceFurtherMessage = "Cannot advance the {0} any further, it is already set to {1}!";
         private const string CannotRevertFurtherMessage = "Cannot revert the {0} any further, it is already set to {1}!";
@@ -93,7 +94,16 @@ namespace TaskManager.Utilities
                 throw new DuplicateEntryException(errorMessage);
             }
         }
-        
+        public static void ValidateDuplicateBoard(string boardName, IList<IBoard> boards, string teamName)
+        {
+            bool duplicateBoardName = boards.Any(board => board.Name == boardName);
+            if (duplicateBoardName == true)
+            {
+                string errorMessage = string.Format(DuplicateBoardMessage, teamName, boardName);
+                throw new DuplicateEntryException(errorMessage);
+            }
+        }
+
         public static void ValidateAssignee(IMember currentAssignee, IMember newAssignee)
         {
             string currentName = currentAssignee.Name;
