@@ -16,6 +16,7 @@ namespace TaskManager.Models
     {
         private List<string> stepsToReproduce;
         private PriorityType priority;
+        private BugStatusType initialBugStatus = BugStatusType.Active;
         private BugStatusType status;
         private SeverityType severity;
         private IMember assignee;
@@ -28,7 +29,7 @@ namespace TaskManager.Models
             : base(title, description)
         {
             Priority = priority;
-            status = BugStatusType.Active;
+            status = initialBugStatus;
             Severity = severity;
             stepsToReproduce = new List<string>();
         }
