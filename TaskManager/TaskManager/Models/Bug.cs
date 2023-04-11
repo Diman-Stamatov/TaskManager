@@ -21,11 +21,12 @@ namespace TaskManager.Models
         private IMember assignee;
 
         public Bug(
+            int id,
             string title, 
             string description, 
             PriorityType priority,  
             SeverityType severity) 
-            : base(title, description)
+            : base(id, title, description)
         {
             Priority = priority;
             status = BugStatusType.Active;

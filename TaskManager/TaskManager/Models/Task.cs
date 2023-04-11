@@ -18,22 +18,19 @@ namespace TaskManager.Models
         private const int DiscriptionNameMinLenght = 10;
         private const int discriptionNameMaxLenght = 500;
 
-        private static int NextID = 0;
-
         private readonly IList<string> changesLog;      
         private readonly IList<Comment> comments;
         private string title;
         private string description;
-        private readonly int id;
 
-        public Task(string title, string description)
+        public Task(int id,string title, string description)
         {
             changesLog = new List<string>();
             comments = new List<Comment>();
 
             Title = title;
             Description = description;
-            id = ++NextID;
+            Id = id;
 
             LogChanges($"{GetType().Name} with title \"{title}\" was created");
         }
@@ -87,6 +84,8 @@ namespace TaskManager.Models
         public IList<IComment> Comments { get => new List<IComment>(comments); }                
    
         public IList<string> ChangesHistory { get => new List<string>(changesLog); }
+
+        public int Id { get; }
 
         public string PrintComments()
         {

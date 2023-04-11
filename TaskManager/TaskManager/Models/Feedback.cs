@@ -17,8 +17,8 @@ namespace TaskManager.Models
         private const int RatingMaxValue = 10;
         private int rating;
         private const FeedbackStatusType InitialStatus = FeedbackStatusType.New;
-        public Feedback(string title, string description, int rating)
-            : base(title, description)
+        public Feedback(int id, string title, string description, int rating)
+            : base(id, title, description)
         {
             Rating = rating;
             Status = InitialStatus;
