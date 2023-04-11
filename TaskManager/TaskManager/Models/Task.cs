@@ -113,5 +113,18 @@ namespace TaskManager.Models
             }
             return sb.ToString().Trim();
         }
+        public string PrintChangesLog()
+        {
+            StringBuilder sb= new StringBuilder();
+            int number = 1;
+            sb.AppendLine("ChangesLog:");
+            sb.AppendLine(StringGenerator('=', 10));
+            foreach (var log in changesLog)
+            {
+                sb.AppendLine($"{number++}. {log}");
+                sb.AppendLine(StringGenerator('=', 10));
+            }
+            return sb.ToString().Trim();
+        }
     }
 }
