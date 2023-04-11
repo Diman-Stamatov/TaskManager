@@ -59,5 +59,14 @@ namespace TaskManager.Models
             Status--;
         }
 
+        public override string ToString()
+        {
+            StringBuilder feedbackInfo = new StringBuilder();
+            feedbackInfo.Append(base.ToString());
+            feedbackInfo.AppendLine($"Feedback:");
+            feedbackInfo.AppendLine($"Rating: {Rating}");
+            feedbackInfo.AppendLine($"Status: {Status}");
+            return feedbackInfo.ToString().Trim();
+        }
     }
 }

@@ -107,10 +107,6 @@ namespace TaskManager.Models
 
         public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }
 
-        public IList<IComment> Comments => throw new NotImplementedException();
-
-        public IList<string> ChangesHistory => throw new NotImplementedException();
-
         public BugStatusType StatusType => throw new NotImplementedException();
     }
 }

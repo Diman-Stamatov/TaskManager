@@ -38,21 +38,7 @@ namespace TaskManager.Models
         }
 
         public IList<ITask> Tasks { get => new List<ITask>(tasks); }
-
-        //метод
-        public string ActivityLog()
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Member {Name}");
-            sb.AppendLine("Activities");
-            foreach (var item in tasks.)
-            {
-                //sb.AppendLine(item);
-            }
-
-            return sb.ToString();
-        }
-
+      
         public void AddTask(Task task)
         {
             tasks.Add(task);
@@ -72,6 +58,18 @@ namespace TaskManager.Models
             return taskOutput.ToString().Trim();
         }
 
+        public string ActivityLog()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Member {Name}");
+            sb.AppendLine("Activities");
+            foreach (var task in Tasks)
+            {
+                sb.AppendLine(task.PrintChangesLog());
+            }
+
+            return sb.ToString();
+        }
 
         public override string ToString()
         {
