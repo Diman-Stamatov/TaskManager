@@ -25,33 +25,26 @@ namespace TaskManager.Models
             string description, 
             PriorityType priority,  
             SeverityType severity) 
-
             : base(title, description)
         {
             Priority = priority;
             status = BugStatusType.Active;
             Severity = severity;
             stepsToReproduce = new List<string>();
-             // ???  LogChanges($"Priority set to {value}");
-              //  LogChanges($"Severity set to {value}");
-
         }
 
         public PriorityType Priority
         {
             get => priority;
-
             private set
             {
                 priority = value;
-
             }
         }
 
         public BugStatusType Status
         {
             get => status;
-
             private set
             {
                 status = value;               
@@ -64,9 +57,9 @@ namespace TaskManager.Models
             private set
             {
                 severity = value;
-
             }
         }
+
         public IMember Assignee
         {
             get =>assignee;
@@ -76,7 +69,6 @@ namespace TaskManager.Models
                 assignee = value;               
             }
         }
-
 
         public void AddStepsToReproduce(string stepToReproduce)
         {
@@ -93,12 +85,23 @@ namespace TaskManager.Models
 
         public override void AdvanceStatus()
         {
-            throw new NotImplementedException();
+            var type = priority.GetType();
+            int currentValue = (int)Priority;
+            string propertyName = GetMethodName().TrimAdvance();
+
+            ValidateAdvanceMethod(type, currentValue, propertyName);
+
+            status++;
         }
 
         public override void RevertStatus()
         {
-            throw new NotImplementedException();
+            var type = priority.GetType();
+            int currentValue = (int)Priority;
+            string propertyName = GetMethodName().TrimRevert();
+
+            ValidateRevertMethod(type, currentValue, propertyName);
+            status--;
         }
 
         public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }
