@@ -23,18 +23,18 @@ namespace TaskManager.Models
         public Bug(
             string title, 
             string description, 
-            PriorityType priority, 
-            BugStatusType status, 
+            PriorityType priority,  
             SeverityType severity) 
 
             : base(title, description)
         {
             Priority = priority;
-            Status = status;
+            status = BugStatusType.Active;
             Severity = severity;
             stepsToReproduce = new List<string>();
+             // ???  LogChanges($"Priority set to {value}");
+              //  LogChanges($"Severity set to {value}");
 
-            AddToChangeHistory($"'Bug' with title '{title}' was created");
         }
 
         public PriorityType Priority
@@ -45,7 +45,6 @@ namespace TaskManager.Models
             {
                 priority = value;
 
-                AddToChangeHistory($"Priority set to {value}");
             }
         }
 
@@ -55,9 +54,7 @@ namespace TaskManager.Models
 
             private set
             {
-                status = value;
-
-                AddToChangeHistory($"Status set to {value}");
+                status = value;               
             }
         }
 
@@ -68,7 +65,6 @@ namespace TaskManager.Models
             {
                 severity = value;
 
-                AddToChangeHistory($"Severity set to {value}");
             }
         }
         public IMember Assignee
@@ -77,24 +73,23 @@ namespace TaskManager.Models
             private set
             {
                 ValidateAssignee(assignee, value);
-                assignee = value;
-
-                AddToChangeHistory($"Severity set to {value}");
+                assignee = value;               
             }
         }
 
 
         public void AddStepsToReproduce(string stepToReproduce)
         {
+            //???
             ValidateStringNotNullOrEmpty(
                 stepToReproduce, 
-                "Step to reproduce can not be null or empty");
+                "Step to reproduce can not be null or empty.");
 
             stepsToReproduce.Add(stepToReproduce);
 
-            AddToChangeHistory(
-                $"Step: '{stepsToReproduce}' added");
-        }       
+            LogChanges(
+                $"'{stepsToReproduce}' added to 'Steps to reproduce'");
+        }        
       
         public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }
 

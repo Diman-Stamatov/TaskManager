@@ -18,29 +18,25 @@ namespace TaskManager.Models
         private const int DiscriptionNameMinLenght = 10;
         private const int discriptionNameMaxLenght = 500;
 
-        private static int taskCounter = 0;
+        private static int NextID = 0;
 
-        private readonly IList<string> changesHistory;   //??    
+        private readonly IList<string> changesLog;      
         private readonly IList<Comment> comments;
         private string title;
         private string description;
         private readonly int id;
 
-        private DateTime dateTime = DateTime.Now;
-
-
         public Task(string title, string description)
         {
-            changesHistory = new List<string>();
+            changesLog = new List<string>();
             comments = new List<Comment>();
 
             Title = title;
             Description = description;
-            id = ++taskCounter;
-            //предлагам ви в конструктора на всеки един наследен клас,
-            //да се създаде първия ред в changesHistroy съдържащ
-            //името на съответния клас и DateTime.Now
-            //$"{GetType{}} is created at {TimeNow}." - нещо такова
+            id = ++NextID;
+
+            LogChanges($"{GetType().Name} with title \"{title}\" was created");
+
         }
 
         public string Title
@@ -56,7 +52,6 @@ namespace TaskManager.Models
                  TaskTitleMinLenght,
                  TaskTitleMaxLenght);
                 title = value;
-                AddToChangeHistory($"Title set to {title}");
             }
         }
         public string Description
@@ -74,45 +69,35 @@ namespace TaskManager.Models
                  DiscriptionNameMinLenght,
                  discriptionNameMaxLenght);
                 description = value;
-                AddToChangeHistory($"Description set");
+               // AddToChangeHistory($"Description {this.description.Take(15)}...  set");
             }
         }
 
         public void AddComment(Comment comment)
         {
             comments.Add(comment);
-            AddToChangeHistory($"Comment: '{comment}' added");
+            LogChanges($"Comment: '{comment}' added");
         }
 
-        protected void AddToChangeHistory(string newEvent)
+        protected void LogChanges(string newEvent)
         {
             //вариант
-            changesHistory.Add($"{newEvent} at {TimeNow()}");
+            changesLog.Add($"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]");
         }
-        protected string TimeNow()
-        {
-            //вариант на форматиране
-            return $"[{dateTime.ToString("yyyyMMdd|HH:mm:ss.ffff")}]";
-        }
-
+     
         public override string ToString()
         {
             return "не съм сигурен какво се очаква да направя тук";
         }
 
-        //???????
-        //protected abstract void AdvancePriority();
+        public abstract void AdvanceStatus();
+        
+        public abstract void RevertStatus();
 
-        //protected abstract void RevertPriority();
-        
-        //protected abstract void AdvanceStatus();
-        
-        //protected abstract void RevertStatus();
 
         public IList<IComment> Comments { get => new List<IComment>(comments); }                
    
-        public IList<string> ChangesHistory { get => new List<string>(changesHistory); }
+        public IList<string> ChangesHistory { get => new List<string>(changesLog); }
 
-        public static object NextID { get; }
     }
 }
