@@ -92,6 +92,9 @@ namespace TaskManager.Models
 
             ValidateAdvanceMethod(type, currentValue, propertyName);
 
+            string className = GetType().Name;
+            int taskId = Id;
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
             status++;
         }
 
@@ -102,6 +105,10 @@ namespace TaskManager.Models
             string propertyName = GetMethodName().TrimRevert();
 
             ValidateRevertMethod(type, currentValue, propertyName);
+
+            string className = GetType().Name;
+            int taskId = Id;
+            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
             status--;
         }
 

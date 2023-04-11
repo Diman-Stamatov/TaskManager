@@ -1,4 +1,10 @@
-﻿using System;
+﻿global using static TaskManager.Utilities.UtilityMethods;
+global using static TaskManager.Utilities.Validation;
+global using TaskManager.Exceptions;
+global using TaskManager.Models.Contracts;
+global using TaskManager.Models;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
