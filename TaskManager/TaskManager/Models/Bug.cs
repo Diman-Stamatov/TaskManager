@@ -80,7 +80,7 @@ namespace TaskManager.Models
 
         public void AddStepsToReproduce(string stepToReproduce)
         {
-            //???
+            //това ще отиде за валидация в "command"
             ValidateStringNotNullOrEmpty(
                 stepToReproduce, 
                 "Step to reproduce can not be null or empty.");
