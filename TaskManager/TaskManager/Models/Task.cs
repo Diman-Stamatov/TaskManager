@@ -36,7 +36,6 @@ namespace TaskManager.Models
             id = ++NextID;
 
             LogChanges($"{GetType().Name} with title \"{title}\" was created");
-
         }
 
         public string Title
@@ -54,6 +53,7 @@ namespace TaskManager.Models
                 title = value;
             }
         }
+
         public string Description
         {
             get => description;            
@@ -65,8 +65,7 @@ namespace TaskManager.Models
                  GetMethodName(),
                  DiscriptionNameMinLenght,
                  discriptionNameMaxLenght);
-                description = value;
-               // AddToChangeHistory($"Description {this.description.Take(15)}...  set");
+                description = value;              
             }
         }
 
@@ -78,7 +77,6 @@ namespace TaskManager.Models
 
         protected void LogChanges(string newEvent)
         {
-            //вариант
             changesLog.Add($"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]");
         }
      
@@ -86,20 +84,10 @@ namespace TaskManager.Models
         
         public abstract void RevertStatus();
 
-
         public IList<IComment> Comments { get => new List<IComment>(comments); }                
    
         public IList<string> ChangesHistory { get => new List<string>(changesLog); }
 
-        public override string ToString()
-        {
-            StringBuilder sb= new StringBuilder();
-            sb.AppendLine($"Task: {GetType().Name}");
-            sb.AppendLine($"Title: {Title}");
-            sb.AppendLine($"Description: {Description}");
-            return sb.ToString().Trim();
-
-        }
         public string PrintComments()
         {
             StringBuilder sb= new StringBuilder();
@@ -112,6 +100,29 @@ namespace TaskManager.Models
                 sb.AppendLine(StringGenerator('*', 10));
             }
             return sb.ToString().Trim();
+        }
+
+        public string PrintChangesLog()
+        {
+            StringBuilder sb = new StringBuilder();
+            int number = 1;
+            sb.AppendLine("ChangesLog:");
+            sb.AppendLine(StringGenerator('=', 10));
+            foreach (var log in changesLog)
+            {
+                sb.AppendLine($"{number++}. {log}");
+                sb.AppendLine(StringGenerator('=', 10));
+            }
+            return sb.ToString().Trim();
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb= new StringBuilder();
+            sb.AppendLine($"Task: {GetType().Name}");
+            sb.AppendLine($"Title: {Title}");
+            sb.AppendLine($"Description: {Description}");
+            return sb.ToString().Trim();        
         }
     }
 }

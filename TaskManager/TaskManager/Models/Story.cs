@@ -57,6 +57,7 @@ namespace TaskManager.Models
             
         }
 
+
         public void AdvancePriority()
         {
             var type = priority.GetType();
