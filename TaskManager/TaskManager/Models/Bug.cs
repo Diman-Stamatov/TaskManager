@@ -2,30 +2,106 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using TaskManager.Models.Contracts;
 using TaskManager.Models.Enums;
+using TaskManager.Models.Contracts;
+using static TaskManager.Utilities.UtilityMethods;
+using static TaskManager.Utilities.Validation;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
+using System.Threading.Tasks;
 
 namespace TaskManager.Models
 {
-    public class Bug : IBug
+    public class Bug : Task, IBug
     {
-        public string Title => throw new NotImplementedException();
+        private List<string> stepsToReproduce;
+        private PriorityType priority;
+        private BugStatusType status;
+        private SeverityType severity;
+        private IMember assignee;
 
-        public string Description => throw new NotImplementedException();
+        public Bug(
+            string title, 
+            string description, 
+            PriorityType priority, 
+            BugStatusType status, 
+            SeverityType severity) 
 
-        public PriorityType Priority => throw new NotImplementedException();
+            : base(title, description)
+        {
+            Priority = priority;
+            Status = status;
+            Severity = severity;
+            stepsToReproduce = new List<string>();
 
-        public SeverityType Severity => throw new NotImplementedException();
+            AddToChangeHistory($"'Bug' with title '{title}' was created at {TimeNow}.");
+        }
 
-        public BugStatusType StatusType => throw new NotImplementedException();
+        public PriorityType Priority
+        {
+            get => priority;
 
-        public IMember Assignee => throw new NotImplementedException();
+            private set
+            {
+                priority = value;
 
-        public IList<string> StepsToReproduce => throw new NotImplementedException();
+                AddToChangeHistory("Priority");
+            }
+        }
+
+        public BugStatusType Status
+        {
+            get => status;
+
+            private set
+            {
+                status = value;
+
+                AddToChangeHistory("Status");
+            }
+        }
+
+        public SeverityType Severity
+        {
+            get => severity;
+            private set
+            {
+                severity = value;
+
+                AddToChangeHistory("Severity");
+            }
+        }
+        public IMember Assignee
+        {
+            get =>assignee;
+            private set
+            {
+                ValidateAssignee(assignee, value);
+                assignee = value;
+
+                AddToChangeHistory("Severity");
+            }
+        }
+
+
+        public void AddStepsToReproduce(string stepToReproduce)
+        {
+            ValidateStringNotNullOrEmpty(
+                stepToReproduce, 
+                "Step to reproduce can not be null or empty");
+
+            stepsToReproduce.Add(stepToReproduce);
+
+            AddToChangeHistory(
+                $"Step: '{stepsToReproduce}' added at {TimeNow()}");
+        }       
+      
+        public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }
 
         public IList<IComment> Comments => throw new NotImplementedException();
 
         public IList<string> ChangesHistory => throw new NotImplementedException();
+
+        public BugStatusType StatusType => throw new NotImplementedException();
     }
 }

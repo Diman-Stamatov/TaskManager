@@ -25,15 +25,16 @@ namespace TaskManager.Models
         private string title;
         private string description;
         private readonly int id;
+
         private DateTime dateTime = DateTime.Now;
 
 
-        public Task(string name, string description)
+        public Task(string title, string description)
         {
             changesHistory = new List<string>();
             comments = new List<Comment>();
 
-            Title = name;
+            Title = title;
             Description = description;
             id = ++taskCounter;
             //предлагам ви в конструктора на всеки един наследен клас,
@@ -86,9 +87,9 @@ namespace TaskManager.Models
         protected void AddToChangeHistory(string newEvent)
         {
             //вариант
-            changesHistory.Add($"{newEvent} at {TimeNow()}");
+            changesHistory.Add($"{newEvent} set at {TimeNow()}");
         }
-        private string TimeNow()
+        protected string TimeNow()
         {
             //вариант на форматиране
             return $"[{dateTime.ToString("yyyyMMdd|HH:mm:ss.ffff")}]";
@@ -98,6 +99,15 @@ namespace TaskManager.Models
         {
             return "не съм сигурен какво се очаква да направя тук";
         }
+
+        //???????
+        //protected abstract void AdvancePriority();
+
+        //protected abstract void RevertPriority();
+        
+        //protected abstract void AdvanceStatus();
+        
+        //protected abstract void RevertStatus();
 
         public IList<IComment> Comments { get => new List<IComment>(comments); }                
    
