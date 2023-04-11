@@ -13,17 +13,18 @@ namespace TaskManager.Models
 {
     public class Story : Task, IStory
     {
-         
+        private const StoryStatusType InitialStatus = StoryStatusType.NotDone;
+
         private PriorityType priority;
         private SizeType size;
         private StoryStatusType status;
         private IMember assignee;
-        public Story(string title, string description, PriorityType priority, SizeType size, StoryStatusType status)
+        public Story(string title, string description, PriorityType priority, SizeType size)
             : base (title, description)
         {
-            this.Priority = priority;
-            this.Size = size;
-            this.Status = status;
+            Priority = priority;
+            Size = size;
+            status = InitialStatus;
         }
         public PriorityType Priority
         {
@@ -33,7 +34,7 @@ namespace TaskManager.Models
             }
             private set
             {
-                this.priority = value;
+                priority = value;
             }
         }
 
@@ -45,7 +46,7 @@ namespace TaskManager.Models
             }
             private set
             {
-                this.size = value;
+                size = value;
             }
         }
 
@@ -55,10 +56,7 @@ namespace TaskManager.Models
             {
                 return this.status;
             }
-            private set
-            {
-                this.status = value;
-            }
+            
         }
 
         public IMember Assignee
@@ -67,16 +65,12 @@ namespace TaskManager.Models
             {
                 return this.assignee;
             }
-            private set
-            {
-                ValidateAssignee(this.assignee, value);
-                this.assignee = value;
-            }
+            
         }
 
         public void AdvancePriority()
         {
-            var type = this.priority.GetType();
+            var type = priority.GetType();
             int currentValue = (int)this.Priority;
             string propertyName = GetMethodName().TrimAdvance();
             
@@ -96,7 +90,7 @@ namespace TaskManager.Models
         }
         public void AdvanceSize()
         {
-            var type = this.priority.GetType();
+            var type = size.GetType();
             int currentValue = (int)this.Priority;
             string propertyName = GetMethodName().TrimAdvance();
 
@@ -132,7 +126,11 @@ namespace TaskManager.Models
             ValidateRevertMethod(type, currentValue, propertyName);
             this.status--;
         }
-
+        public void AssignToMember(IMember member)
+        {
+            ValidateAssignee(Assignee, member);
+            assignee = member;
+        }
         public override string ToString() => throw new NotImplementedException();
 
         
