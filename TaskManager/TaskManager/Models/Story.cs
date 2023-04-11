@@ -19,7 +19,7 @@ namespace TaskManager.Models
         private StoryStatusType status;
         private IMember assignee;
         public Story(string title, string description, PriorityType priority, SizeType size, StoryStatusType status)
-            /*: base (title, description)*/
+            : base (title, description)
         {
             this.Priority = priority;
             this.Size = size;
