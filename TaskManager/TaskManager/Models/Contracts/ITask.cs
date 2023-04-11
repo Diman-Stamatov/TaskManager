@@ -14,7 +14,10 @@ namespace TaskManager.Models.Contracts
         IList<string> ChangesHistory { get; }
         void RevertStatus();
         void AdvanceStatus();
-        
+
+        string PrintChangesLog();
+
+        string PrintComments();
 
     }
 }

@@ -14,14 +14,12 @@ namespace TaskManager.Models
     {
         private const int MinNameLength = 5;
         private const int MaxNameLength = 15;
-        private readonly IList<string> activityHistory;
         private readonly IList<ITask> tasks;
         private string name;
 
         public Member(string name)
         {
             Name = name;
-            activityHistory = new List<string>();
             tasks = new List<ITask>();
         }
         public string Name
@@ -41,7 +39,6 @@ namespace TaskManager.Models
 
         public IList<ITask> Tasks { get => new List<ITask>(tasks); }
 
-        public IList<string> ActivityHistory { get => new List<string>(activityHistory); }
         //метод
         public string ActivityLog()
         {
@@ -54,11 +51,6 @@ namespace TaskManager.Models
             }
 
             return sb.ToString();
-        }
-
-        public void AddActivityHistory(string logHistory)
-        {
-            activityHistory.Add(logHistory);
         }
 
         public void AddTask(Task task)
@@ -80,27 +72,13 @@ namespace TaskManager.Models
             return taskOutput.ToString().Trim();
         }
 
-        public string PtintActivity()
-        {
-            StringBuilder activityOutput = new StringBuilder();
-            activityOutput.AppendLine($"Activity History:");
-            int num = 1;
-            activityOutput.AppendLine(StringGenerator('-', 10));
-            foreach (var activity in activityHistory)
-            {
-                activityOutput.AppendLine($"{num++}. {activity}");
-                activityOutput.AppendLine(StringGenerator('-', 10));
-            }
-
-            return activityOutput.ToString().Trim();
-        }
 
         public override string ToString()
         {
            StringBuilder memberOutput = new StringBuilder();
             memberOutput.AppendLine($"Member: {Name}");
             memberOutput.Append(PrintTasks());
-            memberOutput.Append(PtintActivity());
+            memberOutput.Append(ActivityLog());
             return memberOutput.ToString().Trim();
         }
     }
