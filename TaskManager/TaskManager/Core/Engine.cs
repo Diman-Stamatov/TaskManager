@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Core.Interfaces;
-using TaskManager.Commands.Interfaces;
+using TaskManager.Commands.Contracts;
 
 
 namespace TaskManager.Core

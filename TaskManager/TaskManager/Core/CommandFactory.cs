@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Input;
+
 using TaskManager.Core.Interfaces;
 using TaskManager.Exceptions;
 using TaskManager.Commands.Types;
 using static TaskManager.Utilities.UtilityMethods;
+using TaskManager.Commands.Contracts;
 using TaskManager.Commands;
 
 namespace TaskManager.Core
