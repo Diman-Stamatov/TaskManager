@@ -20,7 +20,14 @@ namespace TaskManager.Models
             Content = content;
         }
         public string Author { get; }
-        //Тук ще подаваме Member.Name, за да идва като string
+
         public string Content { get; }
+
+        public override string ToString()
+        {
+            StringBuilder comment = new StringBuilder();
+            comment.Append($"{Author}: {Content}");
+            return comment.ToString();
+        }
     }
 }
