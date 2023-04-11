@@ -89,8 +89,18 @@ namespace TaskManager.Models
 
             LogChanges(
                 $"'{stepsToReproduce}' added to 'Steps to reproduce'");
-        }        
-      
+        }
+
+        public override void AdvanceStatus()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void RevertStatus()
+        {
+            throw new NotImplementedException();
+        }
+
         public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }
 
         public IList<IComment> Comments => throw new NotImplementedException();
