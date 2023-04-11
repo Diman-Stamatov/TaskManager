@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TaskManager.Exceptions;
 using TaskManager.Models;
 using TaskManager.Models.Contracts;
+using TaskManager.Models.Enums;
 
 namespace TaskManager.Utilities
 {
@@ -20,6 +21,10 @@ namespace TaskManager.Utilities
         private const string DuplicateTeamMemberMessage = "{0} is already part of team \"{1}\"!";
         private const string DuplicateEmployeeMessage = "{0} is already in the system!";
         private const string NotAssignedToTeamMessage = "{0} is not on team \"{1}\"!";
+        private const string CannotAdvanceFurtherMessage = "Cannot advance the {0} any further, it is already set to {1}!";
+        private const string CannotRevertFurtherMessage = "Cannot revert the {0} any further, it is already set to {1}!";
+        private const string TaskAlreadyAsssignedMessage = "The task is already assigned to {0}!";
+        private const string TaskTakenMessage = "The task is already being taken care of by {0}!";
 
 
         public static void ValidateArgumentsCount(IEnumerable<String> arguments, int expectedArgumentsCount)
@@ -88,13 +93,116 @@ namespace TaskManager.Utilities
                 throw new DuplicateEntryException(errorMessage);
             }
         }
-        public static void ValidateAssigneStatus(IMember member, string teamName)
+        public static void ValidateAssignedStatus(IMember member, string teamName)
         {
             if (member.IsAssigned == true)
             {
                 string memberName = member.Name;
                 string errorMessage = string.Format(NotAssignedToTeamMessage, memberName, teamName);
                 throw new EntryNotFoundException(errorMessage);
+            }
+        }
+        public static void ValidateAssignee(IMember currentAssignee, IMember newAssignee)
+        {
+            string currentName = currentAssignee.Name;
+            string newName = newAssignee.Name;
+
+            if (currentName == newName)
+            {
+                string errorMessage = string.Format(TaskAlreadyAsssignedMessage, currentName);
+                throw new InvalidUserInputException(errorMessage);
+            }
+            else if (currentAssignee != null)
+            {
+                string errorMessage = string.Format(TaskTakenMessage, currentName);
+                throw new InvalidUserInputException(errorMessage);
+            }
+        }
+        public static void ValidateAdvanceMethod(Type type, int currentValue, string propertyName)
+        {
+            int maxValue = 0;
+            string maxValueName = "";
+            if (type == typeof(BugStatusType))
+            {
+                maxValue = Enum.GetValues(typeof(BugStatusType)).Cast<int>().Max();
+                maxValueName = ((BugStatusType)maxValue).ToString();
+                
+            }
+            else if (type == typeof(FeedbackStatusType))
+            {
+                maxValue = Enum.GetValues(typeof(FeedbackStatusType)).Cast<int>().Max();
+                maxValueName = ((FeedbackStatusType)maxValue).ToString();
+            }
+            else if (type == typeof(PriorityType))
+            {
+                maxValue = Enum.GetValues(typeof(PriorityType)).Cast<int>().Max();
+                maxValueName = ((PriorityType)maxValue).ToString();
+            }
+            else if (type == typeof(SeverityType))
+            {
+                maxValue = Enum.GetValues(typeof(SeverityType)).Cast<int>().Max();
+                maxValueName = ((SeverityType)maxValue).ToString();
+
+            }
+            else if (type == typeof(SizeType))
+            {
+                maxValue = Enum.GetValues(typeof(SizeType)).Cast<int>().Max();
+                maxValueName = ((SizeType)maxValue).ToString();
+            }
+            else if (type == typeof(StoryStatusType))
+            {
+                maxValue = Enum.GetValues(typeof(StoryStatusType)).Cast<int>().Max();
+                maxValueName = ((StoryStatusType)maxValue).ToString();
+            }
+
+            if (currentValue == maxValue)
+            {
+                string errorMessage = string.Format(CannotAdvanceFurtherMessage, propertyName, maxValueName);
+                throw new InvalidUserInputException(errorMessage);
+            }
+        }
+
+        public static void ValidateRevertMethod(Type type, int currentValue, string propertyName)
+        {
+            int minValue = 0;
+            string maxValueName = "";
+            if (type == typeof(BugStatusType))
+            {
+                minValue = Enum.GetValues(typeof(BugStatusType)).Cast<int>().Min();
+                maxValueName = ((BugStatusType)minValue).ToString();
+
+            }
+            else if (type == typeof(FeedbackStatusType))
+            {
+                minValue = Enum.GetValues(typeof(FeedbackStatusType)).Cast<int>().Min();
+                maxValueName = ((FeedbackStatusType)minValue).ToString();
+            }
+            else if (type == typeof(PriorityType))
+            {
+                minValue = Enum.GetValues(typeof(PriorityType)).Cast<int>().Min();
+                maxValueName = ((PriorityType)minValue).ToString();
+            }
+            else if (type == typeof(SeverityType))
+            {
+                minValue = Enum.GetValues(typeof(SeverityType)).Cast<int>().Min();
+                maxValueName = ((SeverityType)minValue).ToString();
+
+            }
+            else if (type == typeof(SizeType))
+            {
+                minValue = Enum.GetValues(typeof(SizeType)).Cast<int>().Min();
+                maxValueName = ((SizeType)minValue).ToString();
+            }
+            else if (type == typeof(StoryStatusType))
+            {
+                minValue = Enum.GetValues(typeof(StoryStatusType)).Cast<int>().Min();
+                maxValueName = ((StoryStatusType)minValue).ToString();
+            }
+
+            if (currentValue == minValue)
+            {
+                string errorMessage = string.Format(CannotRevertFurtherMessage, propertyName, maxValueName);
+                throw new InvalidUserInputException(errorMessage);
             }
         }
 

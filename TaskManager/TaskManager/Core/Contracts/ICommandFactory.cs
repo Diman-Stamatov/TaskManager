@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace TaskManager.Core.Interfaces
 {
-    internal interface ICommandFactory
+   public interface ICommandFactory
     {
         ICommand Create(string commandLine);
     }

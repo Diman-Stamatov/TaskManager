@@ -4,15 +4,28 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Models;
 using TaskManager.Models.Enums;
 
 namespace TaskManager.Utilities
 {
-    public class UtilityMethods
+    public static class UtilityMethods
     {
-        public static string GetMethodName([CallerMemberName] string memberName = null)
+        public static string TrimAdvance(this string methodName)
         {
-            return memberName.ToLower();
+            int toSkip = "Advance".Length;
+            string fieldName = string.Join("", methodName.Skip(toSkip));
+            return fieldName;
+        }
+        public static string TrimRevert(this string methodName)
+        {
+            int toSkip = "Revert".Length;
+            string fieldName = string.Join("", methodName.Skip(toSkip));
+            return fieldName;
+        }
+        public static string GetMethodName([CallerMemberName] string callerName = null)
+        {
+            return callerName;
         }
         public static string GetBugStatusTypeNames()
         {
@@ -41,8 +54,13 @@ namespace TaskManager.Utilities
         }
         public static string GetStoryStatusTypeNames()
         {
-            string commandNames = String.Join(", ", Enum.GetNames(typeof(StoryStatustype)));
+            string commandNames = String.Join(", ", Enum.GetNames(typeof(StoryStatusType)));
             return commandNames;
+        }
+
+        public static string StringGenerator(char simbol,int num)
+        {
+            return new string(simbol, num);
         }
     }
 }

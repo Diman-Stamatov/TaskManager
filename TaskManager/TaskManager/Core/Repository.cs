@@ -12,9 +12,10 @@ namespace TaskManager.Core
 {
     internal class Repository : IRepository
     {
-        public ICollection<ITeam> Teams => throw new NotImplementedException();
 
-        public ICollection<IMember> Members => throw new NotImplementedException();
+        IList<ITeam> IRepository.Teams => throw new NotImplementedException();
+
+        IList<IMember> IRepository.Members => throw new NotImplementedException();
 
         public void AddMember(IMember member)
         {
@@ -62,6 +63,16 @@ namespace TaskManager.Core
         }
 
         public ITeam GetTeam(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool MemberExist(string membername)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool TeamExist(string teamname)
         {
             throw new NotImplementedException();
         }

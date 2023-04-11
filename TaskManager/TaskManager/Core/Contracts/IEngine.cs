@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Core.Interfaces
 {
-    internal interface IEngine
+    public interface IEngine
     {
         void Start();
     }

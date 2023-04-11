@@ -13,7 +13,7 @@ using static TaskManager.Utilities.UtilityMethods;
 
 namespace TaskManager.Core
 {
-    internal class CommandFactory : ICommandFactory
+    public class CommandFactory : ICommandFactory
     {
         private const char SplitCommandSymbol = ' ';
 
@@ -30,6 +30,7 @@ namespace TaskManager.Core
             CommandType commandType = ParseCommandType(commandLine);
             ICollection<string> commandParameters = this.ExtractCommandParameters(commandLine);
             ICommand command = null;
+
             switch (commandType)
             {
                 case CommandType.AddTaskComment:
@@ -56,7 +57,11 @@ namespace TaskManager.Core
                     throw new NotImplementedException();
                 case CommandType.CreateBug:
                     throw new NotImplementedException();
+                case CommandType.CreateStory:
+                    throw new NotImplementedException();
                 case CommandType.CreateFeedback:
+                    throw new NotImplementedException();
+                case CommandType.CreateMember:
                     throw new NotImplementedException();
                 case CommandType.CreateTeam:
                     throw new NotImplementedException();
@@ -72,23 +77,25 @@ namespace TaskManager.Core
                     throw new NotImplementedException();
                 case CommandType.ShowAllTeams:
                     throw new NotImplementedException();
-                case CommandType.ShowBoardActivityLog:
+                case CommandType.ShowBoardActivityHistory:
                     throw new NotImplementedException();
                 case CommandType.ShowBoards:
                     throw new NotImplementedException();
-                case CommandType.ShowMemberActivityLog:
+                case CommandType.ShowMemberActivityHistory:
                     throw new NotImplementedException();
-                case CommandType.ShowMembers:
+                case CommandType.ShowAllMembers:
                     throw new NotImplementedException();
-                case CommandType.ShowTeamActivityLog:
+                case CommandType.ShowTeamActivityHistory:
                     throw new NotImplementedException();
                 case CommandType.ShowTeamMembers:
                     throw new NotImplementedException();
                 case CommandType.UnassignTask:
                     throw new NotImplementedException();
-
+                case CommandType.ShowAllTeamsBoards:
+                    throw new NotImplementedException();
+                default:
+                    throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
             }
-            return command;
         }
 
         // Receives a full line and extracts the command to be executed from it.

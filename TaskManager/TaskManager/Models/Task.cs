@@ -4,17 +4,100 @@ using System.Linq;
 using System.Text;
 using TaskManager.Models.Enums;
 using TaskManager.Models.Contracts;
+using static TaskManager.Utilities.UtilityMethods;
+using static TaskManager.Utilities.Validation;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
 
 namespace TaskManager.Models
 {
     public abstract class Task : ITask
     {
-        public string Title => throw new NotImplementedException();
+        private const int TaskTitleMinLenght = 10;
+        private const int TaskTitleMaxLenght = 50;
+        private const int DiscriptionNameMinLenght = 10;
+        private const int discriptionNameMaxLenght = 500;
 
-        public string Description => throw new NotImplementedException();
+        private static int NextID = 0;
 
-        public IList<string> ChangesHistory => throw new NotImplementedException();
+        private readonly IList<string> changesLog;      
+        private readonly IList<Comment> comments;
+        private string title;
+        private string description;
+        private readonly int id;
 
-        IList<IComment> ITask.Comments => throw new NotImplementedException();
+        public Task(string title, string description)
+        {
+            changesLog = new List<string>();
+            comments = new List<Comment>();
+
+            Title = title;
+            Description = description;
+            id = ++NextID;
+
+            LogChanges($"{GetType().Name} with title \"{title}\" was created");
+
+        }
+
+        public string Title
+        {
+            get => title;
+
+            private set
+            {
+                ValidateStringPropertyLength(
+                 value,
+                 GetType().Name,
+                 GetMethodName(),
+                 TaskTitleMinLenght,
+                 TaskTitleMaxLenght);
+                title = value;
+            }
+        }
+        public string Description
+        {
+            get
+            {
+                return this.description;
+            }
+            private set
+            {
+                ValidateStringPropertyLength(
+                 value,
+                 GetType().Name,
+                 GetMethodName(),
+                 DiscriptionNameMinLenght,
+                 discriptionNameMaxLenght);
+                description = value;
+               // AddToChangeHistory($"Description {this.description.Take(15)}...  set");
+            }
+        }
+
+        public void AddComment(Comment comment)
+        {
+            comments.Add(comment);
+            LogChanges($"Comment: '{comment}' added");
+        }
+
+        protected void LogChanges(string newEvent)
+        {
+            //вариант
+            changesLog.Add($"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]");
+        }
+     
+        public override string ToString()
+        {
+            return "не съм сигурен какво се очаква да направя тук";
+        }
+
+        public abstract void AdvanceStatus();
+        
+        public abstract void RevertStatus();
+
+
+        public IList<IComment> Comments { get => new List<IComment>(comments); }                
+   
+        public IList<string> ChangesHistory { get => new List<string>(changesLog); }
+
     }
 }

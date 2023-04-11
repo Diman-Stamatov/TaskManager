@@ -6,18 +6,19 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Commands.Types
 {
-    internal enum CommandType
+    public enum CommandType
     {
         CreateMember,
-        ShowMembers,
-        ShowMemberActivityLog,
+        ShowAllMembers,
+        ShowMemberActivityHistory,
         CreateTeam,
         ShowAllTeams,
-        ShowTeamActivityLog,
+        ShowTeamActivityHistory,
         ShowTeamMembers,
         CreateBoard,
         ShowBoards,
-        ShowBoardActivityLog,
+        ShowAllTeamsBoards,
+        ShowBoardActivityHistory,
         CreateBug,
         CreateStory,
         CreateFeedback,
@@ -32,10 +33,12 @@ namespace TaskManager.Commands.Types
         AssignTask,
         UnassignTask,
         AddTaskComment,
+        //Listing
         ListTasks,
         ListBugs,
         ListStories,
         ListFeedback,
-        ListAssignees
+        ListAssignees,
+
     }
 }

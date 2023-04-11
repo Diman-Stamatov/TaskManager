@@ -2,28 +2,134 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using TaskManager.Models.Contracts;
 using TaskManager.Models.Enums;
+using static TaskManager.Utilities.Validation;
+using static TaskManager.Utilities.UtilityMethods;
 
 namespace TaskManager.Models
 {
-    public class Story : IStory
+    public class Story : Task, IStory
     {
-        public PriorityType Priority => throw new NotImplementedException();
+         
+        private PriorityType priority;
+        private SizeType size;
+        private StoryStatusType status;
+        private IMember assignee;
+        public Story(string title, string description, PriorityType priority, SizeType size, StoryStatusType status)
+            /*: base (title, description)*/
+        {
+            this.Priority = priority;
+            this.Size = size;
+            this.Status = status;
+        }
+        public PriorityType Priority
+        {
+            get
+            {
+                return this.priority;
+            }
+            private set
+            {
+                this.priority = value;
+            }
+        }
 
-        public SizeType Size => throw new NotImplementedException();
+        public SizeType Size
+        {
+            get
+            {
+                return this.size;
+            }
+            private set
+            {
+                this.size = value;
+            }
+        }
 
-        public StoryStatustype Statustype => throw new NotImplementedException();
+        public StoryStatusType Status
+        {
+            get
+            {
+                return this.status;
+            }
+            private set
+            {
+                this.status = value;
+            }
+        }
 
-        public IMember Assignee => throw new NotImplementedException();
+        public IMember Assignee
+        {
+            get
+            {
+                return this.assignee;
+            }
+            private set
+            {
+                ValidateAssignee(this.assignee, value);
+                this.assignee = value;
+            }
+        }
 
-        public string Title => throw new NotImplementedException();
+        public void AdvancePriority()
+        {
+            var type = this.priority.GetType();
+            int currentValue = (int)this.Priority;
+            string propertyName = GetMethodName().TrimAdvance();
+            
+            ValidateAdvanceMethod(type, currentValue, propertyName);
+            this.priority++;
+        }
+        public void RevertPriority()
+        {
+            var type = this.priority.GetType();
+            int currentValue = (int)this.Priority;
+            string propertyName = GetMethodName().TrimRevert();
 
-        public string Description => throw new NotImplementedException();
+            ValidateRevertMethod(type, currentValue, propertyName);
+            this.priority--;
+        }
+        public void AdvanceSize()
+        {
+            var type = this.priority.GetType();
+            int currentValue = (int)this.Priority;
+            string propertyName = GetMethodName().TrimAdvance();
 
-        public IList<string> ChangesHistory => throw new NotImplementedException();
+            ValidateAdvanceMethod(type, currentValue, propertyName);
+            this.size++;
+        }
+        public void RevertSize()
+        {
+            var type = this.priority.GetType();
+            int currentValue = (int)this.Priority;
+            string propertyName = GetMethodName().TrimRevert();
 
-        IList<IComment> ITask.Comments => throw new NotImplementedException();
+            ValidateRevertMethod(type, currentValue, propertyName);
+            this.size--;
+        }
+        public void AdvanceStatus()
+        {
+            var type = this.priority.GetType();
+            int currentValue = (int)this.Priority;
+            string propertyName = GetMethodName().TrimAdvance();
+
+            ValidateAdvanceMethod(type, currentValue, propertyName);
+            this.status++;
+        }
+        public void RevertStatus()
+        {
+            var type = this.priority.GetType();
+            int currentValue = (int)this.Priority;
+            string propertyName = GetMethodName().TrimRevert();
+
+            ValidateRevertMethod(type, currentValue, propertyName);
+            this.status--;
+        }
+
+        public override string ToString() => throw new NotImplementedException();
+
     }
 }
