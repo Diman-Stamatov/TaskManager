@@ -41,10 +41,9 @@ namespace TaskManager.Models
         public IList<ITask> Tasks { get => new List<ITask>(tasks); }
 
         public IList<string> ActivityHistory { get => new List<string>(activityHistory); }
-        //ActivityHistory ще връща копие на листа, за да не може да се правят неволни промени в него
+   
         public bool IsAssigned { get; set; }
 
-        //Добавяме през метод, за да защитим списъка
         public void AddActivityHistory(string logHistory)
         {
             activityHistory.Add(logHistory);
@@ -55,27 +54,42 @@ namespace TaskManager.Models
             tasks.Add(task);
         }
 
+        public string PrintTaska()
+        {
+            StringBuilder taskOutput = new StringBuilder();
+            int num = 1;
+            taskOutput.AppendLine("Tcks:");
+            taskOutput.AppendLine(StringGenerator('-', 10));
+            foreach (var task in tasks)
+            {
+                taskOutput.AppendLine($"{num++}. {task.ToString()}");
+                taskOutput.AppendLine(StringGenerator('-', 10));
+            }
+            return taskOutput.ToString().Trim();
+        }
+
+        public string PtintActivity()
+        {
+            StringBuilder activityOutput = new StringBuilder();
+            activityOutput.AppendLine($"Activity History:");
+            int num = 1;
+            activityOutput.AppendLine(StringGenerator('-', 10));
+            foreach (var activity in activityHistory)
+            {
+                activityOutput.AppendLine($"{num++}. {activity}");
+                activityOutput.AppendLine(StringGenerator('-', 10));
+            }
+
+            return activityOutput.ToString().Trim();
+        }
+
         public override string ToString()
         {
            StringBuilder memberOutput = new StringBuilder();
             memberOutput.AppendLine($"Member: {Name}");
-            memberOutput.AppendLine("Tcks:");
-            int num = 1;
-            foreach (var task in tasks)
-            {
-                memberOutput.AppendLine($"{num++}. {task.ToString()}");
-                memberOutput.AppendLine(StringGenerator('-', 10));
-            } 
-
-            memberOutput.AppendLine($"Activity History:");
-            num = 1;
-            foreach (var activity in activityHistory)
-            {
-                memberOutput.AppendLine($"{num++}. {activity}");
-                memberOutput.AppendLine(StringGenerator('-', 10));
-            }
-            
-            return memberOutput.ToString();
+            memberOutput.Append(PrintTaska());
+            memberOutput.Append(PtintActivity());
+            return memberOutput.ToString().Trim();
         }
     }
 }
