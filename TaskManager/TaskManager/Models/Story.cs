@@ -81,6 +81,7 @@ namespace TaskManager.Models
             string propertyName = GetMethodName().TrimAdvance();
             
             ValidateAdvanceMethod(type, currentValue, propertyName);
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName));
             
             this.priority++;
         }
