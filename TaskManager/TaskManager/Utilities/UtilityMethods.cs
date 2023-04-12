@@ -12,11 +12,11 @@ namespace TaskManager.Utilities
 {
     public static class UtilityMethods
     {
-        private const string AdvanceMethodLogMessage = "The {0} was advanced from {1} to {2}.";
-        private const string RevertMethodLogMessage = "The {0} was reverted from {1} to {2}.";
-        //Съобщенията за преминаването от една към друга позиция на enum трябва да включва ID на съответния вид Tack
+        private const string AdvanceMethodLogMessage = "The {0} of {1} ID {2} was advanced from {1} to {2}.";
+        private const string RevertMethodLogMessage = "The {0} of {1} ID {2} was reverted from {3} to {4}.";
 
-        public static string GenerateAdvanceMethodMessage(Type type, int currentValue, string propertyName)
+
+        public static string GenerateAdvanceMethodMessage(Type type, int currentValue, string propertyName, string className, int id)
         {
             int nextValue = currentValue+1;
             string nextValueName = "";
@@ -51,11 +51,11 @@ namespace TaskManager.Utilities
                 nextValueName = ((StoryStatusType)nextValue).ToString();
                 currentValueName = ((StoryStatusType)currentValue).ToString();
             }
-            string logMessage = string.Format(AdvanceMethodLogMessage, propertyName, currentValueName, nextValueName);
+            string logMessage = string.Format(AdvanceMethodLogMessage, propertyName, className, id, currentValueName, nextValueName);
             return logMessage;             
         }
 
-        public static string GenerateRevertMethodMessage(Type type, int currentValue, string propertyName)
+        public static string GenerateRevertMethodMessage(Type type, int currentValue, string propertyName, string className, int id)
         {
             int nextValue = currentValue - 1;
             string nextValueName = "";
@@ -90,7 +90,7 @@ namespace TaskManager.Utilities
                 nextValueName = ((StoryStatusType)nextValue).ToString();
                 currentValueName = ((StoryStatusType)currentValue).ToString();
             }
-            string logMessage = string.Format(RevertMethodLogMessage, propertyName, currentValueName, nextValueName);
+            string logMessage = string.Format(RevertMethodLogMessage, propertyName, className, id, currentValueName, nextValueName);
             return logMessage;
         }
         public static string TrimAdvance(this string methodName)
