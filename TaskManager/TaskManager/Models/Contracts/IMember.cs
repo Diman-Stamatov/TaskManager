@@ -11,5 +11,6 @@ namespace TaskManager.Models.Contracts
         string Name { get; }
         IList<ITask> Tasks { get; }
         bool IsAssignedToATeam { get; }
+        void AssignToATeam();
     }
 }
