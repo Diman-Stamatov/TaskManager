@@ -15,10 +15,8 @@ namespace TaskManager.Core.Interfaces
         IList<IMember> Members { get; }
         IList<ITask> Tasks { get; }
         bool TeamExists(string teamname);
-        void AddTeam(ITeam team);
         ITeam GetTeam(string teamName);
         bool MemberExists(string membername);
-        void AddMember(IMember member);
         IMember GetMember(string memberName);       
         ITeam CreateTeam(string teamName);
         IMember CreateMember(string memberName);       

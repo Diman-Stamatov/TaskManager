@@ -16,6 +16,7 @@ namespace TaskManager.Core
         private const string DuplicateMemberMessage = "{0} is already a registered employee!";
         private const string DuplicateTeamMessage = "{0} is already a registered team!";
         private const string MemberNotFoundMessage = "{0} is not a registered employee!";
+        private const string TeamNotFoundMessage = "{0} is not a registered team!";
         private const string TaskNotFoundMessage = "A task with the ID {0} does not exist!";
 
         private readonly IList<ITeam> teams = new List<ITeam>();
@@ -64,10 +65,11 @@ namespace TaskManager.Core
             return member;
         }
 
-        //public IBoard CreateBoard(string name)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public IBoard CreateBoard(string name)
+        {
+            var board = new Board(name);
+            return board;
+        }
 
         public ITeam CreateTeam(string name)
         {
@@ -110,6 +112,9 @@ namespace TaskManager.Core
        
         public IMember GetMember(string memberName)
         {
+            string nullInputMessage = "Please input an actual Member name!";
+            ValidateStringNotNullOrEmpty(memberName, nullInputMessage);
+
             bool memberExists = MemberExists(memberName);
             if (memberExists == false)
             {
@@ -120,26 +125,19 @@ namespace TaskManager.Core
             return foundMember;
         }
 
-        public ITeam GetTeam(string name)
+        public ITeam GetTeam(string teamName)
         {
-            throw new NotImplementedException();
-        }
+            string nullInputMessage = "Please input an actual Team name!";
+            ValidateStringNotNullOrEmpty(teamName, nullInputMessage);
 
-        public void AddMember(IMember member)
-        {
-            string memberName = member.Name;
-            bool memberExists = MemberExists(memberName);
-            if (memberExists == true)
+            bool teamExists = TeamExists(teamName);
+            if (teamExists == false)
             {
-                string errorMessage = string.Format(DuplicateMemberMessage, memberName);
-                throw new DuplicateEntryException(errorMessage);
+                string errorMessage = string.Format(TeamNotFoundMessage, teamName);
+                throw new EntryNotFoundException(errorMessage);
             }
-            members.Add(member);
-        }
-
-        public void AddTeam(ITeam team)
-        {
-            throw new NotImplementedException();
+            ITeam foundTeam = teams.Where(team => team.Name == teamName).First();
+            return foundTeam;
         }
 
         public bool MemberExists(string memberName)

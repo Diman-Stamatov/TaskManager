@@ -11,6 +11,9 @@ namespace TaskManager.Models.Contracts
         string Name { get; }
         IList<IMember> Members { get; }
         IList<IBoard> Boards { get; }
+        string ShowBoards();
+        void CreateBoard(string boardName);
+        void AddTeamMember(IMember member);
 
     }
 }

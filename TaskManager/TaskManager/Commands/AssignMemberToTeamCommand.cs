@@ -10,7 +10,7 @@ namespace TaskManager.Commands
 {
     internal class AssignMemberToTeamCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
+        public const int ExpectedNumberOfArguments = 2;
 
 
         public AssignMemberToTeamCommand(IList<string> commandParameters, IRepository repository)
@@ -21,22 +21,25 @@ namespace TaskManager.Commands
         public override string Execute()
         {
             ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
+            
+            string teamName = CommandParameters[0];
+            string memberName = CommandParameters[1];
 
-            int taskId = ParseIntParameter(CommandParameters[0], "ID");
-            string content = CommandParameters[1];
-            string author = CommandParameters[2];
-
-            return AddTaskComment(taskId, content, author);
+            return AddMemberToTeam(teamName, memberName);
         }
 
-        private string AddTaskComment(int id, string content, string author)
+        private string AddMemberToTeam(string teamName, string memberName)
         {
-            var foundMember = Repository.GetMember(author);
-            ITask foundTask = Repository.GetTask(id);
-            var newComment = new Comment(foundMember.Name, content);
-            foundTask.AddComment(newComment);
-
-            return $"{author} successfully added a comment to {foundTask.GetType().Name} ID number {id}.";
+            var foundTeam = Repository.GetTeam(teamName);
+            var foundMember = Repository.GetMember(memberName);
+            if (foundMember.IsAssignedToATeam == true)
+            {
+                string errorMessage = $"{memberName} is already assigned to a team!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+            foundTeam.AddTeamMember(foundMember);
+            
+            return $"{memberName} was successfully assigned to Team \"{teamName}\".";
         }
     }
 }

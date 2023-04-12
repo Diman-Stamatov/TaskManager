@@ -42,7 +42,7 @@ namespace TaskManager.Models
             get
             {
                 return new List<IMember>(this.members);
-            }
+            }            
         }
 
         public IList<IBoard> Boards
@@ -72,5 +72,13 @@ namespace TaskManager.Models
             }
             return allBoardsInfo.ToString();
         }
+
+        public void AddTeamMember(IMember member)
+        {
+            ValidateDuplicateTeamMember(member.Name, Members);
+            members.Add(member);
+            member.AssignToATeam();
+        }
+
     }
 }
