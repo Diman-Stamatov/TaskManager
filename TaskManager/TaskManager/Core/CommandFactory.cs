@@ -50,7 +50,7 @@ namespace TaskManager.Core
                 case CommandType.CreateBoard:
                     return new CreateStoryCommand(commandParameters, repository);
                 case CommandType.CreateBug:
-                    return new ListBugsCommand(repository);
+                    return new CreateBugcommand(commandParameters, repository);
                 case CommandType.CreateFeedback:
                     return new CreateFeedbackCommand(commandParameters, repository);                
                 case CommandType.CreateMember:
@@ -62,7 +62,7 @@ namespace TaskManager.Core
                 case CommandType.ListAssignees:
                     return new ListAssigneesCommand(repository);
                 case CommandType.ListBugs:
-                    return new ListBugsCommand(repository); ;
+                    return new ListBugsCommand(commandParameters, repository); ;
                 case CommandType.ListFeedback:
                     return new ListFeedbackCommand(repository);
                 case CommandType.ListStories:
