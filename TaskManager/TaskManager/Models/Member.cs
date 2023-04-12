@@ -58,7 +58,6 @@ namespace TaskManager.Models
         {
             tasks.Add(task);
             Log(Message(task, Name ));
-
         }
 
         private void Log(string newEvent)
@@ -73,7 +72,7 @@ namespace TaskManager.Models
 
         private  string Message(Task task, string name)
         {
-            return $"{GetType().Name} with title {task.Title} was assigned to {Name}"))
+            return $"{GetType().Name} with title {task.Title} was assigned to {Name}";
         }
 
         public string PrintTasks()
@@ -118,6 +117,7 @@ namespace TaskManager.Models
             return memberOutput.ToString().Trim();
         }
 
+        //ToDo трябва да обсъдим този метод 
         public IComment CreateComment(string content)
         {
             var comment = new Comment(Name, content);
