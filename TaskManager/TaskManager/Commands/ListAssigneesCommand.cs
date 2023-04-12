@@ -9,9 +9,6 @@ namespace TaskManager.Commands
 {
     public class ListAssigneesCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
         public ListAssigneesCommand(IRepository repository)
             : base(repository)
         {
@@ -33,7 +30,8 @@ namespace TaskManager.Commands
 
             foreach (var assignee in assignees)
             {
-                stringBuilder.AppendLine(assignee.ToString());
+                stringBuilder.Append(assignee);
+                StringGenerator('*', 15);
             }
             return stringBuilder.ToString().Trim();
         }
