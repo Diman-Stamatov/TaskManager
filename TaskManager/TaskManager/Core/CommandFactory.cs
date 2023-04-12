@@ -64,7 +64,7 @@ namespace TaskManager.Core
                 case CommandType.ListBugs:
                     return new ListBugsCommand(commandParameters, repository); ;
                 case CommandType.ListFeedback:
-                    return new ListFeedbackCommand(repository);
+                    return new ListFeedbackCommand(commandParameters, repository);
                 case CommandType.ListStories:
                     return new ListStoriesCommand(repository);
                 case CommandType.ListTasks:

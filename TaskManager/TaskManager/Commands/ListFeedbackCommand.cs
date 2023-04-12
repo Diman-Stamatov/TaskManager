@@ -9,11 +9,10 @@ namespace TaskManager.Commands
 {
     internal class ListFeedbackCommand :BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
+        public const int ExpectedNumberOfArguments = 1;
 
-        public ListFeedbackCommand(IRepository repository)
-            : base(repository)
+        public ListFeedbackCommand(IList<string> commandParameters, IRepository repository)
+            : base(commandParameters, repository)
         {
         }
 

@@ -21,12 +21,12 @@ namespace TaskManager.Commands
         public override string Execute()
         {
             string command = CommandParameters[0];
-            var test = Repository.Tasks.OfType<Bug>().ToList();
+            var task = Repository.Tasks.OfType<Bug>().ToList();
             StringBuilder stringBuilder = new StringBuilder();
 
             if (command == "Active")
             {
-                List<Bug> bugsActive = test.
+                List<Bug> bugsActive = task.
                Where(bug => bug.Status == BugStatusType.Active).
                OrderBy(bug => bug.Title).
                ThenBy(bug => bug.Priority == PriorityType.High).
@@ -45,7 +45,7 @@ namespace TaskManager.Commands
             }
             else if (command == "Fixed")
             {
-                List<Bug> bugsFixed = test.
+                List<Bug> bugsFixed = task.
                Where(bug => bug.Status == BugStatusType.Fixed).
                OrderBy(bug => bug.Title).
                ThenBy(bug => bug.Priority == PriorityType.High).
@@ -65,7 +65,7 @@ namespace TaskManager.Commands
             }
             else if(command == "Assignee")
             {
-                List<Bug> bugsAssign = test.
+                List<Bug> bugsAssign = task.
                Where(bug => bug.Assignee.IsAssignedToATeam).
                OrderBy(bug => bug.Title).
                ThenBy(bug => bug.Priority == PriorityType.High).
