@@ -14,9 +14,10 @@ namespace TaskManager.Models
 {
     public class Bug : Task, IBug
     {
+        private const BugStatusType InitialBugStatus = BugStatusType.Active;
+
         private List<string> stepsToReproduce;
-        private PriorityType priority;
-        private BugStatusType initialBugStatus = BugStatusType.Active;
+        private PriorityType priority;         
         private BugStatusType status;
         private SeverityType severity;
         private IMember assignee;
@@ -30,7 +31,7 @@ namespace TaskManager.Models
             : base(id, title, description)
         {
             Priority = priority;
-            status = initialBugStatus;
+            Status = InitialBugStatus;
             Severity = severity;
             stepsToReproduce = new List<string>();
         }
@@ -72,6 +73,11 @@ namespace TaskManager.Models
             }
         }
 
+        public IList<string> StepsToReproduce 
+        { 
+            get => new List<string>(stepsToReproduce); 
+        }
+
         public void AddStepsToReproduce(string stepToReproduce)
         {
             //това ще отиде за валидация в "command"
@@ -85,9 +91,36 @@ namespace TaskManager.Models
                 $"'{stepsToReproduce}' added to 'Steps to reproduce'");
         }
 
+        public void AdvancePriority()
+        {
+            var type = Priority.GetType();
+            int currentValue = (int)Priority;
+            string propertyName = GetMethodName().TrimAdvance();
+
+            ValidateAdvanceMethod(type, currentValue, propertyName);
+
+            string className = GetType().Name;
+            int taskId = Id;
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            priority++;
+        }
+
+        public void RevertPriority()
+        {
+            var type = Priority.GetType();
+            int currentValue = (int)Priority;
+            string propertyName = GetMethodName().TrimRevert();
+
+            ValidateRevertMethod(type, currentValue, propertyName);
+
+            string className = GetType().Name;
+            int taskId = Id;
+            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            priority--;
+        }
         public override void AdvanceStatus()
         {
-            var type = status.GetType();
+            var type = Status.GetType();
             int currentValue = (int)Status;
             string propertyName = GetMethodName().TrimAdvance();
 
@@ -95,8 +128,8 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName));
-            status++;
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            Status++;
         }
 
         public override void RevertStatus()
@@ -113,9 +146,35 @@ namespace TaskManager.Models
             status--;
         }
 
-        public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }
+        public void AdvanceSeverity()
+        {
+            var type = Severity.GetType();
+            int currentValue = (int)Severity;
+            string propertyName = GetMethodName().TrimAdvance();
 
-        public BugStatusType StatusType => throw new NotImplementedException();
+            ValidateAdvanceMethod(type, currentValue, propertyName);
+
+            string className = GetType().Name;
+            int taskId = Id;
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            Severity++;
+        }
+
+        public void RevertSeverity()
+        {
+            var type = Severity.GetType();
+            int currentValue = (int)Severity;
+            string propertyName = GetMethodName().TrimRevert();
+
+            ValidateRevertMethod(type, currentValue, propertyName);
+
+            string className = GetType().Name;
+            int taskId = Id;
+            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            Severity--;
+        }
+
+
         public override string ToString()
         {
             StringBuilder bugInfo = new StringBuilder();

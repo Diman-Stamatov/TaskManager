@@ -12,8 +12,11 @@ namespace TaskManager.Models.Contracts
         IList<string> StepsToReproduce { get; }
         PriorityType Priority { get; }
         SeverityType Severity { get; }
-        BugStatusType StatusType { get; }
+        BugStatusType Status { get; }
         IMember Assignee { get; set; }
-
+        void AdvancePriority();
+        void RevertPriority();
+        void AdvanceSeverity();
+        void RevertSeverity(); 
     }
 }

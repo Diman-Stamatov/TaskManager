@@ -20,9 +20,15 @@ namespace TaskManager.Commands
         public override string Execute()
         {
             ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
-            int taskId = ParseIntParameter(CommandParameters[0], "ID");
+            string teamName = CommandParameters[0];
             string boardName = CommandParameters[1];
-            return AskT;
+            return ;
+        }
+        private string AddBoard(string teamName, string boardName)
+        {
+            var foundMember = Repository.GetMember(author);
+
+            return $"{author} successfully added a comment to {foundTask.GetType().Name} ID number {id}.";
         }
     }
 }
