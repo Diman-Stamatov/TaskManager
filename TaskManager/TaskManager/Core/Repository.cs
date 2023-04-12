@@ -70,7 +70,15 @@ namespace TaskManager.Core
 
         public ITeam CreateTeam(string name)
         {
-            throw new NotImplementedException();
+            var team = new Team(name);
+
+            if (teams.Contains(team))
+            {
+                string errorMessage = string.Format(DuplicateTeamMessage, name);
+                throw new InvalidOperationException(errorMessage);
+            }
+            teams.Add(team);
+            return team;
         }
 
         public IBug CreageBug(string title, string description, PriorityType priority, SeverityType severity)
