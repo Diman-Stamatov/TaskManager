@@ -23,7 +23,7 @@ namespace TaskManager.Commands
 
             int taskId = ParseIntParameter(CommandParameters[0], "ID");
             string changeDirection = CommandParameters[1].ToLower();
-            if (changeDirection != "advance" && changeDirection != "revert")
+            if (changeDirection != ExpectedAdvanceParameter && changeDirection != ExpectedRevertParameter)
             {
                 string errorMessage = $"Please choose either the {ExpectedRevertParameter} " +
                     $"or {ExpectedAdvanceParameter} clarification for this command!";
