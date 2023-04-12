@@ -71,28 +71,26 @@ namespace TaskManager.Core
         public IBug CreageBug(string title, string description, PriorityType priority, SeverityType severity)
         {
             int nextId = tasks.Count();
-            ITask bug = new Bug(++nextId, title, description, priority, severity);
+            var bug = new Bug(++nextId, title, description, priority, severity);
             tasks.Add(bug);
-            return (IBug)bug;
-            //защо трабва изрично да му даваме при услови, че интерфейсите се екстендват???????
+            return bug;
+ 
         }
 
         public IFeedback CreateFeedback(string title, string description, int rating)
         {
             int nextId = tasks.Count();
-            ITask feedback = new Feedback(++nextId, title, description, rating);
+            var feedback = new Feedback(++nextId, title, description, rating);
             tasks.Add(feedback);
-            return (IFeedback)feedback;
-            //защо трабва изрично да му даваме при услови, че интерфейсите се екстендват???????
+            return feedback;
         }
 
         public IStory CreateStory(string title, string description, PriorityType priority, SizeType size)
         {
             int nextId = tasks.Count();
-            ITask story = new Story(nextId, title, description, priority, size);
+            var story = new Story(nextId, title, description, priority, size);
             tasks.Add(story);
-            return (IStory)story;
-            //защо трабва изрично да му даваме при услови, че интерфейсите се екстендват???????
+            return story;
         }
 
        

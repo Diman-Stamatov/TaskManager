@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using TaskManager.Core.Interfaces;
 using TaskManager.Exceptions;
 using TaskManager.Commands.Types;
 using static TaskManager.Utilities.UtilityMethods;
 using TaskManager.Commands;
+using TaskManager.Commands.Interfaces;
 
 namespace TaskManager.Core
 {
@@ -37,45 +37,45 @@ namespace TaskManager.Core
                 case CommandType.AddTaskComment:
                     return new AddTaskComment(commandParameters, repository);
                 case CommandType.AssignTask:
-                    throw new NotImplementedException();
+                    return new AssignTask(commandParameters, repository);
                 case CommandType.ChangeBugPriority:
-                    throw new NotImplementedException();
+                    return new ChangeBugPriority(commandParameters, repository);
                 case CommandType.ChangeBugSeverity:
-                    throw new NotImplementedException();
+                    return new ChangeBugSeverity(commandParameters, repository);
                 case CommandType.ChangeBugStatus:
-                    throw new NotImplementedException();
+                    return new ChangeBugStatus(commandParameters, repository);
                 case CommandType.ChangeFeedbackRating:
-                    throw new NotImplementedException();
+                    return new ChangeFeedbackRating(commandParameters, repository);
                 case CommandType.ChangeFeedbackStatus:
-                    throw new NotImplementedException();
+                    return new ChangeFeedbackStatus(commandParameters, repository);
                 case CommandType.ChangeStoryPriority:
-                    throw new NotImplementedException();
+                    return new ChangeStoryPriority(commandParameters, repository);
                 case CommandType.ChangeStorySize:
-                    throw new NotImplementedException();
+                    return new ChangeStorySize(commandParameters, repository);
                 case CommandType.ChangeStoryStatus:
-                    throw new NotImplementedException();
+                    return new ChangeStoryStatus(commandParameters, repository);
                 case CommandType.CreateBoard:
-                    throw new NotImplementedException();
+                    return new CreateBoard(commandParameters, repository);
                 case CommandType.CreateBug:
-                    throw new NotImplementedException();
+                    return new CreateBug(commandParameters, repository);
                 case CommandType.CreateStory:
-                    throw new NotImplementedException();
+                    return new CreateStory(commandParameters, repository);
                 case CommandType.CreateFeedback:
-                    throw new NotImplementedException();
+                    return new CreateFeedback(commandParameters, repository);
                 case CommandType.CreateMember:
-                    throw new NotImplementedException();
+                    return new CreateMember(commandParameters, repository);
                 case CommandType.CreateTeam:
-                    throw new NotImplementedException();
+                    return new CreateTeam(commandParameters, repository);
                 case CommandType.ListAssignees:
-                    throw new NotImplementedException();
+                    return new ListAssignees(commandParameters, repository);
                 case CommandType.ListBugs:
-                    throw new NotImplementedException();
+                    return new ListBugs(commandParameters, repository); ;
                 case CommandType.ListFeedback:
-                    throw new NotImplementedException();
+                    return new ListFeedback(commandParameters, repository);
                 case CommandType.ListStories:
-                    throw new NotImplementedException();
+                    return new ListStories(commandParameters, repository);
                 case CommandType.ListTasks:
-                    throw new NotImplementedException();
+                    return new ListTasks(commandParameters, repository);
                 case CommandType.ShowAllTeams:
                     throw new NotImplementedException();
                 case CommandType.ShowBoardActivityHistory:
