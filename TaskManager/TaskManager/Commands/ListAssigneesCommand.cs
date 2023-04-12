@@ -19,7 +19,23 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            var assignees = Repository.Members.
+                Where(member => member.IsAssignedToATeam==true).
+                OrderBy(member => member.Name).
+                ToList();
+
+            if (assignees.Count == 0 )
+            {
+                return "No Tasks are assigned!";
+            }
+
+            StringBuilder stringBuilder = new StringBuilder();
+
+            foreach (var assignee in assignees)
+            {
+                stringBuilder.AppendLine(assignee.ToString());
+            }
+            return stringBuilder.ToString().Trim();
         }
     }
 }

@@ -11,7 +11,6 @@ namespace TaskManager.Commands
     public class CreateBoardCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 2;
-        //Трябва да решим, колко параметъра ще приема тази команда
 
         public CreateBoardCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)

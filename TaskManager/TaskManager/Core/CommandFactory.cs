@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using TaskManager.Core.Interfaces;
-using TaskManager.Exceptions;
-using TaskManager.Commands.Types;
+﻿using TaskManager.Commands;
 using TaskManager.Commands.Contracts;
-using TaskManager.Commands;
+using TaskManager.Commands.Types;
+using TaskManager.Core.Interfaces;
 
 
 namespace TaskManager.Core
