@@ -16,6 +16,7 @@ namespace TaskManager.Models
     {
         private List<string> stepsToReproduce;
         private PriorityType priority;
+        private BugStatusType initialBugStatus = BugStatusType.Active;
         private BugStatusType status;
         private SeverityType severity;
         private IMember assignee;
@@ -29,7 +30,7 @@ namespace TaskManager.Models
             : base(id, title, description)
         {
             Priority = priority;
-            status = BugStatusType.Active;
+            status = initialBugStatus;
             Severity = severity;
             stepsToReproduce = new List<string>();
         }
@@ -86,8 +87,8 @@ namespace TaskManager.Models
 
         public override void AdvanceStatus()
         {
-            var type = priority.GetType();
-            int currentValue = (int)Priority;
+            var type = status.GetType();
+            int currentValue = (int)Status;
             string propertyName = GetMethodName().TrimAdvance();
 
             ValidateAdvanceMethod(type, currentValue, propertyName);
@@ -100,8 +101,8 @@ namespace TaskManager.Models
 
         public override void RevertStatus()
         {
-            var type = priority.GetType();
-            int currentValue = (int)Priority;
+            var type = status.GetType();
+            int currentValue = (int)Status;
             string propertyName = GetMethodName().TrimRevert();
 
             ValidateRevertMethod(type, currentValue, propertyName);
@@ -115,5 +116,24 @@ namespace TaskManager.Models
         public IList<string> StepsToReproduce { get => new List<string>(stepsToReproduce); }
 
         public BugStatusType StatusType => throw new NotImplementedException();
+        public override string ToString()
+        {
+            StringBuilder bugInfo = new StringBuilder();
+            int number = 1;
+            bugInfo.Append(base.ToString());
+            bugInfo.AppendLine($"List of steps to reproduce it:");
+            bugInfo.AppendLine(StringGenerator('=', 10));
+            foreach (var step in stepsToReproduce)
+            {
+                bugInfo.AppendLine($"{number++}. {step}");
+                bugInfo.AppendLine(StringGenerator('=', 10));
+            }
+            bugInfo.AppendLine(StringGenerator('=', 10));
+            bugInfo.AppendLine($"Priority: {Priority}");
+            bugInfo.AppendLine($"Saverity: {Severity}");
+            bugInfo.AppendLine($"Status: {Status}");
+            bugInfo.AppendLine($"Assigned to: {Assignee.Name}");
+            return bugInfo.ToString().Trim();
+        }
     }
 }
