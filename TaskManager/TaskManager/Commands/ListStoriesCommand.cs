@@ -25,57 +25,76 @@ namespace TaskManager.Commands
 
             if (command == "NotDone")
             {
-                List<Story> storyActive = task.
+                List<Story> storyNotDone = task.
                Where(story => story.Status == StoryStatusType.NotDone).
                OrderBy(story => story.Title).
                ThenBy(bug => bug.Priority == PriorityType.High).
                ThenBy(story => story.Priority == PriorityType.Medium).
                ThenBy(story => story.Priority == PriorityType.Low).
-               ThenBy(bug => bug.Severity == SeverityType.Critical).
-               ThenBy(bug => bug.Severity == SeverityType.Major).
-               ThenBy(bug => bug.Severity == SeverityType.Minor).
+               ThenBy(story => story.Size == SizeType.Large).
+               ThenBy(story => story.Size == SizeType.Medium).
+               ThenBy(story => story.Size == SizeType.Small).
                ToList();
 
-                foreach (Bug bug in bugsActive)
+                foreach (Story bug in storyNotDone)
                 {
                     stringBuilder.Append(bug);
                     StringGenerator('*', 15);
                 }
             }
-            else if (command == "Fixed")
+            else if (command == "InProgress")
             {
-                List<Bug> bugsFixed = task.
-               Where(bug => bug.Status == BugStatusType.Fixed).
-               OrderBy(bug => bug.Title).
-               ThenBy(bug => bug.Priority == PriorityType.High).
-               ThenBy(bug => bug.Priority == PriorityType.Medium).
-               ThenBy(bug => bug.Priority == PriorityType.Low).
-               ThenBy(bug => bug.Severity == SeverityType.Critical).
-               ThenBy(bug => bug.Severity == SeverityType.Major).
-               ThenBy(bug => bug.Severity == SeverityType.Minor).
-               ToList();
+                List<Story> storyInProgress = task.
+              Where(story => story.Status == StoryStatusType.InProgress).
+              OrderBy(story => story.Title).
+              ThenBy(story => story.Priority == PriorityType.High).
+              ThenBy(story => story.Priority == PriorityType.Medium).
+              ThenBy(story => story.Priority == PriorityType.Low).
+              ThenBy(story => story.Size == SizeType.Large).
+              ThenBy(story => story.Size == SizeType.Medium).
+              ThenBy(story => story.Size == SizeType.Small).
+              ToList();
 
-                foreach (Bug bug in bugsFixed)
+                foreach (Story bug in storyInProgress)
                 {
                     stringBuilder.Append(bug);
                     StringGenerator('*', 15);
                 }
 
+            }
+            else if (command == "Done")
+            {
+                List<Story> storyDone = task.
+               Where(story => story.Status == StoryStatusType.Done).
+               OrderBy(story => story.Title).
+               ThenBy(story => story.Priority == PriorityType.High).
+               ThenBy(story => story.Priority == PriorityType.Medium).
+               ThenBy(story => story.Priority == PriorityType.Low).
+               ThenBy(story => story.Size == SizeType.Large).
+               ThenBy(story => story.Size == SizeType.Medium).
+               ThenBy(story => story.Size == SizeType.Small).
+               ToList();
+
+                foreach (Story bug in storyDone)
+                {
+                    stringBuilder.Append(bug);
+                    StringGenerator('*', 15);
+                }
             }
             else if (command == "Assignee")
             {
-                List<Bug> bugsAssign = task.
-               Where(bug => bug.Assignee.IsAssignedToATeam).
-               OrderBy(bug => bug.Title).
-               ThenBy(bug => bug.Priority == PriorityType.High).
-               ThenBy(bug => bug.Priority == PriorityType.Medium).
-               ThenBy(bug => bug.Priority == PriorityType.Low).
-               ThenBy(bug => bug.Severity == SeverityType.Critical).
-               ThenBy(bug => bug.Severity == SeverityType.Major).
-               ThenBy(bug => bug.Severity == SeverityType.Minor).
+                List<Story> storyAssignee = task.
+               Where(story => story.Assignee.IsAssignedToATeam).
+               OrderBy(story => story.Title).
+               ThenBy(story => story.Priority == PriorityType.High).
+               ThenBy(story => story.Priority == PriorityType.Medium).
+               ThenBy(story => story.Priority == PriorityType.Low).
+               ThenBy(story => story.Size == SizeType.Large).
+               ThenBy(story => story.Size == SizeType.Medium).
+               ThenBy(story => story.Size == SizeType.Small).
                ToList();
 
-                foreach (Bug bug in bugsAssign)
+                foreach (Story bug in storyAssignee)
                 {
                     stringBuilder.Append(bug);
                     StringGenerator('*', 15);
