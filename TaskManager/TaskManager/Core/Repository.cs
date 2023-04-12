@@ -72,7 +72,7 @@ namespace TaskManager.Core
         {
             var team = new Team(name);
 
-            if (teams.Contains(team))
+            if (TeamExists(name))
             {
                 string errorMessage = string.Format(DuplicateTeamMessage, name);
                 throw new InvalidOperationException(errorMessage);
@@ -150,7 +150,8 @@ namespace TaskManager.Core
 
         public bool TeamExists(string teamname)
         {
-            throw new NotImplementedException();
+            bool teamExists = teams.Any(member => member.Name == teamname);
+            return teamExists; ;
         }
 
         public ITask GetTask(int id)
