@@ -16,9 +16,7 @@ namespace TaskManager
             //    IEngine engine = new Core.Engine(commandFactory);
             //    engine.Start();
 
-            var member = new Member("Georgy");
-            member.AssignToATeam();
-            Console.WriteLine(member);
+
         }
     }
 }
