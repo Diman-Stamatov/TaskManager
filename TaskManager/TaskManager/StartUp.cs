@@ -1,4 +1,6 @@
 ﻿using System.Net.Http.Headers;
+using TaskManager.Core.Interfaces;
+using TaskManager.Core;
 using TaskManager.Models;
 using TaskManager.Models.Enums;
 
@@ -9,9 +11,14 @@ namespace TaskManager
     {
         static void Main(string[] args)
         {
-            var bug = new Bug(2, "saasdasdasdd", "aadsasdasdasdsds", PriorityType.Low, SeverityType.Major);
-            bug.RevertStatus();
+            //    IRepository repository = new Repository();
+            //    ICommandFactory commandFactory = new CommandFactory(repository);
+            //    IEngine engine = new Core.Engine(commandFactory);
+            //    engine.Start();
 
+            var member = new Member("Georgy");
+            member.AssignToATeam();
+            Console.WriteLine(member);
         }
     }
 }
