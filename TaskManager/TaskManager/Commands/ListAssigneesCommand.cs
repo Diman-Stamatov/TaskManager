@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Core.Interfaces;
-using TaskManager.Exceptions;
 
 namespace TaskManager.Commands
 {
-    public class AddTaskComment : BaseCommand
+    public class ChangeFeedbackRating : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public AddTaskComment(IList<string> commandParameters, IRepository repository)
+        public ChangeFeedbackRating(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }

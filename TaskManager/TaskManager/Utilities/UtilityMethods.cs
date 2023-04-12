@@ -15,6 +15,7 @@ namespace TaskManager.Utilities
         private const string AdvanceMethodLogMessage = "The {0} was advanced from {1} to {2}.";
         private const string RevertMethodLogMessage = "The {0} was reverted from {1} to {2}.";
         //Съобщенията за преминаването от една към друга позиция на enum трябва да включва ID на съответния вид Tack
+
         public static string GenerateAdvanceMethodMessage(Type type, int currentValue, string propertyName)
         {
             int nextValue = currentValue+1;

@@ -65,7 +65,7 @@ namespace TaskManager.Models
         public IMember Assignee
         {
             get =>assignee;
-            private set
+            set
             {
                 ValidateAssignee(assignee, value);
                 assignee = value;               
@@ -93,6 +93,9 @@ namespace TaskManager.Models
 
             ValidateAdvanceMethod(type, currentValue, propertyName);
 
+            string className = GetType().Name;
+            int taskId = Id;
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
             status++;
         }
 
@@ -103,6 +106,10 @@ namespace TaskManager.Models
             string propertyName = GetMethodName().TrimRevert();
 
             ValidateRevertMethod(type, currentValue, propertyName);
+
+            string className = GetType().Name;
+            int taskId = Id;
+            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
             status--;
         }
 

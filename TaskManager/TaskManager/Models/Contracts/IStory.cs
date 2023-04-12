@@ -12,6 +12,6 @@ namespace TaskManager.Models.Contracts
         PriorityType Priority { get; }
         SizeType Size { get; }
         StoryStatusType Status { get; }
-        IMember Assignee { get; }
+        IMember Assignee { get; set; }
     }
 }

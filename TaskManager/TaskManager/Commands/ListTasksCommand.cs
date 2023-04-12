@@ -7,12 +7,12 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class AssignTask : BaseCommand
+    public class ListTasksCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public AssignTask(IList<string> commandParameters, IRepository repository)
+        public ListTasksCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
