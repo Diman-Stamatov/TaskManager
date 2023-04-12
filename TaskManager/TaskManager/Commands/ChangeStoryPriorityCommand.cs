@@ -9,7 +9,7 @@ namespace TaskManager.Commands
 {
     internal class ChangeStoryPriorityCommand:BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 2;        ;
+        public const int ExpectedNumberOfArguments = 2;        
         public const string ExpectedAdvanceParameter = "advance";
         public const string ExpectedTaskTypeName = "Story";
         public const string ManipulatedPropertyName = "Priority";

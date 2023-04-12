@@ -34,7 +34,7 @@ namespace TaskManager.Models
             Description = description;
             Id = id;
 
-            Log($"{GetType().Name} with title \"{title}\" was created");
+            Log(Message(id, title, description));
         }
 
         public string Title
@@ -71,12 +71,12 @@ namespace TaskManager.Models
         public void AddComment(IComment comment)
         {
             comments.Add(comment);
-            Log($"Comment: \"{comment}\" added");
+            Log(Message(comment));
         }
 
         protected void Log(string newEvent)
         {
-            changesLog.Add($"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]");
+            changesLog.Add(AddDate(newEvent));
         }
      
         public abstract void AdvanceStatus();
