@@ -22,6 +22,7 @@ namespace TaskManager.Models
             this.Name = name;
             this.tasks = new List<ITask>();
             this.activityHistory = new List<string>();
+            //Todo
         }
         public string Name
         {

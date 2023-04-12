@@ -29,6 +29,7 @@ namespace TaskManager.Models
             get => rating;
             set 
             {
+                //не се записва рейтинга от инпут в changesLog
                 ValidateIntRange(value, GetType().Name, GetMethodName(), RatingMinValue, RatingMaxValue);
                 rating = value; 
             }

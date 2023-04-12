@@ -34,6 +34,7 @@ namespace TaskManager.Models
             Status = InitialBugStatus;
             Severity = severity;
             stepsToReproduce = new List<string>();
+            // на един ред в конструктора
         }
 
         public PriorityType Priority
@@ -69,7 +70,8 @@ namespace TaskManager.Models
             set
             {
                 ValidateAssignee(assignee, value);
-                assignee = value;               
+                assignee = value;   
+                //ToDo
             }
         }
 

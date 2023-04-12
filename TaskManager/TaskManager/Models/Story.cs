@@ -28,6 +28,7 @@ namespace TaskManager.Models
         }
         public PriorityType Priority
         {
+            //не се записва Priority от инпут в changesLog
             get => priority;
 
             private set
@@ -38,6 +39,7 @@ namespace TaskManager.Models
 
         public SizeType Size
         {
+            //не се записва Size от инпут в changesLog
             get => size;
 
             private set
@@ -48,11 +50,13 @@ namespace TaskManager.Models
 
         public StoryStatusType Status
         {
+            //не се записва Status от инпут в changesLog
             get => status;
         }
 
         public IMember Assignee
         {
+            //не се записва Size от инпут в changesLog
             get => assignee;
             set
             {

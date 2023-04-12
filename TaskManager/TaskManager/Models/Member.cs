@@ -15,6 +15,8 @@ namespace TaskManager.Models
         private const int MinNameLength = 5;
         private const int MaxNameLength = 15;
         private readonly IList<ITask> tasks;
+        private readonly List<string> activityLog;
+        //ToDo
         private string name;
         private bool isAssignedToATeam;
 
@@ -22,6 +24,8 @@ namespace TaskManager.Models
         {
             Name = name;
             tasks = new List<ITask>();
+            //Todo
+            activityLog.Add(LogChanges(" "));
         }
         public string Name
         { 
@@ -36,6 +40,7 @@ namespace TaskManager.Models
                  MaxNameLength);
                  name = value;
                  isAssignedToATeam = false;
+                
             }
         }
 
@@ -49,6 +54,7 @@ namespace TaskManager.Models
         public void AddTask(Task task)
         {
             tasks.Add(task);
+            //log
         }
 
         public string PrintTasks()

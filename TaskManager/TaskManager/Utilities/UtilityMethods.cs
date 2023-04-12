@@ -144,5 +144,9 @@ namespace TaskManager.Utilities
         {
             return new string(simbol, num);
         }
+        public static string LogChanges(string newEvent)
+        {
+            return $"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]";
+        }
     }
 }
