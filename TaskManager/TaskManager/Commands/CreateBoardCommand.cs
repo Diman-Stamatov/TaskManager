@@ -29,7 +29,7 @@ namespace TaskManager.Commands
         {
             ITeam foundTeam = Repository.GetTeam(teamName);
             foundTeam.CreateBoard(boardName);
-            return $"Board {teamName} successfully created in team {teamName}";
+            return $"Board {boardName} successfully created in team {teamName}";
         }
     }
 }

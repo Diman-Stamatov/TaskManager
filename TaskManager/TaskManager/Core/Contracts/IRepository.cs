@@ -20,7 +20,7 @@ namespace TaskManager.Core.Interfaces
         IMember GetMember(string memberName);       
         ITeam CreateTeam(string teamName);
         IMember CreateMember(string memberName);       
-        IBug CreageBug(string title, string description, PriorityType priority, SeverityType severity);
+        IBug CreateBug(string title, string description, PriorityType priority, SeverityType severity);
         IStory CreateStory(string title, string description, PriorityType priority, SizeType size);
         IFeedback CreateFeedback(string title, string description, int rating);
         ITask GetTask(int id);

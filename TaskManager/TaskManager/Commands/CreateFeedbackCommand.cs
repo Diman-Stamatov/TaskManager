@@ -11,7 +11,6 @@ namespace TaskManager.Commands
     public class CreateFeedbackCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
 
         public CreateFeedbackCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -21,15 +20,14 @@ namespace TaskManager.Commands
         public override string Execute()
         {
             ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
-            int id = ParseIntParameter(CommandParameters[0], "ID");
-            string title = CommandParameters[1];
-            string description = CommandParameters[2];
-            int rating = ParseIntParameter(CommandParameters[3], "Rating");
-            return CreateFeedback(id, title, description, rating);
+            string title = CommandParameters[0];
+            string description = CommandParameters[1];
+            int rating = ParseIntParameter(CommandParameters[2], "Rating");
+            return CreateFeedback(title, description, rating);
         }
-        public string CreateFeedback(int id, string title, string description, int rating)
+        public string CreateFeedback(string title, string description, int rating)
         {
-            var newFeedback = new Feedback(id, title, description, rating);
+            var newFeedback = Repository.CreateFeedback(title, description, rating);
             return $"Feedback with name {title} was successfully created";
         }
     }

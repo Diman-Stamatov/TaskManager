@@ -9,9 +9,7 @@ namespace TaskManager.Commands
 {
     public class CreateMemberCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
+        public const int ExpectedNumberOfArguments = 1;
         public CreateMemberCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -19,7 +17,15 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
+            string memberName = CommandParameters[0];
+                
+                return CreateMember(memberName);
+        }
+        private string CreateMember(string memberName)
+        {
+            var newMember = Repository.CreateMember(memberName);
+            return $"Member with name {memberName} was successfully created";
         }
     }
 }

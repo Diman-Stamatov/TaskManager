@@ -21,18 +21,17 @@ namespace TaskManager.Commands
         public override string Execute()
         {
             ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
-            int id = ParseIntParameter(CommandParameters[0], "ID");
-            string title = CommandParameters[1];
-            string description = CommandParameters[2];
-            PriorityType priority = ParsePriorityTypeParameter(CommandParameters[3], "Priority");
-            SeverityType severity = ParseSeverityTypeParameter(CommandParameters[4], "Serverity");
+            string title = CommandParameters[0];
+            string description = CommandParameters[1];
+            PriorityType priority = ParsePriorityTypeParameter(CommandParameters[2], "Priority");
+            SeverityType severity = ParseSeverityTypeParameter(CommandParameters[3], "Serverity");
 
-            return CreateBug(id, title, description, priority, severity);
+            return CreateBug(title, description, priority, severity);
         }
-        public string CreateBug(int id,string  title, string  description, PriorityType priority, SeverityType severity)
-        {
-            var newBug = new Bug(id, title, description, priority, severity);
-            return $"Bug with name {title} was successfully created";
+        public string CreateBug(string  title, string  description, PriorityType priority, SeverityType severity)
+        {                           
+            var newBug = Repository.CreateBug(title, description, priority, severity);           
+            return $"Bug with ID {newBug.Id} was successfully created";
         }
     }
 }
