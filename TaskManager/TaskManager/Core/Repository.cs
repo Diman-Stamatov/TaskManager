@@ -52,7 +52,15 @@ namespace TaskManager.Core
 
         public IMember CreateMember(string name)
         {
-            throw new NotImplementedException();
+            var member  = new Member(name);
+
+            if (member.IsAssignedToATeam)
+            {
+                string errorMessage = string.Format(DuplicateMemberMessage, name);
+                throw new InvalidOperationException(errorMessage);
+            }
+            members.Add(member);
+            return member;
         }
 
         //public IBoard CreateBoard(string name)
