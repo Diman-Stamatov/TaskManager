@@ -11,7 +11,6 @@ namespace TaskManager.Commands
     public class CreateFeedbackCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
 
         public CreateFeedbackCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -29,7 +28,6 @@ namespace TaskManager.Commands
         public string CreateFeedback(string title, string description, int rating)
         {
             var newFeedback = Repository.CreateFeedback(title, description, rating);
-            //var newFeedback = new Feedback(id, title, description, rating);
             return $"Feedback with name {title} was successfully created";
         }
     }

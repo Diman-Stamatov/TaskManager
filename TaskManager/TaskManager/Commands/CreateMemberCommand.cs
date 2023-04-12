@@ -10,8 +10,6 @@ namespace TaskManager.Commands
     public class CreateMemberCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 1;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
         public CreateMemberCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -19,7 +17,7 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments)
+            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
             string memberName = CommandParameters[0];
                 
                 return CreateMember(memberName);

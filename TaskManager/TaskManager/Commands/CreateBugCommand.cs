@@ -31,7 +31,6 @@ namespace TaskManager.Commands
         public string CreateBug(string  title, string  description, PriorityType priority, SeverityType severity)
         {                            //???
             var newBug = Repository.CreageBug(title, description, priority, severity);
-            //var newBug = new Bug(id, title, description, priority, severity);
             return $"Bug with ID {newBug.Id} was successfully created";
         }
     }
