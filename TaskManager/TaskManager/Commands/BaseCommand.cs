@@ -64,6 +64,7 @@ namespace TaskManager.Commands
             {
                 return result;
             }
+
             throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetFeedbackStatusTypeNames}");
         }
 
