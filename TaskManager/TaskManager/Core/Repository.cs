@@ -52,8 +52,7 @@ namespace TaskManager.Core
 
         public IMember CreateMember(string name)
         {
-            var member = new Member(name);
-            if(member.)
+            throw new NotImplementedException();
         }
 
         //public IBoard CreateBoard(string name)
