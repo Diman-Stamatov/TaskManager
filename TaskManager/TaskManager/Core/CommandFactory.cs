@@ -35,6 +35,8 @@ namespace TaskManager.Core
             {
                 case CommandType.AddTaskComment:
                     return new AddTaskCommentCommand(commandParameters, repository);
+                case CommandType.AssignMemberToTeam:
+                    return new AssignMemberToTeamCommand(commandParameters, repository);
                 case CommandType.AssignTask:
                     return new AssignTaskCommand(commandParameters, repository);
                 case CommandType.ChangeBugPriority:

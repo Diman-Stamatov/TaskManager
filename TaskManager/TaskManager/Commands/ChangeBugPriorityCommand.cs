@@ -9,8 +9,9 @@ namespace TaskManager.Commands
 {
     internal class ChangeBugPriorityCommand :BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        
+        public const int ExpectedNumberOfArguments = 2;
+        public const string ExpectedRevertParameter = "revert";
+        public const string ExpectedAdvanceParameter = "advance";
         public ChangeBugPriorityCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -21,20 +22,30 @@ namespace TaskManager.Commands
             ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
 
             int taskId = ParseIntParameter(CommandParameters[0], "ID");
-            string content = CommandParameters[1];
-            string author = CommandParameters[2];
+            string changeDirection = CommandParameters[1].ToLower();
+            if (changeDirection != "advance" && changeDirection != "revert")
+            {
+                string errorMessage = $"Please choose either the {ExpectedRevertParameter} " +
+                    $"or {ExpectedAdvanceParameter} clarification for this command!";
+                throw new InvalidUserInputException(errorMessage);
+            }          
 
-            return AddTaskComment(taskId, content, author);
+            return ChangeBugPriority(taskId, changeDirection);
         }
 
-        private string AddTaskComment(int id, string content, string author)
+        private string ChangeBugPriority(int id, string changeDirection)
         {
-            var foundMember = Repository.GetMember(author);
-            ITask foundTask = Repository.GetTask(id);
-            var newComment = new Comment(foundMember.Name, content);
-            foundTask.AddComment(newComment);
+            var foundTask = (IBug)Repository.GetTask(id);
+            if (changeDirection == ExpectedAdvanceParameter)
+            {
+                foundTask.AdvancePriority();
+            }
+            else
+            {
+                foundTask.RevertPriority();
+            }            
 
-            return $"{author} successfully added a comment to {foundTask.GetType().Name} ID number {id}.";
+            return $"successfully added a comment to {foundTask.GetType().Name} ID number {id}.";
         }
     }
 }

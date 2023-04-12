@@ -10,6 +10,7 @@ namespace TaskManager.Commands.Types
     {
         AddTaskComment,
         AssignTask,
+        AssignMemberToTeam,
         ChangeBugPriority,
         ChangeBugSeverity,
         ChangeBugStatus,
