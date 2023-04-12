@@ -21,7 +21,8 @@ namespace TaskManager.Models
 
         private readonly IList<string> changesLog;      
         private readonly IList<IComment> comments;
-        private string title;
+
+        protected string title;
         private string description;
 
         public Task(int id,string title, string description)
@@ -33,7 +34,7 @@ namespace TaskManager.Models
             Description = description;
             Id = id;
 
-            LogChanges($"{GetType().Name} with title \"{title}\" was created");
+            Log($"{GetType().Name} with title \"{title}\" was created");
         }
 
         public string Title
@@ -70,10 +71,10 @@ namespace TaskManager.Models
         public void AddComment(IComment comment)
         {
             comments.Add(comment);
-            LogChanges($"Comment: \"{comment}\" added");
+            Log($"Comment: \"{comment}\" added");
         }
 
-        protected void LogChanges(string newEvent)
+        protected void Log(string newEvent)
         {
             changesLog.Add($"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]");
         }

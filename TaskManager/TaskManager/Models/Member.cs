@@ -14,19 +14,24 @@ namespace TaskManager.Models
     {
         private const int MinNameLength = 5;
         private const int MaxNameLength = 15;
+
         private readonly IList<ITask> tasks;
         private readonly List<string> activityLog;
-        //ToDo
+  
         private string name;
         private bool isAssignedToATeam;
 
         public Member(string name)
         {
             Name = name;
+
             tasks = new List<ITask>();
-            //Todo
-            activityLog.Add(LogChanges(" "));
+            activityLog = new List<string>
+            {
+                LogChanges($"Member with name {name} was created")
+            };
         }
+
         public string Name
         { 
             get => name;
@@ -39,8 +44,7 @@ namespace TaskManager.Models
                  MinNameLength, 
                  MaxNameLength);
                  name = value;
-                 isAssignedToATeam = false;
-                
+                 isAssignedToATeam = false;                
             }
         }
 
@@ -48,13 +52,15 @@ namespace TaskManager.Models
 
         public bool IsAssignedToATeam
         {
-            get => isAssignedToATeam;
+            get => isAssignedToATeam;            
         }
 
         public void AddTask(Task task)
         {
             tasks.Add(task);
-            //log
+
+            activityLog.Add(LogChanges(
+                $"{GetType().Name} with title {task.Title} was assigned to {Name}"));
         }
 
         public string PrintTasks()
@@ -80,7 +86,6 @@ namespace TaskManager.Models
             {
                 sb.AppendLine(task.PrintChangesLog());
             }
-
             return sb.ToString();
         }
 
@@ -99,11 +104,13 @@ namespace TaskManager.Models
             memberOutput.Append(ActivityLog());
             return memberOutput.ToString().Trim();
         }
+
         public IComment CreateComment(string content)
         {
             var comment = new Comment(Name, content);
             return comment;
         }
+
         public void AssignToATeam()
         {
             isAssignedToATeam = true;

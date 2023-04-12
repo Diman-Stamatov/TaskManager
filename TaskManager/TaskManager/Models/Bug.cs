@@ -9,6 +9,7 @@ using static TaskManager.Utilities.Validation;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics.Metrics;
 
 namespace TaskManager.Models
 {
@@ -34,12 +35,14 @@ namespace TaskManager.Models
             Status = InitialBugStatus;
             Severity = severity;
             stepsToReproduce = new List<string>();
-            // на един ред в конструктора
+            
+            Log(Message("Bug", Id, title, priority, severity));
         }
 
         public PriorityType Priority
         {
             get => priority;
+
             private set
             {
                 priority = value;
@@ -49,6 +52,7 @@ namespace TaskManager.Models
         public BugStatusType Status
         {
             get => status;
+
             private set
             {
                 status = value;               
@@ -58,6 +62,7 @@ namespace TaskManager.Models
         public SeverityType Severity
         {
             get => severity;
+
             private set
             {
                 severity = value;
@@ -70,8 +75,9 @@ namespace TaskManager.Models
             set
             {
                 ValidateAssignee(assignee, value);
-                assignee = value;   
-                //ToDo
+                assignee = value;
+
+                Log(Message("Bug", value, Title, Id));
             }
         }
 
@@ -89,8 +95,7 @@ namespace TaskManager.Models
 
             stepsToReproduce.Add(stepToReproduce);
 
-            LogChanges(
-                $"'{stepsToReproduce}' added to 'Steps to reproduce'");
+            Log($"'{stepsToReproduce}' added to 'Steps to reproduce'");
         }
 
         public void AdvancePriority()
@@ -103,8 +108,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+
             priority++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public void RevertPriority()
@@ -117,8 +123,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+           
             priority--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
         public override void AdvanceStatus()
         {
@@ -130,8 +137,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            
             Status++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public override void RevertStatus()
@@ -144,8 +152,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            
             status--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public void AdvanceSeverity()
@@ -158,8 +167,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            
             Severity++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public void RevertSeverity()
@@ -172,8 +182,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            
             Severity--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public string StepsToReproduseDisplay() 

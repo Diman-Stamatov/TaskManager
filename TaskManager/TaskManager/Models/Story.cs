@@ -19,16 +19,16 @@ namespace TaskManager.Models
         private SizeType size;
         private StoryStatusType status;
         private IMember assignee;
-        public Story(int id,string title, string description, PriorityType priority, SizeType size)
-            : base (id,title, description)
+        public Story(int id, string title, string description, PriorityType priority, SizeType size)
+            : base(id, title, description)
         {
             Priority = priority;
             Size = size;
             status = InitialStatus;
+            Log(Message("Story", id, title, priority, size));
         }
         public PriorityType Priority
         {
-            //не се записва Priority от инпут в changesLog
             get => priority;
 
             private set
@@ -39,48 +39,45 @@ namespace TaskManager.Models
 
         public SizeType Size
         {
-            //не се записва Size от инпут в changesLog
             get => size;
 
             private set
             {
-                size = value;
+                size = value; ;
             }
         }
 
         public StoryStatusType Status
         {
-            //не се записва Status от инпут в changesLog
             get => status;
         }
 
         public IMember Assignee
         {
-            //не се записва Size от инпут в changesLog
             get => assignee;
             set
             {
                 ValidateAssignee(assignee, value);
                 assignee = value;
+                Log(Message("Story", value, Title, Id));
             }
-
         }
-
 
         public void AdvancePriority()
         {
             var type = priority.GetType();
             int currentValue = (int)Priority;
             string propertyName = GetMethodName().TrimAdvance();
-            
+
             ValidateAdvanceMethod(type, currentValue, propertyName);
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
-            
+
             priority++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
+
         public void RevertPriority()
         {
             var type = priority.GetType();
@@ -91,9 +88,11 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            
             priority--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
+
         public void AdvanceSize()
         {
             var type = size.GetType();
@@ -104,10 +103,11 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
 
             size++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
+
         public void RevertSize()
         {
             var type = size.GetType();
@@ -118,8 +118,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            
             size--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
         public override void AdvanceStatus()
         {
@@ -131,10 +132,11 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
 
             status++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
+
         public override void RevertStatus()
         {
             var type = status.GetType();
@@ -145,14 +147,17 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
             status--;
         }
+
         public void AssignTask(IMember member)
         {
             ValidateAssignee(Assignee, member);
             assignee = member;
+            Log(Message("Story", member, title, Id));
         }
+
         public override string ToString()
         {
             StringBuilder storyInfo = new StringBuilder();
@@ -162,6 +167,6 @@ namespace TaskManager.Models
             storyInfo.AppendLine($"Status: {Status}");
             storyInfo.AppendLine($"Assigned to: {Assignee.Name}");
             return storyInfo.ToString().Trim();
-        }        
+        }
     }
 }

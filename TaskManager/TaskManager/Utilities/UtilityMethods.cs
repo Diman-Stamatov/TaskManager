@@ -94,6 +94,27 @@ namespace TaskManager.Utilities
             string logMessage = string.Format(RevertMethodLogMessage, propertyName, className, id, currentValueName, nextValueName);
             return logMessage;
         }
+
+        public static string Message(SizeType value)
+        {            
+            return $"SizeType set to: {value}";
+        }
+        public static string Message(string type, IMember member, string title, int id)
+        {
+            return $"{member.Name} was set as assignee to {type} with title:{title} and Id:{id}";
+        }
+        public static string Message(string type, int id, string title, PriorityType priority, SizeType size)
+        {
+            return $"{type} with title: \"{title}\" ID: {id} PriorityType: {priority} SizeType {size} was created";
+        }
+        public static string Message(string type, int id, string title, PriorityType priority, SeverityType severity)
+        {
+            return $"{type} with title: \"{title}\" ID: {id} PriorityType: {priority} SizeType {severity} was created";
+        }
+        public static string Message(string type, int id, string title, int rating)
+        {
+            return $"{type} with title: \"{title}\" ID: {id} and raiting: {rating} was created";
+        }
         public static string TrimAdvance(this string methodName)
         {
             int toSkip = "Advance".Length;
