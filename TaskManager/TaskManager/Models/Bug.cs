@@ -174,12 +174,10 @@ namespace TaskManager.Models
             Severity--;
         }
 
-
-        public override string ToString()
+        public string StepsToReproduseDisplay() 
         {
             StringBuilder bugInfo = new StringBuilder();
             int number = 1;
-            bugInfo.Append(base.ToString());
             bugInfo.AppendLine($"List of steps to reproduce it:");
             bugInfo.AppendLine(StringGenerator('=', 10));
             foreach (var step in stepsToReproduce)
@@ -187,7 +185,13 @@ namespace TaskManager.Models
                 bugInfo.AppendLine($"{number++}. {step}");
                 bugInfo.AppendLine(StringGenerator('=', 10));
             }
-            bugInfo.AppendLine(StringGenerator('=', 10));
+            return bugInfo.ToString().Trim();
+        }
+        public override string ToString()
+        {
+            StringBuilder bugInfo = new StringBuilder();
+            
+            bugInfo.Append(base.ToString());
             bugInfo.AppendLine($"Priority: {Priority}");
             bugInfo.AppendLine($"Saverity: {Severity}");
             bugInfo.AppendLine($"Status: {Status}");
