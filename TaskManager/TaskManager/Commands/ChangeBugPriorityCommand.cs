@@ -12,6 +12,8 @@ namespace TaskManager.Commands
         public const int ExpectedNumberOfArguments = 2;
         public const string ExpectedRevertParameter = "revert";
         public const string ExpectedAdvanceParameter = "advance";
+        public const string ExpectedTaskTypeName = "Bug";
+        public const string ManipulatedPropertyName = "Priority";
         public ChangeBugPriorityCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -35,21 +37,27 @@ namespace TaskManager.Commands
 
         private string ChangeBugPriority(int id, string changeDirection)
         {
-            var foundTask = (IBug)Repository.GetTask(id);
-            var type = foundTask.GetType();
-            int currentValue = (int)foundTask.Priority;
-            string propertyName = "Priority";
-            string className = foundTask.GetType().Name;            
+            var foundTask = Repository.GetTask(id);
+            if (foundTask is IBug == false)
+            {
+                string errorMessage = $"The specified task is not a {ExpectedTaskTypeName}!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+            var foundBug = (IBug)foundTask;
+            var type = foundBug.GetType();
+            int currentValue = (int)foundBug.Priority;
+            string propertyName = ManipulatedPropertyName;
+            string className = ExpectedTaskTypeName;            
 
             string commandMessage;
             if (changeDirection == ExpectedAdvanceParameter)
             {
-                foundTask.AdvancePriority();
+                foundBug.AdvancePriority();
                 commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id);
             }
             else
             {
-                foundTask.RevertPriority();
+                foundBug.RevertPriority();
                 commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id);
             }            
             

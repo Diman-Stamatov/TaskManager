@@ -30,7 +30,7 @@ namespace TaskManager.Commands
 
         private string AddMemberToTeam(string teamName, string memberName)
         {
-            var foundTeam = Repository.GetTeam(teamName);
+            var foundTeam = Repository.GetTeam(teamName);            
             var foundMember = Repository.GetMember(memberName);
             if (foundMember.IsAssignedToATeam == true)
             {
