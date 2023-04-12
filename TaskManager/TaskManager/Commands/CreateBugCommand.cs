@@ -27,7 +27,6 @@ namespace TaskManager.Commands
             PriorityType priority = ParsePriorityTypeParameter(CommandParameters[3], "Priority");
             SeverityType severity = ParseSeverityTypeParameter(CommandParameters[4], "Serverity");
 
-
             return CreateBug(id, title, description, priority, severity);
         }
         public string CreateBug(int id,string  title, string  description, PriorityType priority, SeverityType severity)

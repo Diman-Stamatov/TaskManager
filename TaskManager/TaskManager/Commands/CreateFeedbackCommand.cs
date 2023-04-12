@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Core.Interfaces;
+using TaskManager.Models.Enums;
 
 namespace TaskManager.Commands
 {
@@ -19,7 +20,17 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
+            int id = ParseIntParameter(CommandParameters[0], "ID");
+            string title = CommandParameters[1];
+            string description = CommandParameters[2];
+            int rating = ParseIntParameter(CommandParameters[3], "Rating");
+            return CreateFeedback(id, title, description, rating);
+        }
+        public string CreateFeedback(int id, string title, string description, int rating)
+        {
+            var newFeedback = new Feedback(id, title, description, rating);
+            return $"Feedback with name {title} was successfully created";
         }
     }
 }
