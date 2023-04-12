@@ -48,7 +48,7 @@ namespace TaskManager.Models
         {
             StringBuilder taskOutput = new StringBuilder();
             int num = 1;
-            taskOutput.AppendLine("Tcks:");
+            taskOutput.AppendLine("Tasks:");
             taskOutput.AppendLine(StringGenerator('-', 10));
             foreach (var task in tasks)
             {
@@ -78,6 +78,11 @@ namespace TaskManager.Models
             memberOutput.Append(PrintTasks());
             memberOutput.Append(ActivityLog());
             return memberOutput.ToString().Trim();
+        }
+        public IComment CreateComment(string content)
+        {
+            var comment = new Comment(Name, content);
+            return comment;
         }
     }
 }

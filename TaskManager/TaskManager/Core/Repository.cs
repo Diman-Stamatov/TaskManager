@@ -7,26 +7,21 @@ using TaskManager.Models;
 using TaskManager.Models.Contracts;
 using TaskManager.Models.Enums;
 using TaskManager.Core.Interfaces;
-
+using TaskManager.Exceptions;
 
 namespace TaskManager.Core
 {
     internal class Repository : IRepository
     {
+        private const string DuplicateMemberMessage = "{0} is already a registered employee!";
+        private const string MemberNotFoundMessage = "{0} is not a registered employee!";
+        private const string TaskNotFoundMessage = "A task with the ID {0} does not exist!";
+
         private readonly IList<ITeam> teams = new List<ITeam>();
         private readonly IList<IMember> members = new List<IMember>();
         private readonly IList<ITask> tasks = new List<ITask>();
-        private readonly IList<IBoard> boards = new List<IBoard>();
-
-
-        public IList<IBoard> Boards
-        {
-            get
-            {
-                var boardCopy = new List<IBoard>(boards);
-                return boardCopy;
-            }
-        }
+        //ToDo Removed boards from Repository     
+        
         public IList<ITeam> Teams
         {
             get
@@ -94,9 +89,16 @@ namespace TaskManager.Core
         }
 
        
-        public ITeam GetMember(string name)
+        public IMember GetMember(string memberName)
         {
-            throw new NotImplementedException();
+            bool memberExists = MemberExists(memberName);
+            if (memberExists == false)
+            {
+                string errorMessage = string.Format(MemberNotFoundMessage, memberName);
+                throw new EntryNotFoundException(errorMessage);
+            }
+            IMember foundMember = members.Where(member => member.Name == memberName).First();
+            return foundMember;
         }
 
         public ITeam GetTeam(string name)
@@ -106,7 +108,14 @@ namespace TaskManager.Core
 
         public void AddMember(IMember member)
         {
-            throw new NotImplementedException();
+            string memberName = member.Name;
+            bool memberExists = MemberExists(memberName);
+            if (memberExists == true)
+            {
+                string errorMessage = string.Format(DuplicateMemberMessage, memberName);
+                throw new DuplicateEntryException(errorMessage);
+            }
+            members.Add(member);
         }
 
         public void AddTeam(ITeam team)
@@ -114,14 +123,33 @@ namespace TaskManager.Core
             throw new NotImplementedException();
         }
 
-        public bool MemberExist(string membername)
+        public bool MemberExists(string memberName)
+        {
+            bool memberExists = Members.Any(member=>member.Name == memberName);
+            return memberExists;
+            
+        }
+
+        public bool TeamExists(string teamname)
         {
             throw new NotImplementedException();
         }
 
-        public bool TeamExist(string teamname)
+        public ITask GetTask(int id)
         {
-            throw new NotImplementedException();
+            bool taskExists = TaskExists(id);
+            if (taskExists == false)
+            {
+                string errorMessage = string.Format(TaskNotFoundMessage, id);
+                throw new EntryNotFoundException(errorMessage);
+            }
+            ITask foundTask = Tasks.Where(task=>task.Id == id).First();
+            return foundTask;
+        }
+        public bool TaskExists(int id)
+        { 
+            bool taskExists = Tasks.Any(task=>task.Id == id);
+            return taskExists;
         }
     }
 }

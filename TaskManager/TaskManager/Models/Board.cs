@@ -53,7 +53,12 @@ namespace TaskManager.Models
                 return new List<ITask>(this.tasks);
             }
         }
-        public override string ToString() => throw new NotImplementedException();
+        public override string ToString()
+        {
+            string boardInfo = $"Board name: {Name}" +
+                $"\nNumber of tasks on the board: {Tasks.Count}";
+            return boardInfo;
+        }
         
     }
 }

@@ -14,18 +14,19 @@ namespace TaskManager.Core.Interfaces
         IList<ITeam> Teams { get; }
         IList<IMember> Members { get; }
         IList<ITask> Tasks { get; }
+        bool TeamExists(string teamname);
         void AddTeam(ITeam team);
-        ITeam GetTeam(string name);
+        ITeam GetTeam(string teamName);
+        bool MemberExists(string membername);
         void AddMember(IMember member);
-        public bool MemberExist(string membername);
-        public bool TeamExist(string teamname);
-        ITeam GetMember(string name);
-        public ITeam CreateTeam(string name);
-        public IMember CreateMember(string name);
-        public IBoard CreateBoard(string name);
-        public IBug CreageBug(string title, string description, PriorityType priority, SeverityType severity);
-        public IStory CreateStory(string title, string description, PriorityType priority, SizeType size);
-        public IFeedback CreateFeedback(string title, string description, int rating);
+        IMember GetMember(string memberName);       
+        ITeam CreateTeam(string teamName);
+        IMember CreateMember(string memberName);       
+        IBug CreageBug(string title, string description, PriorityType priority, SeverityType severity);
+        IStory CreateStory(string title, string description, PriorityType priority, SizeType size);
+        IFeedback CreateFeedback(string title, string description, int rating);
+        ITask GetTask(int id);
+
 
         
     }

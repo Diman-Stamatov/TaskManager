@@ -23,7 +23,7 @@ Each board must have a **name, list of tasks** and **activity history**.
 There are 3 types of tasks: **bug**, **story**, and **feedback**.
 ### Bug
 Bugs must have an **ID**, a **title**, a **description**, a **list of steps to reproduce it**, a **priority**, a
-**severity**, a **status**, an **assignee, a **list of comments** and a **list of changes history**.
+**severity**, a **status**, an **assignee**, a **list of comments** and a **list of changes history**.
 
 - Title is a string between 10 and 50 symbols.
 - Description is a string between 10 and 500 symbols.
@@ -49,7 +49,7 @@ Stories must have an **ID**, a **title**, a **description**, a **priority**, a *
 - History is a list of all changes (string messages) that were done to the story.
 
 ### Feedback
-Feedbacks must have an **ID**, a **title**, a **description**, a **ating**, a **status**, a **list of
+Feedbacks must have an **ID**, a **title**, a **description**, a **rating**, a **status**, a **list of
 comments** and a **list of changes history**.
 - Title is a string between 10 and 50 symbols.
 - Description is a string between 10 and 500 symbols.

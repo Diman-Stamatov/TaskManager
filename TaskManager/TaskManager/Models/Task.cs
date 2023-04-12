@@ -20,14 +20,14 @@ namespace TaskManager.Models
 
 
         private readonly IList<string> changesLog;      
-        private readonly IList<Comment> comments;
+        private readonly IList<IComment> comments;
         private string title;
         private string description;
 
         public Task(int id,string title, string description)
         {
             changesLog = new List<string>();
-            comments = new List<Comment>();
+            comments = new List<IComment>();
 
             Title = title;
             Description = description;
@@ -67,7 +67,7 @@ namespace TaskManager.Models
             }
         }
 
-        public void AddComment(Comment comment)
+        public void AddComment(IComment comment)
         {
             comments.Add(comment);
             LogChanges($"Comment: \"{comment}\" added");

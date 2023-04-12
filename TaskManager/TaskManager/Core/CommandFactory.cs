@@ -9,6 +9,7 @@ using TaskManager.Core.Interfaces;
 using TaskManager.Exceptions;
 using TaskManager.Commands.Types;
 using static TaskManager.Utilities.UtilityMethods;
+using TaskManager.Commands.Contracts;
 using TaskManager.Commands;
 using TaskManager.Commands.Interfaces;
 
@@ -35,7 +36,7 @@ namespace TaskManager.Core
             switch (commandType)
             {
                 case CommandType.AddTaskComment:
-                    return new AddTaskComment(commandParameters, repository);
+                    return new AddTaskCommentCommand(commandParameters, repository);
                 case CommandType.AssignTask:
                     return new AssignTask(commandParameters, repository);
                 case CommandType.ChangeBugPriority:

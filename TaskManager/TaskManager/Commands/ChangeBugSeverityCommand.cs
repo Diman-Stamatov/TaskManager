@@ -7,12 +7,12 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class ListStories : BaseCommand
+    public class ChangeBugSeverityCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ListStories(IList<string> commandParameters, IRepository repository)
+        public ChangeBugSeverityCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
