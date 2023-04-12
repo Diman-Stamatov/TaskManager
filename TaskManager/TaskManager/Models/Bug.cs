@@ -95,7 +95,7 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName));
             status++;
         }
 

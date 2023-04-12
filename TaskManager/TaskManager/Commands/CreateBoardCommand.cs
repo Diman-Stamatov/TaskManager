@@ -19,7 +19,10 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
+            int taskId = ParseIntParameter(CommandParameters[0], "ID");
+            string boardName = CommandParameters[1];
+            return AskT;
         }
     }
 }
