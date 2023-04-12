@@ -14,6 +14,7 @@ namespace TaskManager.Core
     internal class Repository : IRepository
     {
         private const string DuplicateMemberMessage = "{0} is already a registered employee!";
+        private const string DuplicateTeamMessage = "{0} is already a registered team!";
         private const string MemberNotFoundMessage = "{0} is not a registered employee!";
         private const string TaskNotFoundMessage = "A task with the ID {0} does not exist!";
 
@@ -51,12 +52,33 @@ namespace TaskManager.Core
 
         public IMember CreateMember(string name)
         {
-            throw new NotImplementedException();
+            var member  = new Member(name);
+
+            if (member.IsAssignedToATeam)
+            {
+                string errorMessage = string.Format(DuplicateMemberMessage, name);
+                throw new InvalidOperationException(errorMessage);
+            }
+            members.Add(member);
+            return member;
         }
-        
+
+        //public IBoard CreateBoard(string name)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
         public ITeam CreateTeam(string name)
         {
-            throw new NotImplementedException();
+            var team = new Team(name);
+
+            if (TeamExists(name))
+            {
+                string errorMessage = string.Format(DuplicateTeamMessage, name);
+                throw new InvalidOperationException(errorMessage);
+            }
+            teams.Add(team);
+            return team;
         }
 
         public IBug CreageBug(string title, string description, PriorityType priority, SeverityType severity)
@@ -128,7 +150,8 @@ namespace TaskManager.Core
 
         public bool TeamExists(string teamname)
         {
-            throw new NotImplementedException();
+            bool teamExists = teams.Any(member => member.Name == teamname);
+            return teamExists; ;
         }
 
         public ITask GetTask(int id)
