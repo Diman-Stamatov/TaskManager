@@ -14,6 +14,7 @@ namespace TaskManager.Core
     internal class Repository : IRepository
     {
         private const string DuplicateMemberMessage = "{0} is already a registered employee!";
+        private const string DuplicateTeamMessage = "{0} is already a registered team!";
         private const string MemberNotFoundMessage = "{0} is not a registered employee!";
         private const string TaskNotFoundMessage = "A task with the ID {0} does not exist!";
 
@@ -51,12 +52,14 @@ namespace TaskManager.Core
 
         public IMember CreateMember(string name)
         {
-            throw new NotImplementedException();
+            var member = new Member(name);
+            if(member.)
         }
-        public IBoard CreateBoard(string name)
-        {
-            throw new NotImplementedException();
-        }
+
+        //public IBoard CreateBoard(string name)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public ITeam CreateTeam(string name)
         {
