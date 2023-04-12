@@ -31,6 +31,10 @@ namespace TaskManager.Commands
         private string AssignTask(int taskId, string assigneeName)
         {
             var foundMember = Repository.GetMember(assigneeName);
+            if (foundMember.IsAssignedToATeam == false)
+            {
+                throw new InvalidUserInputException($"{assigneeName} should be assigned to a team before being assigned a task!");
+            }
             ITask foundTask = Repository.GetTask(taskId);
             string successMessage = "{0} ID number {1} was assigned to {2}.";
             string taskTypeName = foundTask.GetType().Name;
@@ -44,6 +48,7 @@ namespace TaskManager.Commands
             {
                 IBug foundBug = (IBug)foundTask;
                 foundBug.Assignee = foundMember;
+                foundMember.AssignToATeam();
                 return string.Format(successMessage, taskTypeName, taskId, assigneeName);
             }
             else
