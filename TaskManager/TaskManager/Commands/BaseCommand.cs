@@ -103,5 +103,18 @@ namespace TaskManager.Commands
             }
             throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetStoryStatusTypeNames()}");
         }
+
+        protected void ValidateEnumChangeInput(string changeDirection)
+        {
+            string expectedAdvanceParameter = "advance"; 
+            string expectedRevertParameter = "revert";
+
+            if (changeDirection != expectedAdvanceParameter && changeDirection != expectedRevertParameter)
+            {
+                string errorMessage = $"Please choose either the \"{expectedRevertParameter}\" " +
+                    $"or \"{expectedAdvanceParameter}\" clarification for this command!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+        }
     }
 }

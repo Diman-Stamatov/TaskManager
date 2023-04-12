@@ -62,11 +62,11 @@ namespace TaskManager.Core
                 case CommandType.ListAssignees:
                     return new ListAssigneesCommand(repository);
                 case CommandType.ListBugs:
-                    return new ListBugsCommand(commandParameters, repository); ;
+                    return new ListBugsCommand(commandParameters, repository); 
                 case CommandType.ListFeedback:
                     return new ListFeedbackCommand(commandParameters, repository);
                 case CommandType.ListStories:
-                    return new ListStoriesCommand(repository);
+                    return new ListStoriesCommand(commandParameters, repository);
                 case CommandType.ListTasks:
                     return new ListTasksCommand(repository);
                 case CommandType.ShowAllMembers:
