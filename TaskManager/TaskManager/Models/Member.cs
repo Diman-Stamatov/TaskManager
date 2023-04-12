@@ -78,6 +78,13 @@ namespace TaskManager.Models
             return sb.ToString();
         }
 
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Member {Name} - Tasks {tasks.Count}");
+            return sb.ToString();
+        }
+
         public  string FullInfo()
         {
            StringBuilder memberOutput = new StringBuilder();
