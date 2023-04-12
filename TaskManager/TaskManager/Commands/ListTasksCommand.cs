@@ -12,8 +12,8 @@ namespace TaskManager.Commands
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ListTasksCommand(IList<string> commandParameters, IRepository repository)
-            : base(commandParameters, repository)
+        public ListTasksCommand(IRepository repository)
+            : base(repository)
         {
         }
 

@@ -55,7 +55,7 @@ namespace TaskManager.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetBugStatusTypeNames}");            
+            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetBugStatusTypeNames()}");            
         }
 
         protected FeedbackStatusType ParseFeedbackStatusTypeParameter(string value, string parameterName)
@@ -64,7 +64,8 @@ namespace TaskManager.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetFeedbackStatusTypeNames}");
+
+            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetFeedbackStatusTypeNames()}");
         }
 
         protected PriorityType ParsePriorityTypeParameter(string value, string parameterName)
@@ -73,7 +74,7 @@ namespace TaskManager.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetPriorityTypeNames}");
+            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetPriorityTypeNames()}");
         }
 
         protected SeverityType ParseSeverityTypeParameter(string value, string parameterName)
@@ -82,7 +83,7 @@ namespace TaskManager.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetSeverityTypeNames}");
+            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetSeverityTypeNames()}");
         }
 
         protected SizeType ParseSizeTypeParameter(string value, string parameterName)
@@ -91,7 +92,7 @@ namespace TaskManager.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetSizeTypeNames}");
+            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetSizeTypeNames()}");
         }
 
         protected StoryStatusType ParseStoryStatusTypeParameter(string value, string parameterName)
@@ -100,7 +101,7 @@ namespace TaskManager.Commands
             {
                 return result;
             }
-            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetStoryStatusTypeNames}");
+            throw new InvalidUserInputException($"Invalid input for {parameterName}! Please choose one of the following: {GetStoryStatusTypeNames()}");
         }
     }
 }

@@ -7,12 +7,12 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class ChangeStoryStatus : BaseCommand
+    public class CreateBoardCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ChangeStoryStatus(IList<string> commandParameters, IRepository repository)
+        public CreateBoardCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
