@@ -84,7 +84,7 @@ namespace TaskManager.Core
             return team;
         }
 
-        public IBug CreageBug(string title, string description, PriorityType priority, SeverityType severity)
+        public IBug CreateBug(string title, string description, PriorityType priority, SeverityType severity)
         {
             int nextId = tasks.Count();
             var bug = new Bug(++nextId, title, description, priority, severity);
