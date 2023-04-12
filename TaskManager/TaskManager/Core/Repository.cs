@@ -112,6 +112,9 @@ namespace TaskManager.Core
        
         public IMember GetMember(string memberName)
         {
+            string nullInputMessage = "Please input an actual Member name!";
+            ValidateStringNotNullOrEmpty(memberName, nullInputMessage);
+
             bool memberExists = MemberExists(memberName);
             if (memberExists == false)
             {
@@ -122,15 +125,18 @@ namespace TaskManager.Core
             return foundMember;
         }
 
-        public ITeam GetTeam(string name)
+        public ITeam GetTeam(string teamName)
         {
-            bool teamExists = TeamExists(name);
+            string nullInputMessage = "Please input an actual Team name!";
+            ValidateStringNotNullOrEmpty(teamName, nullInputMessage);
+
+            bool teamExists = TeamExists(teamName);
             if (teamExists == false)
             {
-                string errorMessage = string.Format(TeamNotFoundMessage, name);
+                string errorMessage = string.Format(TeamNotFoundMessage, teamName);
                 throw new EntryNotFoundException(errorMessage);
             }
-            ITeam foundTeam = teams.Where(team => team.Name == name).First();
+            ITeam foundTeam = teams.Where(team => team.Name == teamName).First();
             return foundTeam;
         }
 
