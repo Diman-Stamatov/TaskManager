@@ -134,23 +134,6 @@ namespace TaskManager.Core
             return foundTeam;
         }
 
-        public void AddMember(IMember member)
-        {
-            string memberName = member.Name;
-            bool memberExists = MemberExists(memberName);
-            if (memberExists == true)
-            {
-                string errorMessage = string.Format(DuplicateMemberMessage, memberName);
-                throw new DuplicateEntryException(errorMessage);
-            }
-            members.Add(member);
-        }
-
-        public void AddTeam(ITeam team)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool MemberExists(string memberName)
         {
             bool memberExists = Members.Any(member=>member.Name == memberName);
