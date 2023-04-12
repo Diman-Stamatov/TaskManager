@@ -7,13 +7,13 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    internal class ChangeStoryStatusCommand:BaseCommand
+    internal class ShowAllMembersCommand:BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ChangeStoryStatusCommand(IList<string> commandParameters, IRepository repository)
-            : base(commandParameters, repository)
+        public ShowAllMembersCommand(IRepository repository)
+            : base(repository)
         {
         }
 

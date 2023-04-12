@@ -7,12 +7,12 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class ChangeStoryPriority : BaseCommand
+    public class CreateMemberCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ChangeStoryPriority(IList<string> commandParameters, IRepository repository)
+        public CreateMemberCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }

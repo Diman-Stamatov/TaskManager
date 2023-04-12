@@ -7,12 +7,12 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class ChangeFeedbackStatus : BaseCommand
+    public class CreateFeedbackCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ChangeFeedbackStatus(IList<string> commandParameters, IRepository repository)
+        public CreateFeedbackCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }

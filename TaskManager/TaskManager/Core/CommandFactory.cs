@@ -29,8 +29,7 @@ namespace TaskManager.Core
         {
 
             CommandType commandType = ParseCommandType(commandLine);
-            IList<string> commandParameters = this.ExtractCommandParameters(commandLine);
-            ICommand command = null;
+            IList<string> commandParameters = this.ExtractCommandParameters(commandLine);           
 
             switch (commandType)
             {
@@ -39,61 +38,59 @@ namespace TaskManager.Core
                 case CommandType.AssignTask:
                     return new AssignTaskCommand(commandParameters, repository);
                 case CommandType.ChangeBugPriority:
-                    return new ChangeBugPriority(commandParameters, repository);
+                    return new CreateTeamCommand(commandParameters, repository);
                 case CommandType.ChangeBugSeverity:
                     return new ChangeBugSeverityCommand(commandParameters, repository);
                 case CommandType.ChangeBugStatus:
                     return new ChangeBugStatusCommand(commandParameters, repository);
                 case CommandType.ChangeFeedbackRating:
-                    return new ChangeFeedbackRating(commandParameters, repository);
+                    return new ListAssigneesCommand(repository);
                 case CommandType.ChangeFeedbackStatus:
-                    return new ChangeFeedbackStatus(commandParameters, repository);
+                    return new CreateFeedbackCommand(commandParameters, repository);
                 case CommandType.ChangeStoryPriority:
-                    return new ChangeStoryPriority(commandParameters, repository);
+                    return new CreateMemberCommand(commandParameters, repository);
                 case CommandType.ChangeStorySize:
-                    return new ChangeStorySize(commandParameters, repository);
+                    return new CreateBugcommand(commandParameters, repository);
                 case CommandType.ChangeStoryStatus:
-                    return new ChangeStoryStatus(commandParameters, repository);
+                    return new CreateBoardCommand(commandParameters, repository);
                 case CommandType.CreateBoard:
-                    return new CreateBoard(commandParameters, repository);
+                    return new CreateStoryCommand(commandParameters, repository);
                 case CommandType.CreateBug:
-                    return new CreateBug(commandParameters, repository);
-                case CommandType.CreateStory:
-                    return new CreateStory(commandParameters, repository);
+                    return new ListBugsCommand(repository);
                 case CommandType.CreateFeedback:
-                    return new CreateFeedback(commandParameters, repository);
+                    return new CreateFeedbackCommand(commandParameters, repository);                
                 case CommandType.CreateMember:
-                    return new CreateMember(commandParameters, repository);
+                    return new CreateMemberCommand(commandParameters, repository);
+                case CommandType.CreateStory:
+                    return new CreateStoryCommand(commandParameters, repository);
                 case CommandType.CreateTeam:
-                    return new CreateTeam(commandParameters, repository);
+                    return new CreateTeamCommand(commandParameters, repository);
                 case CommandType.ListAssignees:
-                    return new ListAssignees(commandParameters, repository);
+                    return new ListAssigneesCommand(repository);
                 case CommandType.ListBugs:
-                    return new ListBugs(commandParameters, repository); ;
+                    return new ListBugsCommand(repository); ;
                 case CommandType.ListFeedback:
-                    return new ListFeedback(commandParameters, repository);
+                    return new ListFeedbackCommand(repository);
                 case CommandType.ListStories:
-                    return new ListStories(commandParameters, repository);
+                    return new ListStoriesCommand(repository);
                 case CommandType.ListTasks:
-                    return new ListTasks(commandParameters, repository);
-                case CommandType.ShowAllTeams:
-                    throw new NotImplementedException();
-                case CommandType.ShowBoardActivityHistory:
-                    throw new NotImplementedException();
-                case CommandType.ShowBoards:
-                    throw new NotImplementedException();
-                case CommandType.ShowMemberActivityHistory:
-                    throw new NotImplementedException();
+                    return new ListTasksCommand(repository);
                 case CommandType.ShowAllMembers:
-                    throw new NotImplementedException();
+                    return new ShowAllMembersCommand(repository);
+                case CommandType.ShowAllTeamBoards:
+                    return new ShowAllTeamBoardsCommand(commandParameters, repository);
+                case CommandType.ShowAllTeams:
+                    return new ShowAllTeamsCommand(repository);
+                case CommandType.ShowBoardActivityHistory:
+                    return new ShowBoardActivityHistoryCommand(commandParameters, repository);                
+                case CommandType.ShowMemberActivityHistory:
+                    return new ShowMemberActivityHistoryCommand(commandParameters, repository);               
                 case CommandType.ShowTeamActivityHistory:
-                    throw new NotImplementedException();
+                    return new ShowTeamActivityHistoryCommand(commandParameters, repository);
                 case CommandType.ShowTeamMembers:
-                    throw new NotImplementedException();
+                    return new ShowTeamMembersCommand(commandParameters, repository);
                 case CommandType.UnassignTask:
-                    throw new NotImplementedException();
-                case CommandType.ShowAllTeamsBoards:
-                    throw new NotImplementedException();
+                    return new UnassignTaskCommand(commandParameters, repository);                
                 default:
                     throw new InvalidUserInputException($"Command with name: {commandType} doesn't exist!");
             }

@@ -7,13 +7,13 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class ChangeFeedbackRating : BaseCommand
+    public class ListAssigneesCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ChangeFeedbackRating(IList<string> commandParameters, IRepository repository)
-            : base(commandParameters, repository)
+        public ListAssigneesCommand(IRepository repository)
+            : base(repository)
         {
         }
 

@@ -7,12 +7,12 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class ChangeStorySize : BaseCommand
+    public class CreateBugcommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ChangeStorySize(IList<string> commandParameters, IRepository repository)
+        public CreateBugcommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }

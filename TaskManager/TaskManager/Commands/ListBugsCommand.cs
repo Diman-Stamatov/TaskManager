@@ -7,13 +7,13 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class CreateBug : BaseCommand
+    public class ListBugsCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 0;
         //Трябва да решим, колко параметъра ще приема тази команда
 
-        public CreateBug(IList<string> commandParameters, IRepository repository)
-            : base(commandParameters, repository)
+        public ListBugsCommand(IRepository repository)
+            : base(repository)
         {
         }
 
