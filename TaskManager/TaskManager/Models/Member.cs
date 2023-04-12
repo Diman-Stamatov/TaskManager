@@ -78,7 +78,7 @@ namespace TaskManager.Models
             return sb.ToString();
         }
 
-        public override string ToString()
+        public  string FullInfo()
         {
            StringBuilder memberOutput = new StringBuilder();
             memberOutput.AppendLine($"Member: {Name}");

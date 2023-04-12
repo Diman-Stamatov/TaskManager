@@ -54,10 +54,11 @@ namespace TaskManager.Core
         {
             var member  = new Member(name);
 
-            if (member.IsAssignedToATeam)
+            bool memberExists = MemberExists(name);
+            if (memberExists == true)
             {
                 string errorMessage = string.Format(DuplicateMemberMessage, name);
-                throw new InvalidOperationException(errorMessage);
+                throw new DuplicateEntryException(errorMessage);
             }
             members.Add(member);
             return member;
