@@ -23,7 +23,7 @@ namespace TaskManager.Commands
 
             int taskId = ParseIntParameter(CommandParameters[0], "ID");
             string changeDirection = CommandParameters[1].ToLower();
-            if (changeDirection != "advance" && changeDirection != "revert")
+            if (changeDirection != ExpectedAdvanceParameter && changeDirection != ExpectedRevertParameter)
             {
                 string errorMessage = $"Please choose either the {ExpectedRevertParameter} " +
                     $"or {ExpectedAdvanceParameter} clarification for this command!";
@@ -36,16 +36,24 @@ namespace TaskManager.Commands
         private string ChangeBugPriority(int id, string changeDirection)
         {
             var foundTask = (IBug)Repository.GetTask(id);
+            var type = foundTask.GetType();
+            int currentValue = (int)foundTask.Priority;
+            string propertyName = "Priority";
+            string className = foundTask.GetType().Name;            
+
+            string commandMessage;
             if (changeDirection == ExpectedAdvanceParameter)
             {
                 foundTask.AdvancePriority();
+                commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id);
             }
             else
             {
                 foundTask.RevertPriority();
+                commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id);
             }            
-
-            return $"successfully added a comment to {foundTask.GetType().Name} ID number {id}.";
+            
+            return commandMessage;
         }
     }
 }
