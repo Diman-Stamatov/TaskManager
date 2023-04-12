@@ -9,8 +9,8 @@ namespace TaskManager
     {
         static void Main(string[] args)
         {
-            var bug = new Bug(2, "saasdasdasdd", "aadsasdasdasdsds", PriorityType.Low, SeverityType.Major);
-            bug.RevertStatus();
+            //var bug = new Bug(2, "saasdasdasdd", "aadsasdasdasdsds", PriorityType.Low, SeverityType.Major);
+            //bug.RevertStatus();
 
         }
     }

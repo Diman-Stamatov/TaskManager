@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Core.Interfaces;
+using TaskManager.Core;
 
 namespace TaskManager.Commands
 {
     public class CreateBoardCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
+        public const int ExpectedNumberOfArguments = 2;
         //Трябва да решим, колко параметъра ще приема тази команда
 
         public CreateBoardCommand(IList<string> commandParameters, IRepository repository)
@@ -22,13 +23,13 @@ namespace TaskManager.Commands
             ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
             string teamName = CommandParameters[0];
             string boardName = CommandParameters[1];
-            return ;
+            return AddBoard(teamName, boardName);
         }
         private string AddBoard(string teamName, string boardName)
         {
-            var foundMember = Repository.GetMember(author);
-
-            return $"{author} successfully added a comment to {foundTask.GetType().Name} ID number {id}.";
+            ITeam foundTeam = Repository.GetTeam(teamName);
+            foundTeam.CreateBoard(boardName);
+            return $"Board {teamName} successfully created in team {teamName}";
         }
     }
 }
