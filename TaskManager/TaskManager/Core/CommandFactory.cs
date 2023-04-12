@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 using TaskManager.Core.Interfaces;
 using TaskManager.Exceptions;
 using TaskManager.Commands.Types;
-using static TaskManager.Utilities.UtilityMethods;
 using TaskManager.Commands.Contracts;
 using TaskManager.Commands;
-using TaskManager.Commands.Interfaces;
+
 
 namespace TaskManager.Core
 {
@@ -38,13 +37,13 @@ namespace TaskManager.Core
                 case CommandType.AddTaskComment:
                     return new AddTaskCommentCommand(commandParameters, repository);
                 case CommandType.AssignTask:
-                    return new AssignTask(commandParameters, repository);
+                    return new AssignTaskCommand(commandParameters, repository);
                 case CommandType.ChangeBugPriority:
                     return new ChangeBugPriority(commandParameters, repository);
                 case CommandType.ChangeBugSeverity:
-                    return new ChangeBugSeverity(commandParameters, repository);
+                    return new ChangeBugSeverityCommand(commandParameters, repository);
                 case CommandType.ChangeBugStatus:
-                    return new ChangeBugStatus(commandParameters, repository);
+                    return new ChangeBugStatusCommand(commandParameters, repository);
                 case CommandType.ChangeFeedbackRating:
                     return new ChangeFeedbackRating(commandParameters, repository);
                 case CommandType.ChangeFeedbackStatus:
