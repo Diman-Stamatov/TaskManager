@@ -12,7 +12,7 @@ namespace TaskManager.Utilities
 {
     public static class UtilityMethods
     {
-        private const string AdvanceMethodLogMessage = "The {0} of {1} ID {2} was advanced from {1} to {2}.";
+        private const string AdvanceMethodLogMessage = "The {0} of {1} ID {2} was advanced from {3} to {4}.";
         private const string RevertMethodLogMessage = "The {0} of {1} ID {2} was reverted from {3} to {4}.";
 
 
@@ -105,7 +105,7 @@ namespace TaskManager.Utilities
             string fieldName = string.Join("", methodName.Skip(toSkip));
             return fieldName;
         }
-        public static string GetMethodName([CallerMemberName] string callerName = null)
+        public static string GetMethodName([CallerMemberName] string callerName = "")
         {
             return callerName;
         }
