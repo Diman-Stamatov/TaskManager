@@ -36,16 +36,24 @@ namespace TaskManager.Commands
         private string ChangeBugPriority(int id, string changeDirection)
         {
             var foundTask = (IBug)Repository.GetTask(id);
+            var type = foundTask.GetType();
+            int currentValue = (int)foundTask.Priority;
+            string propertyName = "Priority";
+            string className = foundTask.GetType().Name;            
+
+            string commandMessage;
             if (changeDirection == ExpectedAdvanceParameter)
             {
                 foundTask.AdvancePriority();
+                commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id);
             }
             else
             {
                 foundTask.RevertPriority();
+                commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id);
             }            
-
-            return $"successfully added a comment to {foundTask.GetType().Name} ID number {id}.";
+            
+            return commandMessage;
         }
     }
 }
