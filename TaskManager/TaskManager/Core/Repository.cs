@@ -16,6 +16,7 @@ namespace TaskManager.Core
         private const string DuplicateMemberMessage = "{0} is already a registered employee!";
         private const string DuplicateTeamMessage = "{0} is already a registered team!";
         private const string MemberNotFoundMessage = "{0} is not a registered employee!";
+        private const string TeamNotFoundMessage = "{0} is not a registered team!";
         private const string TaskNotFoundMessage = "A task with the ID {0} does not exist!";
 
         private readonly IList<ITeam> teams = new List<ITeam>();
@@ -64,10 +65,11 @@ namespace TaskManager.Core
             return member;
         }
 
-        //public IBoard CreateBoard(string name)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public IBoard CreateBoard(string name)
+        {
+            var board = new Board(name);
+            return board;
+        }
 
         public ITeam CreateTeam(string name)
         {
@@ -122,7 +124,14 @@ namespace TaskManager.Core
 
         public ITeam GetTeam(string name)
         {
-            throw new NotImplementedException();
+            bool teamExists = TeamExists(name);
+            if (teamExists == false)
+            {
+                string errorMessage = string.Format(TeamNotFoundMessage, name);
+                throw new EntryNotFoundException(errorMessage);
+            }
+            ITeam foundTeam = teams.Where(team => team.Name == name).First();
+            return foundTeam;
         }
 
         public void AddMember(IMember member)
