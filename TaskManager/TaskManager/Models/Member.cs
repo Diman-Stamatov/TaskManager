@@ -16,6 +16,7 @@ namespace TaskManager.Models
         private const int MaxNameLength = 15;
         private readonly IList<ITask> tasks;
         private string name;
+        private bool isAssignedToATeam;
 
         public Member(string name)
         {
@@ -33,12 +34,18 @@ namespace TaskManager.Models
                  GetMethodName(),
                  MinNameLength, 
                  MaxNameLength);
-                name = value;
+                 name = value;
+                 isAssignedToATeam = false;
             }
         }
 
         public IList<ITask> Tasks { get => new List<ITask>(tasks); }
-      
+
+        public bool IsAssignedToATeam
+        {
+            get => isAssignedToATeam;
+        }
+
         public void AddTask(Task task)
         {
             tasks.Add(task);
@@ -83,6 +90,10 @@ namespace TaskManager.Models
         {
             var comment = new Comment(Name, content);
             return comment;
+        }
+        public void AssignToATeam()
+        {
+            isAssignedToATeam = true;
         }
     }
 }

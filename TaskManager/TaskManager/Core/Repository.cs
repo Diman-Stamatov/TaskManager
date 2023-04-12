@@ -53,11 +53,7 @@ namespace TaskManager.Core
         {
             throw new NotImplementedException();
         }
-        public IBoard CreateBoard(string name)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public ITeam CreateTeam(string name)
         {
             throw new NotImplementedException();
