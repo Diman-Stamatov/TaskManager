@@ -9,9 +9,11 @@ namespace TaskManager.Commands
 {
     public class ChangeBugStatusCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
+        public const int ExpectedNumberOfArguments = 2;
+        public const string ExpectedRevertParameter = "revert";
+        public const string ExpectedAdvanceParameter = "advance";
+        public const string ExpectedTaskTypeName = "Bug";
+        public const string ManipulatedPropertyName = "Status";
         public ChangeBugStatusCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -19,7 +21,47 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
+
+            int taskId = ParseIntParameter(CommandParameters[0], "ID");
+            string changeDirection = CommandParameters[1].ToLower();
+            if (changeDirection != ExpectedAdvanceParameter && changeDirection != ExpectedRevertParameter)
+            {
+                string errorMessage = $"Please choose either the {ExpectedRevertParameter} " +
+                    $"or {ExpectedAdvanceParameter} clarification for this command!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+
+            return ChangeBugStatus(taskId, changeDirection);
+        }
+
+        private string ChangeBugStatus(int id, string changeDirection)
+        {
+            var foundTask = Repository.GetTask(id);
+            if (foundTask is IBug == false)
+            {
+                string errorMessage = $"The specified task is not a {ExpectedTaskTypeName}!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+            var foundBug = (IBug)foundTask;
+            var type = foundBug.GetType();
+            int currentValue = (int)foundBug.Status;
+            string propertyName = ManipulatedPropertyName;
+            string className = ExpectedTaskTypeName;
+
+            string commandMessage;
+            if (changeDirection == ExpectedAdvanceParameter)
+            {
+                foundBug.AdvanceStatus();
+                commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id);
+            }
+            else
+            {
+                foundBug.RevertStatus();
+                commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id);
+            }
+
+            return commandMessage;
         }
     }
 }

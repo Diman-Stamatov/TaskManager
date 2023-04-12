@@ -12,6 +12,8 @@ namespace TaskManager.Commands
         public const int ExpectedNumberOfArguments = 2;
         public const string ExpectedRevertParameter = "revert";
         public const string ExpectedAdvanceParameter = "advance";
+        public const string ExpectedTaskTypeName = "Bug";
+        public const string ManipulatedPropertyName = "Severity";
         public ChangeBugSeverityCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -35,21 +37,27 @@ namespace TaskManager.Commands
 
         private string ChangeBugSeverity(int id, string changeDirection)
         {
-            var foundTask = (IBug)Repository.GetTask(id);
-            var type = foundTask.GetType();
-            int currentValue = (int)foundTask.Severity;
-            string propertyName = "Severity";
-            string className = foundTask.GetType().Name;
+            var foundTask = Repository.GetTask(id);
+            if (foundTask is IBug == false)
+            {
+                string errorMessage = $"The specified task is not a {ExpectedTaskTypeName}!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+            var foundBug = (IBug)foundTask;
+            var type = foundBug.GetType();
+            int currentValue = (int)foundBug.Severity;
+            string propertyName = ManipulatedPropertyName;
+            string className = ExpectedTaskTypeName;
 
             string commandMessage;
             if (changeDirection == ExpectedAdvanceParameter)
             {
-                foundTask.AdvanceSeverity();
+                foundBug.AdvanceSeverity();
                 commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id);
             }
             else
             {
-                foundTask.RevertSeverity();
+                foundBug.RevertSeverity();
                 commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id);
             }
 
