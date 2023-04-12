@@ -147,13 +147,15 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+           
             status--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public void AssignTask(IMember member)
         {
             ValidateAssignee(Assignee, member);
+            
             assignee = member;
             Log(Message("Story", member, title, Id));
         }

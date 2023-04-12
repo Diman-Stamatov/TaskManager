@@ -6,7 +6,7 @@ using TaskManager.Models.Enums;
 using TaskManager.Models.Contracts;
 using static TaskManager.Utilities.UtilityMethods;
 using static TaskManager.Utilities.Validation;
-
+using TaskManager.Utilities;
 
 namespace TaskManager.Models
 {
@@ -26,10 +26,9 @@ namespace TaskManager.Models
             Name = name;
 
             tasks = new List<ITask>();
-            activityLog = new List<string>
-            {
-                LogChanges($"Member with name {name} was created")
-            };
+            activityLog = new List<string>();
+
+            Log(Message(name));            ;
         }
 
         public string Name
@@ -58,9 +57,23 @@ namespace TaskManager.Models
         public void AddTask(Task task)
         {
             tasks.Add(task);
+            Log(Message(task, Name ));
 
-            activityLog.Add(LogChanges(
-                $"{GetType().Name} with title {task.Title} was assigned to {Name}"));
+        }
+
+        private void Log(string newEvent)
+        {
+            activityLog.Add(DateToEvent(newEvent));
+        }
+
+        private  string Message(string name)
+        {
+            return $"Member with name: {name} was created";
+        }
+
+        private  string Message(Task task, string name)
+        {
+            return $"{GetType().Name} with title {task.Title} was assigned to {Name}"))
         }
 
         public string PrintTasks()

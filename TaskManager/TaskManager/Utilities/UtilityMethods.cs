@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TaskManager.Exceptions;
 using TaskManager.Models;
 using TaskManager.Models.Enums;
@@ -114,7 +115,7 @@ namespace TaskManager.Utilities
         public static string Message(string type, int id, string title, int rating)
         {
             return $"{type} with title: \"{title}\" ID: {id} and raiting: {rating} was created";
-        }
+        }              
         public static string TrimAdvance(this string methodName)
         {
             int toSkip = "Advance".Length;
@@ -165,7 +166,7 @@ namespace TaskManager.Utilities
         {
             return new string(simbol, num);
         }
-        public static string LogChanges(string newEvent)
+        public static string DateToEvent(string newEvent)
         {
             return $"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]";
         }

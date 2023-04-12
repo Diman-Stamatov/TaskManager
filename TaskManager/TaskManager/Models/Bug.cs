@@ -34,8 +34,7 @@ namespace TaskManager.Models
             Priority = priority;
             Status = InitialBugStatus;
             Severity = severity;
-            stepsToReproduce = new List<string>();
-            
+            stepsToReproduce = new List<string>();            
             Log(Message("Bug", Id, title, priority, severity));
         }
 

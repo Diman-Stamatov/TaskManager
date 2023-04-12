@@ -47,9 +47,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
 
             Status++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public override void RevertStatus()
@@ -62,8 +62,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            
             Status--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public override string ToString()
