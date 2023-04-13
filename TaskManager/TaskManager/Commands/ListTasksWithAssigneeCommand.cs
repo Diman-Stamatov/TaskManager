@@ -26,7 +26,7 @@ namespace TaskManager.Commands
             switch (comand)
             {
                 case "Active":
-                    tasksTypeBug.
+                    tasksTypeBug = tasksTypeBug.
                     Where(bug => bug.Status == BugStatusType.Active).
                     OrderBy(bug => bug.Title).
                     ToList();
@@ -37,7 +37,7 @@ namespace TaskManager.Commands
                     }
                     break;               
                 case "Fixed":
-                    tasksTypeBug.
+                    tasksTypeBug = tasksTypeBug.
                     Where(bug => bug.Status == BugStatusType.Fixed).
                     OrderBy(bug => bug.Title).
                     ToList();
@@ -48,7 +48,7 @@ namespace TaskManager.Commands
                     }
                     break;               
                 case "NotDone":
-                    tasksTypeStory.
+                    tasksTypeStory = tasksTypeStory.
                     Where(story => story.Status == StoryStatusType.NotDone).
                     OrderBy(story => story.Title).
                     ToList();
@@ -59,7 +59,7 @@ namespace TaskManager.Commands
                     }
                     break;                
                 case "InProgres":
-                    tasksTypeStory.
+                    tasksTypeStory = tasksTypeStory.
                     Where(story => story.Status == StoryStatusType.InProgress).
                     OrderBy(story => story.Title).
                     ToList();
@@ -70,7 +70,7 @@ namespace TaskManager.Commands
                     }
                     break;               
                 case "Done":
-                    tasksTypeStory.
+                    tasksTypeStory = tasksTypeStory.
                     Where(story => story.Status == StoryStatusType.Done).
                     OrderBy(story => story.Title).
                     ToList();
@@ -81,19 +81,30 @@ namespace TaskManager.Commands
                     }
                     break;                
                 default:
-                    tasksTypeBug.
+                    tasksTypeBug = tasksTypeBug.
                     Where(bug => bug.Assignee.Name == comand).
                     OrderBy(bug => bug.Title).
                     ToList();
 
-                    tasksTypeStory.
+                    tasksTypeStory = tasksTypeStory.
                     Where(story => story.Assignee.Name == comand).
                     OrderBy(story => story.Title).
                     ToList();
+
+                    foreach(var story in tasksTypeStory)
+                    {
+                        taskDisplay.Append(story);
+                    }
+
+                    foreach(var bug in tasksTypeBug)
+                    {
+                        taskDisplay.Append(bug);
+                    }
+
                     break;
             }
 
-            return "";
+            return taskDisplay.ToString().Trim();
         }
     }
 }
