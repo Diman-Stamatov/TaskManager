@@ -9,9 +9,10 @@ namespace TaskManager.Commands
 {
     internal class ChangeStorySizeCommand:BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
+        public const int ExpectedNumberOfArguments = 2;        
+        public const string ExpectedAdvanceParameter = "advance";
+        public const string ExpectedTaskTypeName = "Story";
+        public const string ManipulatedPropertyName = "Size";
         public ChangeStorySizeCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -19,7 +20,41 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
+
+            int taskId = ParseIntParameter(CommandParameters[0], "ID");
+            string changeDirection = CommandParameters[1].ToLower();
+            ValidateEnumChangeInput(changeDirection);
+            return ChangeStorySize(taskId, changeDirection);
+        }
+
+        private string ChangeStorySize(int id, string changeDirection)
+        {
+            var foundTask = Repository.GetTask(id);
+            if (foundTask is IStory == false)
+            {
+                string errorMessage = $"The specified task is not a {ExpectedTaskTypeName}!";
+                throw new InvalidUserInputException(errorMessage);
+            }
+            var foundStory = (IStory)foundTask;
+            var type = foundStory.GetType();
+            int currentValue = (int)foundStory.Size;
+            string propertyName = ManipulatedPropertyName;
+            string className = ExpectedTaskTypeName;
+
+            string commandMessage;
+            if (changeDirection == ExpectedAdvanceParameter)
+            {
+                foundStory.AdvanceSize();
+                commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id);
+            }
+            else
+            {
+                foundStory.RevertSize();
+                commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id);
+            }
+
+            return commandMessage;
         }
     }
 }

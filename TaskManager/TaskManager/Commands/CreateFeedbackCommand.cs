@@ -10,7 +10,7 @@ namespace TaskManager.Commands
 {
     public class CreateFeedbackCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
+        public const int ExpectedNumberOfArguments = 3;
 
         public CreateFeedbackCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)

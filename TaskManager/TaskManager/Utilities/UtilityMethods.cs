@@ -6,8 +6,10 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using TaskManager.Exceptions;
 using TaskManager.Models;
+using TaskManager.Models.Contracts;
 using TaskManager.Models.Enums;
 
 namespace TaskManager.Utilities
@@ -15,15 +17,15 @@ namespace TaskManager.Utilities
     public static class UtilityMethods
     {
         private const string AdvanceMethodLogMessage = "The {0} of {1} ID {2} was advanced from {3} to {4}.";
-        private const string RevertMethodLogMessage = "The {0} of {1} ID {2} was reverted from {3} to {4}.";
+        private const string RevertMethodLogMessage = "The {0} of {1} ID {2} was reverted from {3} to {4}.";        
         //Съобщенията за преминаването от една към друга позиция на enum трябва да включва ID на съответния вид Tack
         public static string GenerateAdvanceMethodMessage(Type type, int currentValue, string propertyName, string className, int id)
         {
-            int nextValue = currentValue+1;
+            int nextValue = currentValue + 1;
             string nextValueName = "";
             string currentValueName = "";
             if (type == typeof(BugStatusType))
-            {                
+            {
                 nextValueName = ((BugStatusType)nextValue).ToString();
                 currentValueName = ((BugStatusType)currentValue).ToString();
             }
@@ -53,7 +55,7 @@ namespace TaskManager.Utilities
                 currentValueName = ((StoryStatusType)currentValue).ToString();
             }
             string logMessage = string.Format(AdvanceMethodLogMessage, propertyName, className, id, currentValueName, nextValueName);
-            return logMessage;             
+            return logMessage;
         }
 
         public static string GenerateRevertMethodMessage(Type type, int currentValue, string propertyName, string className, int id)
@@ -93,6 +95,31 @@ namespace TaskManager.Utilities
             }
             string logMessage = string.Format(RevertMethodLogMessage, propertyName, className, id, currentValueName, nextValueName);
             return logMessage;
+        }
+
+        public static string Message(SizeType value)
+        {
+            return $"SizeType set to: {value}";
+        }
+        public static string Message(IComment comment)
+        {
+            return $"Author: {comment.Author} added comment: \"{comment.Content}\"";
+        }
+        public static string Message(string type, IMember member, string title, int id)
+        {
+            return $"{member.Name} was assigned to {type} with title:{title} and Id:{id}";
+        }
+        public static string Message(string type, int id, string title, PriorityType priority, SizeType size)
+        {
+            return $"{type} with title: \"{title}\" ID: {id} PriorityType: {priority} SizeType {size} was created";
+        }
+        public static string Message(string type, int id, string title, PriorityType priority, SeverityType severity)
+        {
+            return $"{type} with title: \"{title}\" ID: {id} PriorityType: {priority} SizeType {severity} was created";
+        }
+        public static string Message(string type, int id, string title, int rating)
+        {
+            return $"{type} with title: \"{title}\" ID: {id} and raiting: {rating} was created";
         }
         public static string TrimAdvance(this string methodName)
         {
@@ -140,9 +167,13 @@ namespace TaskManager.Utilities
             string commandNames = String.Join(", ", Enum.GetNames(typeof(StoryStatusType)));
             return commandNames;
         }
-        public static string StringGenerator(char simbol,int num)
+        public static string StringGenerator(char simbol, int num)
         {
             return new string(simbol, num);
+        }
+        public static string AddDate(string newEvent)
+        {
+            return $"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]";
         }
     }
 }

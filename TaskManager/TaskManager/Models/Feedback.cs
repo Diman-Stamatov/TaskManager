@@ -22,6 +22,7 @@ namespace TaskManager.Models
         {
             Rating = rating;
             Status = InitialStatus;
+            Log(Message("Feedback", id, title, rating));
         }
 
         public int Rating 
@@ -30,7 +31,7 @@ namespace TaskManager.Models
             set 
             {
                 ValidateIntRange(value, GetType().Name, GetMethodName(), RatingMinValue, RatingMaxValue);
-                rating = value; 
+                rating = value;
             }
         }
 
@@ -46,9 +47,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
 
             Status++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public override void RevertStatus()
@@ -61,8 +62,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            
             Status--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public override string ToString()

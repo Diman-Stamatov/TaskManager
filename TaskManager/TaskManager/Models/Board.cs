@@ -22,6 +22,7 @@ namespace TaskManager.Models
             this.Name = name;
             this.tasks = new List<ITask>();
             this.activityHistory = new List<string>();
+            Log(Message(name));
         }
         public string Name
         {
@@ -52,6 +53,14 @@ namespace TaskManager.Models
             {
                 return new List<ITask>(this.tasks);
             }
+        }
+        private void Log(string newEvent)
+        {
+            activityHistory.Add(AddDate(newEvent));
+        }
+        private string Message(string name)
+        {
+            return $"{name} board was created";
         }
         public override string ToString()
         {

@@ -13,5 +13,9 @@ namespace TaskManager.Models.Contracts
         SizeType Size { get; }
         StoryStatusType Status { get; }
         IMember Assignee { get; set; }
+        void AdvancePriority();
+        void RevertPriority();
+        void AdvanceSize();
+        void RevertSize();
     }
 }

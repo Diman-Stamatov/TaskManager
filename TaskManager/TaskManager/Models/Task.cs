@@ -18,10 +18,10 @@ namespace TaskManager.Models
         private const int DiscriptionNameMinLenght = 10;
         private const int discriptionNameMaxLenght = 500;
 
-
         private readonly IList<string> changesLog;      
         private readonly IList<IComment> comments;
-        private string title;
+
+        protected string title;
         private string description;
 
         public Task(int id,string title, string description)
@@ -32,8 +32,6 @@ namespace TaskManager.Models
             Title = title;
             Description = description;
             Id = id;
-
-            LogChanges($"{GetType().Name} with title \"{title}\" was created");
         }
 
         public string Title
@@ -70,12 +68,12 @@ namespace TaskManager.Models
         public void AddComment(IComment comment)
         {
             comments.Add(comment);
-            LogChanges($"Comment: \"{comment}\" added");
+            Log(Message(comment));
         }
 
-        protected void LogChanges(string newEvent)
+        protected void Log(string newEvent)
         {
-            changesLog.Add($"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]");
+            changesLog.Add(AddDate(newEvent));
         }
      
         public abstract void AdvanceStatus();

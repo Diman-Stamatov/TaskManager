@@ -9,6 +9,7 @@ using static TaskManager.Utilities.Validation;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics.Metrics;
 
 namespace TaskManager.Models
 {
@@ -17,28 +18,30 @@ namespace TaskManager.Models
         private const BugStatusType InitialBugStatus = BugStatusType.Active;
 
         private List<string> stepsToReproduce;
-        private PriorityType priority;         
+        private PriorityType priority;
         private BugStatusType status;
         private SeverityType severity;
         private IMember assignee;
 
         public Bug(
             int id,
-            string title, 
-            string description, 
-            PriorityType priority,  
-            SeverityType severity) 
+            string title,
+            string description,
+            PriorityType priority,
+            SeverityType severity)
             : base(id, title, description)
         {
             Priority = priority;
             Status = InitialBugStatus;
             Severity = severity;
             stepsToReproduce = new List<string>();
+            Log(Message("Bug", Id, title, priority, severity));
         }
 
         public PriorityType Priority
         {
             get => priority;
+
             private set
             {
                 priority = value;
@@ -48,15 +51,17 @@ namespace TaskManager.Models
         public BugStatusType Status
         {
             get => status;
+
             private set
             {
-                status = value;               
+                status = value;
             }
         }
 
         public SeverityType Severity
         {
             get => severity;
+
             private set
             {
                 severity = value;
@@ -65,30 +70,41 @@ namespace TaskManager.Models
 
         public IMember Assignee
         {
-            get =>assignee;
+            get => assignee;
             set
             {
                 ValidateAssignee(assignee, value);
-                assignee = value;               
+                assignee = value;
+
+                Log(Message("Bug", value, Title, Id));
             }
         }
 
-        public IList<string> StepsToReproduce 
-        { 
-            get => new List<string>(stepsToReproduce); 
+        public void AddStepsToReproduce(string stepsToReproduceAsString)
+        {
+            ValidateStringNotNullOrEmpty(
+                stepsToReproduceAsString,
+                "Step to reproduce can not be null or empty.");
+            stepsToReproduce = stepsToReproduceAsString.Split(';').ToList();
+            
+            foreach (var step in stepsToReproduce)
+            {
+            Log($"[{stepsToReproduce}] was added to 'Steps to reproduce'");
+            }
         }
 
-        public void AddStepsToReproduce(string stepToReproduce)
+        public IList<string> StepsToReproduce
         {
-            //това ще отиде за валидация в "command"
-            ValidateStringNotNullOrEmpty(
-                stepToReproduce, 
-                "Step to reproduce can not be null or empty.");
+            get => new List<string>(stepsToReproduce);
+        }
 
-            stepsToReproduce.Add(stepToReproduce);
+        //ToDo      AssignBug() ? има и  AssignStory() 
+        public void AssignTask(IMember member)
+        {
+            ValidateAssignee(Assignee, member);
 
-            LogChanges(
-                $"'{stepsToReproduce}' added to 'Steps to reproduce'");
+            assignee = member;
+            Log(Message("Bug", member, title, Id));
         }
 
         public void AdvancePriority()
@@ -101,8 +117,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+
             priority++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public void RevertPriority()
@@ -115,9 +132,11 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+
             priority--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
+
         public override void AdvanceStatus()
         {
             var type = Status.GetType();
@@ -128,8 +147,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+
             Status++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public override void RevertStatus()
@@ -142,8 +162,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+
             status--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public void AdvanceSeverity()
@@ -156,8 +177,9 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+
             Severity++;
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
         public void RevertSeverity()
@@ -170,11 +192,12 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            LogChanges(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+
             Severity--;
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
-        public string StepsToReproduseDisplay() 
+        public string StepsToReproduseDisplay()
         {
             StringBuilder bugInfo = new StringBuilder();
             int number = 1;
@@ -187,10 +210,11 @@ namespace TaskManager.Models
             }
             return bugInfo.ToString().Trim();
         }
+
         public override string ToString()
         {
             StringBuilder bugInfo = new StringBuilder();
-            
+
             bugInfo.Append(base.ToString());
             bugInfo.AppendLine($"Priority: {Priority}");
             bugInfo.AppendLine($"Saverity: {Severity}");

@@ -6,7 +6,7 @@ using TaskManager.Models.Enums;
 using TaskManager.Models.Contracts;
 using static TaskManager.Utilities.UtilityMethods;
 using static TaskManager.Utilities.Validation;
-
+using TaskManager.Utilities;
 
 namespace TaskManager.Models
 {
@@ -14,7 +14,10 @@ namespace TaskManager.Models
     {
         private const int MinNameLength = 5;
         private const int MaxNameLength = 15;
+
         private readonly IList<ITask> tasks;
+        private readonly List<string> activityLog;
+
         private string name;
         private bool isAssignedToATeam;
 
@@ -22,24 +25,25 @@ namespace TaskManager.Models
         {
             Name = name;
             tasks = new List<ITask>();
+            activityLog = new List<string>();
+            Log(Message(name));
         }
+
         public string Name
-        { 
+        {
             get => name;
-            private set 
+            private set
             {
                 ValidateStringPropertyLength(
                  value,
                  GetType().Name,
                  GetMethodName(),
-                 MinNameLength, 
+                 MinNameLength,
                  MaxNameLength);
-                 name = value;
-                 isAssignedToATeam = false;
+                name = value;
+                isAssignedToATeam = false;
             }
         }
-
-        public IList<ITask> Tasks { get => new List<ITask>(tasks); }
 
         public bool IsAssignedToATeam
         {
@@ -49,7 +53,13 @@ namespace TaskManager.Models
         public void AddTask(Task task)
         {
             tasks.Add(task);
+            Log(Message(task, Name));
         }
+
+        private void Log(string newEvent)
+        {
+            activityLog.Add(AddDate(newEvent));
+        }       
 
         public string PrintTasks()
         {
@@ -74,8 +84,43 @@ namespace TaskManager.Models
             {
                 sb.AppendLine(task.PrintChangesLog());
             }
-
             return sb.ToString();
+        }
+
+        public string FullInfo()
+        {
+            StringBuilder memberOutput = new StringBuilder();
+            memberOutput.AppendLine($"Member: {Name}");
+            memberOutput.Append(PrintTasks());
+            memberOutput.Append(ActivityLog());
+            return memberOutput.ToString().Trim();
+        }
+
+        public IComment CreateComment(string content)
+        {
+            var comment = new Comment(Name, content);
+            Log(Message(comment));
+            return comment;
+        }
+
+        public IList<ITask> Tasks { get => new List<ITask>(tasks); }
+                
+        public void AssignToATeam()
+        {
+            isAssignedToATeam = true;
+        }
+      
+        private string Message(IComment value)
+        {
+            return $"Author: {value.Author} added comment: \"{value.Content}\"";
+        }
+        private string Message(string name)
+        {
+            return $"Member with name: {name} was created";
+        }
+        private string Message(Task task, string name)
+        {
+            return $"{GetType().Name} with title: {task.Title} Id: {task.Id} was assigned to {Name}";
         }
 
         public override string ToString()
@@ -83,24 +128,6 @@ namespace TaskManager.Models
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Member {Name} - Tasks {tasks.Count}");
             return sb.ToString();
-        }
-
-        public  string FullInfo()
-        {
-           StringBuilder memberOutput = new StringBuilder();
-            memberOutput.AppendLine($"Member: {Name}");
-            memberOutput.Append(PrintTasks());
-            memberOutput.Append(ActivityLog());
-            return memberOutput.ToString().Trim();
-        }
-        public IComment CreateComment(string content)
-        {
-            var comment = new Comment(Name, content);
-            return comment;
-        }
-        public void AssignToATeam()
-        {
-            isAssignedToATeam = true;
         }
     }
 }
