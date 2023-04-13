@@ -9,11 +9,9 @@ namespace TaskManager.Commands
 {
     internal class ShowBoardActivityHistoryCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
 
-        public ShowBoardActivityHistoryCommand(IList<string> commandParameters, IRepository repository)
-            : base(commandParameters, repository)
+        public ShowBoardActivityHistoryCommand(IRepository repository)
+            : base(repository)
         {
         }
 
