@@ -11,7 +11,7 @@ namespace TaskManager.Commands
 {
     public class ListBugsCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 1;
+        public const int ExpectedNumberOfArguments = 2;
 
         public ListBugsCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -20,11 +20,12 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            string command = CommandParameters[0];
+            string filterByCommand = CommandParameters[0];
+            string sortByCommand = CommandParameters[1];
             var task = Repository.Tasks.OfType<Bug>().ToList();
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (command == "Active")
+            if (filterByCommand == "FilterActive")
             {
                 List<Bug> bugsActive = task.
                Where(bug => bug.Status == BugStatusType.Active).
@@ -43,7 +44,7 @@ namespace TaskManager.Commands
                     StringGenerator('*', 15);
                 }
             }
-            else if (command == "Fixed")
+            else if (filterByCommand == "Fixed")
             {
                 List<Bug> bugsFixed = task.
                Where(bug => bug.Status == BugStatusType.Fixed).
@@ -63,7 +64,7 @@ namespace TaskManager.Commands
                 }
 
             }
-            else if(command == "Assignee")
+            else if(filterByCommand == "Assignee")
             {
                 List<Bug> bugsAssign = task.
                Where(bug => bug.Assignee.IsAssignedToATeam).
