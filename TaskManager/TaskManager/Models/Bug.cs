@@ -75,17 +75,14 @@ namespace TaskManager.Models
             {
                 ValidateAssignee(assignee, value);
                 assignee = value;
-
                 Log(Message("Bug", value, Title, Id));
             }
         }
 
-        public void AddStepsToReproduce(string stepsToReproduceAsString)
+        public void AddStepsToReproduce(string allStepsToReproduceAsOneString)
         {
-            ValidateStringNotNullOrEmpty(
-                stepsToReproduceAsString,
-                "Step to reproduce can not be null or empty.");
-            stepsToReproduce = stepsToReproduceAsString.Split(';').ToList();
+            ValidateStringNotNullOrEmpty(allStepsToReproduceAsOneString,"Step to reproduce can not be null or empty.");
+            stepsToReproduce = allStepsToReproduceAsOneString.Split(';').ToList();
             
             foreach (var step in stepsToReproduce)
             {
@@ -102,7 +99,6 @@ namespace TaskManager.Models
         public void AssignTask(IMember member)
         {
             ValidateAssignee(Assignee, member);
-
             assignee = member;
             Log(Message("Bug", member, title, Id));
         }
