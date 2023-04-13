@@ -7,7 +7,7 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    internal class ShowBoardActivityHistoryCommand : BaseCommand
+    public class ShowBoardActivityHistoryCommand : BaseCommand
     {
 
         public ShowBoardActivityHistoryCommand(IRepository repository)

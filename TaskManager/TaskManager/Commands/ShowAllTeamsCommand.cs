@@ -7,7 +7,7 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    internal class ShowAllTeamsCommand : BaseCommand
+   public class ShowAllTeamsCommand : BaseCommand
     {
 
         public ShowAllTeamsCommand(IRepository repository)
