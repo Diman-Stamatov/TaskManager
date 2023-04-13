@@ -37,6 +37,7 @@ namespace TaskManager.Commands.Types
         ShowMemberActivityHistory,
         ShowTeamActivityHistory,
         ShowTeamMembers,
-        UnassignTask
+        UnassignTask,
+        ListTasksWithAssignee
     }
 }

@@ -68,11 +68,13 @@ namespace TaskManager.Core
                 case CommandType.ListStories:
                     return new ListStoriesCommand(commandParameters, repository);
                 case CommandType.ListTasks:
-                    return new ListTasksCommand(repository);
+                    return new ListTasksCommand(commandParameters, repository);
+                case CommandType.ListTasksWithAssignee:
+                    return new ListTasksWithAssigneeCommand(commandParameters, repository);
                 case CommandType.ShowAllMembers:
                     return new ShowAllMembersCommand(repository);
                 case CommandType.ShowAllTeamBoards:
-                    return new ShowAllTeamBoardsCommand(commandParameters, repository);
+                    return new ShowAllTeamBoardsCommand( repository);
                 case CommandType.ShowAllTeams:
                     return new ShowAllTeamsCommand(repository);
                 case CommandType.ShowBoardActivityHistory:

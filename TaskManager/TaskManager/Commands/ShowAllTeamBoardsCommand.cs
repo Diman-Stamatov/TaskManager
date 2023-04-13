@@ -9,11 +9,8 @@ namespace TaskManager.Commands
 {
     internal class ShowAllTeamBoardsCommand:BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
-        public ShowAllTeamBoardsCommand(IList<string> commandParameters, IRepository repository)
-            : base(commandParameters, repository)
+        public ShowAllTeamBoardsCommand(IRepository repository)
+            : base(repository)
         {
         }
 
