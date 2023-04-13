@@ -17,50 +17,65 @@ namespace TaskManager.Models
         private string name;
         private IList<ITask> tasks;
         private IList<string> activityHistory;
+
         public Board(string name)
         {
-            this.Name = name;
-            this.tasks = new List<ITask>();
-            this.activityHistory = new List<string>();
+            Name = name;
+            tasks = new List<ITask>();
+            activityHistory = new List<string>();
             Log(Message(name));
         }
+
         public string Name
         {
             get
             {
-                return this.name;
+                return name;
             }
             private set
             {
-                string className = this.GetType().Name;
+                string className = GetType().Name;
                 string propertyName = GetMethodName();
-                ValidateStringPropertyLength(value, className, propertyName, BoardNameMinLength, BoardNameMaxLength);
-                this.name = value;
+                ValidateStringPropertyLength(
+                    value, 
+                    className, 
+                    propertyName, 
+                    BoardNameMinLength, 
+                    BoardNameMaxLength);
+                name = value;
             }
         }
 
         public IList<string> ActivityHistory
         { 
-            get 
-            { 
-                return new List<string>(this.activityHistory); 
-            }
+            get =>new List<string>(activityHistory); 
+            
         }
 
         public IList<ITask> Tasks
         {
-            get
-            {
-                return new List<ITask>(this.tasks);
-            }
+            get => new List<ITask>(tasks);
         }
+       
+        public void AddTask(Task task)
+        {
+            tasks.Add(task);
+            Log(Message(task));
+        }
+        
         private void Log(string newEvent)
         {
             activityHistory.Add(AddDate(newEvent));
         }
+        
         private string Message(string name)
         {
             return $"{name} board was created";
+        }
+        
+        private string Message(Task task)
+        {
+            return $"{task.GetType} with title {task.Title} and {task.Id} is added at board: {Name}";
         }
         public override string ToString()
         {
