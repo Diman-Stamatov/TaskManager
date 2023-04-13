@@ -152,14 +152,12 @@ namespace TaskManager.Models
             Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
-        public void AssignTask(IMember member)
+        public void Assigne(IMember member)
         {
             ValidateAssignee(Assignee, member);
-            
             assignee = member;
             Log(Message(GetType().Name, member, title, Id));
         }
-
         public override string ToString()
         {
             StringBuilder storyInfo = new StringBuilder();

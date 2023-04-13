@@ -101,6 +101,12 @@ namespace TaskManager.Models
             assignee = member;
             Log(Message(GetType().Name, member, title, Id));
         }
+        public void Assigne(IMember member)
+        {
+            ValidateAssignee(Assignee, member);
+            assignee = member;
+            Log(Message(GetType().Name, member, title, Id));
+        }
 
         public void AdvancePriority()
         {
@@ -218,5 +224,6 @@ namespace TaskManager.Models
             bugInfo.AppendLine($"Assigned to: {Assignee.Name}");
             return bugInfo.ToString().Trim();
         }
+
     }
 }
