@@ -74,7 +74,7 @@ namespace TaskManager.Core
                 case CommandType.ShowAllMembers:
                     return new ShowAllMembersCommand(repository);
                 case CommandType.ShowAllTeamBoards:
-                    return new ShowAllTeamBoardsCommand( repository);
+                    return new ShowAllTeamBoardsCommand(repository);
                 case CommandType.ShowAllTeams:
                     return new ShowAllTeamsCommand(repository);
                 case CommandType.ShowBoardActivityHistory:

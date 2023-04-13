@@ -16,7 +16,18 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            var teams = Repository.Teams; 
+            StringBuilder boardDisplay = new StringBuilder();
+            foreach (var team in teams)
+            {
+                boardDisplay.AppendLine(team.Name);
+                for (int i = 0; i < team.Members.Count; i++)
+                {
+                    boardDisplay.Append(team.Members[i].FullInfo());
+                }
+                boardDisplay.AppendLine(StringGenerator('*', 15));
+            }
+            return boardDisplay.ToString().Trim();
         }
     }
 }
