@@ -16,6 +16,7 @@ namespace TaskManager.Models
         public Comment(string author, string content)
         {
             ValidateStringNotNullOrEmpty(content, errorMessage);
+            ValidateStringNotNullOrEmpty(author, errorMessage);
             Author = author;
             Content = content;
         }
