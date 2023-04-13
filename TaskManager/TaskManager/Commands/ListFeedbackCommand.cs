@@ -10,7 +10,7 @@ namespace TaskManager.Commands
 {
     internal class ListFeedbackCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 1;
+        public const int ExpectedNumberOfArguments = 2;
 
         public ListFeedbackCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -19,12 +19,15 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            string command = CommandParameters[0];
+            string fulterByCommand = CommandParameters[0];
+            string sortByCommand = CommandParameters[1];
             var task = Repository.Tasks.OfType<Feedback>().ToList();
             StringBuilder stringBuilder = new StringBuilder();
 
-            if (command == "New")
+            if (fulterByCommand == "FilterNew")
             {
+
+                switch()
                 List<Feedback> feedbackNew = task.
                Where(feedback => feedback.Status == FeedbackStatusType.New).
                OrderBy(story => story.Title).
@@ -37,7 +40,7 @@ namespace TaskManager.Commands
                     StringGenerator('*', 15);
                 }
             }
-            else if (command == "Unscheduled")
+            else if (fulterByCommand == "FilterUnscheduled")
             {
                 List<Feedback> feedbackUnscheduled = task.
                Where(feedback => feedback.Status == FeedbackStatusType.Unscheduled).
@@ -52,7 +55,7 @@ namespace TaskManager.Commands
                 }
 
             }
-            else if (command == "Scheduled")
+            else if (fulterByCommand == "FilterScheduled")
             {
                 List<Feedback> feedbackScheduled = task.
                Where(feedback => feedback.Status == FeedbackStatusType.Scheduled).
@@ -66,7 +69,7 @@ namespace TaskManager.Commands
                     StringGenerator('*', 15);
                 }
             }
-            else if (command == "Done")
+            else if (fulterByCommand == "FilterDone")
             {
                 List<Feedback> feedbackDone = task.
                Where(feedback => feedback.Status == FeedbackStatusType.Done).
