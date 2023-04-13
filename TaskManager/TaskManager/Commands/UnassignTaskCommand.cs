@@ -22,10 +22,10 @@ namespace TaskManager.Commands
 
             int taskId = ParseIntParameter(CommandParameters[0], "ID");          
 
-            return AssignTask(taskId);
+            return unassignTask(taskId);
         }
 
-        private string AssignTask(int taskId)
+        private string unassignTask(int taskId)
         {
             
             string assigneeName;
@@ -46,7 +46,7 @@ namespace TaskManager.Commands
                     throw new InvalidUserInputException(errorMessage);
                 }
                 foundBug.Assignee.RemoveTask(foundBug);
-                foundBug.RemoveTask();                
+              // foundBug.RemoveTask();                
             }
             else
             {
@@ -55,6 +55,7 @@ namespace TaskManager.Commands
                 foundStory.Assignee = null;                
             }
 
+            return "";
 
         }
     }
