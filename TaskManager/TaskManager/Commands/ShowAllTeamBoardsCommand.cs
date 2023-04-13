@@ -7,7 +7,7 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    internal class ShowAllTeamBoardsCommand:BaseCommand
+    public class ShowAllTeamBoardsCommand:BaseCommand
     {
         public ShowAllTeamBoardsCommand(IRepository repository)
             : base(repository)
@@ -23,7 +23,7 @@ namespace TaskManager.Commands
                 boardDisplay.AppendLine(team.Name);
                 for (int i = 0; i < team.Boards.Count; i++)
                 {
-                    boardDisplay.Append(team.Boards);
+                    boardDisplay.AppendLine($"{team.Boards[i].Name} - Task Count {team.Boards[i].Tasks.Count}");
                 }
                 boardDisplay.AppendLine(StringGenerator('*', 15));
             }

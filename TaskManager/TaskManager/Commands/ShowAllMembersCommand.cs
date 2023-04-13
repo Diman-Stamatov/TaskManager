@@ -24,7 +24,7 @@ namespace TaskManager.Commands
                 memberDisplay.AppendLine(team.Name);
                 for (int i = 0; i < team.Members.Count; i++)
                 {
-                    memberDisplay.Append(team.Members[i].FullInfo());
+                    memberDisplay.AppendLine(team.Members[i].FullInfo());
                 }
                 memberDisplay.AppendLine(StringGenerator('*', 15));
             }
