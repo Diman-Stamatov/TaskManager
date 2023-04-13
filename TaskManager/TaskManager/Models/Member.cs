@@ -55,9 +55,24 @@ namespace TaskManager.Models
         public void AddTask(Task task)
         {
             tasks.Add(task);
-            Log(Message(task, Name));
+            Log(Message(task, Name ));
         }
-               
+
+        private void Log(string newEvent)
+        {
+            activityLog.Add(DateToEvent(newEvent));
+        }
+
+        private  string Message(string name)
+        {
+            return $"Member with name: {name} was created";
+        }
+
+        private  string Message(Task task, string name)
+        {
+            return $"{GetType().Name} with title {task.Title} was assigned to {Name}";
+        }
+
         public string PrintTasks()
         {
             StringBuilder taskOutput = new StringBuilder();
@@ -93,6 +108,7 @@ namespace TaskManager.Models
             return memberOutput.ToString().Trim();
         }
 
+        //ToDo трябва да обсъдим този метод 
         public IComment CreateComment(string content)
         {
             var comment = new Comment(Name, content);
