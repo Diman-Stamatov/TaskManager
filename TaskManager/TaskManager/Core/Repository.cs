@@ -25,6 +25,8 @@ namespace TaskManager.Core
         //ToDo Removed boards from Repository
         //ToDo в Bug класа има метод "AssignTask" за добавяне на Assignee
         //ToDo в Feedback класа има метод "AssignTask" за добавяне на Assignee
+        //ToDo AssignBug() и AssignStory(), а имаме 1 команда AssignTask
+
         public IList<ITeam> Teams
         {
             get

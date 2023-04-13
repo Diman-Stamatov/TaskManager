@@ -98,6 +98,7 @@ namespace TaskManager.Models
             get => new List<string>(stepsToReproduce);
         }
 
+        //ToDo      AssignBug() ? има и  AssignStory() 
         public void AssignTask(IMember member)
         {
             ValidateAssignee(Assignee, member);

@@ -18,7 +18,6 @@ namespace TaskManager.Models
         private const int DiscriptionNameMinLenght = 10;
         private const int discriptionNameMaxLenght = 500;
 
-
         private readonly IList<string> changesLog;      
         private readonly IList<IComment> comments;
 
@@ -33,8 +32,6 @@ namespace TaskManager.Models
             Title = title;
             Description = description;
             Id = id;
-
-            Log(Message(id, title, description));
         }
 
         public string Title

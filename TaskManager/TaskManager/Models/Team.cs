@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using TaskManager.Models.Enums;
 using TaskManager.Models.Contracts;
-using static TaskManager.Utilities.Validation;
 using static TaskManager.Utilities.UtilityMethods;
+using static TaskManager.Utilities.Validation;
+using System.Reflection.Metadata;
+using System.Xml.Linq;
 
 namespace TaskManager.Models
 {
@@ -17,12 +19,15 @@ namespace TaskManager.Models
         private string name;
         private IList<IMember> members;
         private IList<IBoard> boards;
-        
+        private readonly IList<string> hystoryLog;
+
         public Team(string name)
         {
             Name = name;
             members = new List<IMember>();
             boards = new List<IBoard>();
+            hystoryLog = new List<string>();
+            Log(Message(Name));
         }
         public string Name
         {
@@ -31,8 +36,7 @@ namespace TaskManager.Models
             {
                 string className = this.GetType().Name;
                 string propertyName = GetMethodName();
-                ValidateStringPropertyLength(value, className, propertyName, TeamNameMinLength, TeamNameMaxLength);
-
+                ValidateStringPropertyLength(value, className, propertyName, TeamNameMinLength, TeamNameMaxLength);                
                 this.name = value;
             }
         }
@@ -59,7 +63,9 @@ namespace TaskManager.Models
             ValidateDuplicateBoard(boardName, Boards, teamName);
             var board = new Board(boardName);
             boards.Add(board);
+            Log(Message(board, teamName));
         }
+
         public string ShowBoards()
         {
             var allBoardsInfo = new StringBuilder();
@@ -73,11 +79,28 @@ namespace TaskManager.Models
             return allBoardsInfo.ToString();
         }
 
+        private void Log(string newEvent)
+        {
+            hystoryLog.Add(AddDate(newEvent));
+        }
+        private string Message(string name)
+        {
+            return $"Team with name: {name} was created";
+        }
+        private string Message(Board board, string name)
+        {
+            return $"Board: {board.Name} was created in team: {name}";
+        }
+        private string Message(IMember member, string name)
+        {
+            return $"{member.Name} was added in team: {name}";
+        }
         public void AddTeamMember(IMember member)
         {
             ValidateDuplicateTeamMember(member.Name, Members);
             members.Add(member);
             member.AssignToATeam();
+            Log(Message(member, Name));            
         }
 
     }

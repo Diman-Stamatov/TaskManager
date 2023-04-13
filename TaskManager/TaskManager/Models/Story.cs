@@ -151,7 +151,7 @@ namespace TaskManager.Models
             status--;
             Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
-
+        //ToDo      AssignStory() ? има и AssignBug()
         public void AssignTask(IMember member)
         {
             ValidateAssignee(Assignee, member);
