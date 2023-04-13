@@ -160,6 +160,7 @@ namespace TaskManager.Models
 
             status--;
             Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+
         }
 
         public void AdvanceSeverity()
