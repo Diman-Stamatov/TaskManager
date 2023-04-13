@@ -4,10 +4,13 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Core;
 using TaskManager.Exceptions;
 using TaskManager.Models;
 using TaskManager.Models.Contracts;
 using TaskManager.Models.Enums;
+
+
 
 namespace TaskManager.Utilities
 {
@@ -21,6 +24,10 @@ namespace TaskManager.Utilities
         private const string DuplicateTeamMemberMessage = "{0} is already part of team \"{1}\"!";
         private const string DuplicateEmployeeMessage = "{0} is already in the system!";
         private const string DuplicateBoardMessage = "Team {0} already has a board called {1}!";
+        private const string DuplicateTaskMessage = "Board {0} already contains {1} ID number {2}!";
+        private const string DuplicateAssignedTaskMessage = "{0} ID number {1} is already assigned to {2}!";
+        private const string TaskNotFoundMessage = "{0} ID number {1} is is not assigned to {2}!";
+        private const string MissingBoardMessage = "Team {0} doesn't have a board called {1}!";
         private const string NotAssignedToTeamMessage = "{0} is not on team \"{1}\"!";
         private const string CannotAdvanceFurtherMessage = "Cannot advance the {0} any further, it is already set to {1}!";
         private const string CannotRevertFurtherMessage = "Cannot revert the {0} any further, it is already set to {1}!";
@@ -103,13 +110,57 @@ namespace TaskManager.Utilities
                 throw new DuplicateEntryException(errorMessage);
             }
         }
+        public static void ValidateDuplicateTask(int taskId, IList<ITask> tasks, string boardName, string taskType)
+        {
+            bool duplicateTask = tasks.Any(task => task.Id == taskId); 
+            if (duplicateTask == true)
+            {
+                string errorMessage = string.Format(DuplicateTaskMessage, boardName, taskType, taskId);
+                throw new DuplicateEntryException(errorMessage);
+            }
+        }
+        public static void ValidateDuplicateTask(ITask task, IList<ITask> tasks, string memberName)
+        {
+            bool duplicateTask = tasks.Contains(task);
+            if (duplicateTask == true)
+            {
+                string taskType = task.GetType().Name;
+                int taskId = task.Id;
+                string errorMessage = string.Format(DuplicateAssignedTaskMessage, taskType, taskId, memberName);
+                throw new DuplicateEntryException(errorMessage);
+            }
+        }
+        public static void ValidateTaskExists(ITask task, IList<ITask> tasks, string memberName)
+        {
+            bool taskExists = tasks.Contains(task);
+            if (taskExists == false)
+            {
+                string taskType = task.GetType().Name;
+                int taskId = task.Id;                
+                string errorMessage = string.Format(TaskNotFoundMessage, taskType, taskId, memberName);
+                throw new EntryNotFoundException(errorMessage);
+            }
+        }
+        public static void ValidateMissingBoard(string boardName, IList<IBoard> boards, string teamName)
+        {
+            bool duplicateBoardName = boards.Any(board => board.Name == boardName);
+            if (duplicateBoardName == false)
+            {
+                string errorMessage = string.Format(MissingBoardMessage, teamName, boardName);
+                throw new EntryNotFoundException(errorMessage);
+            }
+        }
 
-        public static void ValidateAssignee(IMember currentAssignee, IMember newAssignee)
+        public static void ValidateAssignMethod(IMember currentAssignee, IMember newAssignee, string taskteam)
         {
             string currentName = currentAssignee.Name;
             string newName = newAssignee.Name;
 
-            if (currentName == newName)
+            if (newAssignee.TeamAssignedTo == null)
+            {
+                string errorMessage = string.Format(NotAssignedToTeamMessage, newName, taskteam);
+            }
+            else if (currentName == newName)
             {
                 string errorMessage = string.Format(TaskAlreadyAsssignedMessage, currentName);
                 throw new InvalidUserInputException(errorMessage);
@@ -118,6 +169,14 @@ namespace TaskManager.Utilities
             {
                 string errorMessage = string.Format(TaskTakenMessage, currentName);
                 throw new InvalidUserInputException(errorMessage);
+            }
+        }
+        public static void ValidateUnassignMethod(string type, IMember assignee )
+        {            
+            if (assignee == null)
+            {
+                string errorMessage = $"This {type} hasn't been assigned yet!";
+                throw new EntryNotFoundException(errorMessage);
             }
         }
         public static void ValidateAdvanceMethod(Type type, int currentValue, string propertyName)

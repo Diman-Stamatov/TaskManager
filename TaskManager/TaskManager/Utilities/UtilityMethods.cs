@@ -186,18 +186,19 @@ namespace TaskManager.Utilities
         {
             return $"Author: {comment.Author} added comment: \"{comment.Content}\"";
         }
-        public static string Message(string type, IMember member, string title, int id, bool isAssigned)
+        public static string Message(string type, string assigneeName, string title, int id, bool isAssigned)
         {
             string action;
             if (isAssigned == true)
             {
-                action = "unassigned from";
+                action = "assigned to";
+                
             }
             else
             {
-                action = "assigned to";
+                action = "unassigned from";
             }
-            return $"{member.Name} was {action} {type} with title:{title} and Id:{id}";
+            return $"{assigneeName} was {action} {type} with title:{title} and Id:{id}";
         }
         public static string Message(string type, IMember member, string title, int id)
         {

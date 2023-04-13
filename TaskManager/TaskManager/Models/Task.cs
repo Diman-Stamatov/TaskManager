@@ -71,7 +71,7 @@ namespace TaskManager.Models
             Log(Message(comment));
         }
 
-        protected void Log(string newEvent)
+        public void Log(string newEvent)
         {
             changesLog.Add(AddDate(newEvent));
         }

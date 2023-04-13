@@ -31,7 +31,7 @@ namespace TaskManager.Commands
         private string AssignTask(int taskId, string assigneeName)
         {
             var foundMember = Repository.GetMember(assigneeName);
-            if (foundMember.IsAssignedToATeam == false)
+            if (foundMember.TeamAssignedTo == null)
             {
                 throw new InvalidUserInputException($"{assigneeName} should be assigned to a team before being assigned a task!");
             }
@@ -47,15 +47,13 @@ namespace TaskManager.Commands
             else if (foundTask.GetType() == typeof(Bug))
             {
                 IBug foundBug = (IBug)foundTask;
-                foundBug.AssignTask(foundMember);  
-                foundMember.AddTask(foundBug);
+                foundBug.Assign(foundMember);
                 return string.Format(successMessage, taskTypeName, taskId, assigneeName);
             }
             else
             {
                 IStory foundStory = (IStory)foundTask;
-                foundStory.Assignee = foundMember;
-                foundMember.AddTask(foundStory);
+                foundStory.Assign(foundMember);
                 return string.Format(successMessage, taskTypeName, taskId, assigneeName);
             }
         }

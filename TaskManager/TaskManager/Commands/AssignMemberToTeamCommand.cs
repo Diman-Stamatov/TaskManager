@@ -31,14 +31,8 @@ namespace TaskManager.Commands
         private string AddMemberToTeam(string teamName, string memberName)
         {
             var foundTeam = Repository.GetTeam(teamName);            
-            var foundMember = Repository.GetMember(memberName);
-            if (foundMember.IsAssignedToATeam == true)
-            {
-                string errorMessage = $"{memberName} is already assigned to a team!";
-                throw new InvalidUserInputException(errorMessage);
-            }
-            foundTeam.AddTeamMember(foundMember);
-            foundMember.AssignToATeam();
+            var foundMember = Repository.GetMember(memberName);            
+            foundTeam.AddTeamMember(foundMember);           
             
             return $"{memberName} was successfully assigned to Team \"{teamName}\".";
         }

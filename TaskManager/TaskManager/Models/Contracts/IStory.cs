@@ -12,10 +12,13 @@ namespace TaskManager.Models.Contracts
         PriorityType Priority { get; }
         SizeType Size { get; }
         StoryStatusType Status { get; }
-        IMember Assignee { get; set; }
+        IMember Assignee { get;}
+        string TeamAssignedTo { get; }
         void AdvancePriority();
         void RevertPriority();
         void AdvanceSize();
         void RevertSize();
+        void Assign(IMember member);
+        void Unassign();
     }
 }

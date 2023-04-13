@@ -63,8 +63,12 @@ namespace TaskManager.Models
         {
             ValidateDuplicateTeamMember(member.Name, Members);
             members.Add(member);
-            member.AssignToATeam();
+            member.AssignToTeam(Name);
             Log(Message(member, Name));            
+        }
+        public IBoard GetBoard(string boardName)
+        {
+            return boards.Where(board => board.Name == boardName).First();
         }
         public string ShowBoards()
         {
@@ -95,5 +99,6 @@ namespace TaskManager.Models
             return $"{member.Name} was added in team: {name}";
         }
 
+        
     }
 }

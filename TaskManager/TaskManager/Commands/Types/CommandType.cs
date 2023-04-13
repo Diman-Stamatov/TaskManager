@@ -9,6 +9,7 @@ namespace TaskManager.Commands.Types
     public enum CommandType
     {
         AddTaskComment,
+        AddTaskToBoard,
         AssignTask,
         AssignMemberToTeam,
         ChangeBugPriority,

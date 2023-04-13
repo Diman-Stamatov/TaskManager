@@ -19,7 +19,7 @@ namespace TaskManager.Models
         private readonly List<string> activityLog;
 
         private string name;
-        private bool isAssignedToATeam;
+        private string teamAssignedTo;
 
         public Member(string name)
         {
@@ -41,23 +41,25 @@ namespace TaskManager.Models
                  MinNameLength,
                  MaxNameLength);
                 name = value;
-                isAssignedToATeam = false;
+                
             }
         }
 
-        public bool IsAssignedToATeam
+        public string TeamAssignedTo
         {
-            get => isAssignedToATeam;
+            get => teamAssignedTo;
         }
 
         public void AddTask(ITask task)
         {
+            ValidateDuplicateTask(task, tasks, Name);            
             tasks.Add(task);
             Log(Message(task, Name));
         }
 
         public void RemoveTask(ITask task)
         {
+            ValidateTaskExists(task, Tasks, Name);            
             tasks.Remove(task);
             Log(Message(task, Name));
         }
@@ -111,9 +113,14 @@ namespace TaskManager.Models
 
         public IList<ITask> Tasks { get => new List<ITask>(tasks); }
                 
-        public void AssignToATeam()
+        public void AssignToTeam(string teamName)
         {
-            isAssignedToATeam = true;
+            if (teamAssignedTo != null)
+            {
+                string errorMessage = $"{Name} is already assigned to a team!";
+                throw new InvalidUserInputException(errorMessage);
+            }            
+            teamAssignedTo = teamName;
         }
       
         private string Message(IComment value)
@@ -135,6 +142,7 @@ namespace TaskManager.Models
             sb.AppendLine($"Member {Name} - Tasks {tasks.Count}");
             return sb.ToString();
         }
+        
     }
 }
 

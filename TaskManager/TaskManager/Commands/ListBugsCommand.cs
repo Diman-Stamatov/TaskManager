@@ -112,19 +112,19 @@ namespace TaskManager.Commands
                 {
                     case "SortedTitle":
                         bugsAssignee = task.
-                        Where(bug => bug.Assignee.IsAssignedToATeam).
+                        Where(bug => bug.Assignee.TeamAssignedTo != null).
                         OrderBy(bug => bug.Title).ToList(); ;
                         break;
                     case "SortedPriority":
                         bugsAssignee = task.
-                        Where(bug => bug.Assignee.IsAssignedToATeam).
+                        Where(bug => bug.Assignee.TeamAssignedTo != null).
                         OrderBy(bug => bug.Priority == PriorityType.High).
                         ThenBy(bug => bug.Priority == PriorityType.Medium).
                         ThenBy(bug => bug.Priority == PriorityType.Low).ToList();
                         break;
                     case "SortedSeverity":
                         bugsAssignee = task.
-                        Where(bug => bug.Assignee.IsAssignedToATeam).
+                        Where(bug => bug.Assignee.TeamAssignedTo != null).
                         OrderBy(bug => bug.Severity == SeverityType.Critical).
                         ThenBy(bug => bug.Severity == SeverityType.Major).
                         ThenBy(bug => bug.Severity == SeverityType.Minor).

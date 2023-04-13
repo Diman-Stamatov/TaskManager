@@ -22,6 +22,7 @@ namespace TaskManager.Models
         private BugStatusType status;
         private SeverityType severity;
         private IMember assignee;
+        private string teamAssignedTo;
 
         public Bug(
             int id,
@@ -71,12 +72,11 @@ namespace TaskManager.Models
         public IMember Assignee
         {
             get => assignee;
-            set
-            {
-                ValidateAssignee(assignee, value);
-                assignee = value;
-                Log(Message(GetType().Name, value, Title, Id, false));
-            }
+            
+        }
+        public string TeamAssignedTo
+        {
+            get => teamAssignedTo;
         }
 
         public void AddStepsToReproduce(string stepOfReproduce)
@@ -94,13 +94,24 @@ namespace TaskManager.Models
             get => new List<string>(stepsToReproduce);
         }
 
-        //ToDo      AssignBug() ? има и  AssignStory() 
-        public void AssignTask(IMember member)
+        public void Assign(IMember member)
         {
-            ValidateAssignee(Assignee, member);
-            bool isAssigned = assignee == null;            
+            ValidateAssignMethod(Assignee, member, teamAssignedTo);
             assignee = member;
-            Log(Message(GetType().Name, member, title, Id, isAssigned));
+            member.AddTask(this);
+            bool isAssigned = assignee != null;
+            string assigneeName = member.Name;
+            Log(Message(GetType().Name, assigneeName, title, Id, isAssigned));
+        }
+        public void Unassign()
+        {
+            var type = this.GetType().Name;
+            ValidateUnassignMethod(type, Assignee);
+            string assigneeName = Assignee.Name;
+            Assignee.RemoveTask(this);
+            assignee = null;
+            bool isAssigned = assignee != null;
+            Log(Message(GetType().Name, assigneeName, title, Id, isAssigned));
         }
 
         public void AdvancePriority()
@@ -220,9 +231,6 @@ namespace TaskManager.Models
             return bugInfo.ToString().Trim();
         }
 
-        public void Unassign(IMember task)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

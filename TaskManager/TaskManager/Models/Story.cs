@@ -8,6 +8,7 @@ using TaskManager.Models.Contracts;
 using TaskManager.Models.Enums;
 using static TaskManager.Utilities.Validation;
 using static TaskManager.Utilities.UtilityMethods;
+using System.Diagnostics.Metrics;
 
 namespace TaskManager.Models
 {
@@ -19,6 +20,7 @@ namespace TaskManager.Models
         private SizeType size;
         private StoryStatusType status;
         private IMember assignee;
+        private string teamAssignedTo;
         public Story(int id, string title, string description, PriorityType priority, SizeType size)
             : base(id, title, description)
         {
@@ -54,13 +56,12 @@ namespace TaskManager.Models
 
         public IMember Assignee
         {
-            get => assignee;
-            set
-            {
-                ValidateAssignee(assignee, value);
-                assignee = value;
-                Log(Message(GetType().Name, value, Title, Id));
-            }
+            get => assignee;            
+        }
+
+        public string TeamAssignedTo
+        {
+            get => teamAssignedTo;
         }
 
         public void AdvancePriority()
@@ -152,11 +153,24 @@ namespace TaskManager.Models
             Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
 
-        public void Assigne(IMember member)
+        public void Assign(IMember member)
         {
-            ValidateAssignee(Assignee, member);
+            ValidateAssignMethod(Assignee, member, teamAssignedTo);
             assignee = member;
-            Log(Message(GetType().Name, member, title, Id));
+            member.AddTask(this);
+            bool isAssigned = assignee != null;
+            string assigneeName = member.Name;
+            Log(Message(GetType().Name, assigneeName, title, Id, isAssigned));
+        }
+        public void Unassign()
+        {
+            var type = this.GetType().Name;
+            ValidateUnassignMethod(type, Assignee);
+            string assigneeName = Assignee.Name;
+            Assignee.RemoveTask(this);
+            assignee = null;
+            bool isAssigned = assignee != null;
+            Log(Message(GetType().Name, assigneeName, title, Id, isAssigned));
         }
         public override string ToString()
         {

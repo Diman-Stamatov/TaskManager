@@ -14,11 +14,12 @@ namespace TaskManager.Models.Contracts
         SeverityType Severity { get; }
         BugStatusType Status { get; }
         IMember Assignee { get; }
+        string TeamAssignedTo { get; } 
         void AdvancePriority();
         void RevertPriority();
         void AdvanceSeverity();
         void RevertSeverity(); 
-        void AssignTask(IMember member);
-        void Unassign(IMember task);
+        void Assign(IMember member);
+        void Unassign();
     }
 }

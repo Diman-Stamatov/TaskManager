@@ -57,13 +57,16 @@ namespace TaskManager.Models
             get => new List<ITask>(tasks);
         }
        
-        public void AddTask(Task task)
+        public void AddTask(ITask task)
         {
+            int taskId = task.Id;
+            string taskType = task.GetType().Name;
+            ValidateDuplicateTask(taskId, Tasks, Name, taskType);
             tasks.Add(task);
             Log(Message(task));
         }
         
-        private void Log(string newEvent)
+        public void Log(string newEvent)
         {
             activityHistory.Add(AddDate(newEvent));
         }
@@ -73,7 +76,7 @@ namespace TaskManager.Models
             return $"{name} board was created";
         }
         
-        private string Message(Task task)
+        private string Message(ITask task)
         {
             return $"{task.GetType} with title {task.Title} and {task.Id} is added at board: {Name}";
         }
@@ -83,6 +86,7 @@ namespace TaskManager.Models
                 $"\nNumber of tasks on the board: {Tasks.Count}";
             return boardInfo;
         }
+
         
     }
 }

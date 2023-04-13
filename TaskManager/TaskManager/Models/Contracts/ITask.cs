@@ -17,8 +17,8 @@ namespace TaskManager.Models.Contracts
         void AdvanceStatus();
         void AddComment(IComment comment);
         string PrintChangesLog();
-
         string PrintComments();
+        void Log(string newEvent);
 
     }
 }

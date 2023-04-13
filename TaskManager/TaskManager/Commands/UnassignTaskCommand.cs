@@ -22,16 +22,17 @@ namespace TaskManager.Commands
 
             int taskId = ParseIntParameter(CommandParameters[0], "ID");          
 
-            return unassignTask(taskId);
+            return UnassignTask(taskId);
         }
 
-        private string unassignTask(int taskId)
+        private string UnassignTask(int taskId)
         {
             
-            string assigneeName;
+            
             ITask foundTask = Repository.GetTask(taskId);
-            string taskTypeName = foundTask.GetType().Name;
-            string noAssigneeError = "The specified {0} hasn't been assigned yet!";
+            string successMessage = "{0} ID number {1} was unassigned from {2}.";
+            string taskTypeName;
+            string assigneeName;            
             if (foundTask.GetType() == typeof(Feedback))
             {
                 string errorMessage = "A Feedback cannot have an assignee!";
@@ -40,22 +41,23 @@ namespace TaskManager.Commands
             else if (foundTask.GetType() == typeof(Bug))
             {
                 IBug foundBug = (IBug)foundTask;
-                if (foundBug.Assignee == null)
-                {
-                    string errorMessage = string.Format(noAssigneeError, taskTypeName);
-                    throw new InvalidUserInputException(errorMessage);
-                }
-                foundBug.Assignee.RemoveTask(foundBug);
-              // foundBug.RemoveTask();                
+                int id = foundBug.Id;
+                taskTypeName = foundBug.GetType().Name;
+                assigneeName = foundBug.Assignee.Name;
+                successMessage = string.Format(successMessage, taskTypeName, id, assigneeName);
+                foundBug.Unassign();                            
             }
             else
             {
                 IStory foundStory = (IStory)foundTask;
+                int id = foundStory.Id;
+                taskTypeName = foundStory.GetType().Name;
                 assigneeName = foundStory.Assignee.Name;
-                foundStory.Assignee = null;                
+                successMessage = string.Format(successMessage, taskTypeName, id, assigneeName);
+                foundStory.Unassign();
             }
 
-            return "";
+            return successMessage;
 
         }
     }

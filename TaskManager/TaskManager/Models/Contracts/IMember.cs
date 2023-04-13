@@ -6,12 +6,12 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Models.Contracts
 {
-    public interface IMember 
+    public interface IMember
     {
         string Name { get; }
         IList<ITask> Tasks { get; }
-        bool IsAssignedToATeam { get; }
-        void AssignToATeam();
+        string TeamAssignedTo { get; }
+        void AssignToTeam(string teamName);
         void Log(string newEvent);
         void AddTask(ITask task);
         void RemoveTask(ITask task);
