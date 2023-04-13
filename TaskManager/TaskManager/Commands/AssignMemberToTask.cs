@@ -25,11 +25,11 @@ namespace TaskManager.Commands
             int taskId = ParseIntParameter(CommandParameters[0], "ID");
             string content = CommandParameters[1];
 
-            return AddMemberToTeam(taskId, content);
+            return AddMemberToTask(taskId, content);
         }
 
-        private string AddMemberToTeam(int taskName, string memberName)
-        {
+        private string AddMemberToTask(int taskName, string memberName)
+        {            
             var foundTeam = Repository.GetTask(taskName);
             IMember foundMember = Repository.GetMember(memberName);
             if (foundMember.IsAssignedToATeam == true)
@@ -37,9 +37,9 @@ namespace TaskManager.Commands
                 string errorMessage = $"{memberName} is already assigned to a team!";
                 throw new InvalidUserInputException(errorMessage);
             }
-            //foundTeam.();
+            //ToDo foundTeam.();
 
-            return $"{memberName} was successfully assigned to Team \"{teamName}\".";
+            return $"{memberName} was successfully assigned to Team \"{taskName}\".";
         }
     }
 }
