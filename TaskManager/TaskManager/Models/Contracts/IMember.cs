@@ -15,5 +15,8 @@ namespace TaskManager.Models.Contracts
         void Log(string newEvent);
         void AddTask(ITask task);
         void RemoveTask(ITask task);
+        string FullInfo();
+        string ActivityLog();
+        string PrintTasks();
     }
 }

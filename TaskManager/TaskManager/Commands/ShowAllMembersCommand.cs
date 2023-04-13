@@ -9,9 +9,7 @@ namespace TaskManager.Commands
 {
     internal class ShowAllMembersCommand:BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
+       
         public ShowAllMembersCommand(IRepository repository)
             : base(repository)
         {
@@ -19,7 +17,13 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            var members = Repository.Members.ToList();
+            StringBuilder memberDisplay = new StringBuilder();
+            foreach (var member in members)
+            {
+                memberDisplay.Append(member.FullInfo());
+            }
+
         }
     }
 }
