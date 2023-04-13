@@ -35,7 +35,7 @@ namespace TaskManager.Models
             Status = InitialBugStatus;
             Severity = severity;
             stepsToReproduce = new List<string>();
-            Log(Message("Bug", Id, title, priority, severity));
+            Log(Message(GetType().Name, Id, title, priority, severity));
         }
 
         public PriorityType Priority
@@ -75,19 +75,18 @@ namespace TaskManager.Models
             {
                 ValidateAssignee(assignee, value);
                 assignee = value;
-                Log(Message("Bug", value, Title, Id));
+                Log(Message(GetType().Name, value, Title, Id));
             }
         }
 
-        public void AddStepsToReproduce(string allStepsToReproduceAsOneString)
+        public void AddStepsToReproduce(string stepOfReproduce)
         {
-            ValidateStringNotNullOrEmpty(allStepsToReproduceAsOneString,"Step to reproduce can not be null or empty.");
-            stepsToReproduce = allStepsToReproduceAsOneString.Split(';').ToList();
+            ValidateStringNotNullOrEmpty(stepOfReproduce,"Step to reproduce can not be null or empty.");
+            int number = stepsToReproduce.Count;
+            string completeStep = $"{++number}. {stepOfReproduce}";
+            stepsToReproduce.Add(completeStep);
+            Log($"[{completeStep}] was added to 'Steps to reproduce'");
             
-            foreach (var step in stepsToReproduce)
-            {
-            Log($"[{stepsToReproduce}] was added to 'Steps to reproduce'");
-            }
         }
 
         public IList<string> StepsToReproduce
@@ -100,7 +99,7 @@ namespace TaskManager.Models
         {
             ValidateAssignee(Assignee, member);
             assignee = member;
-            Log(Message("Bug", member, title, Id));
+            Log(Message(GetType().Name, member, title, Id));
         }
 
         public void AdvancePriority()
