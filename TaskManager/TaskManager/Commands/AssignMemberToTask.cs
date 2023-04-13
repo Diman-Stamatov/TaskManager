@@ -30,6 +30,8 @@ namespace TaskManager.Commands
 
         private string AddMemberToTask(int taskName, string memberName)
         {
+            IMember member = null;
+            member.fi
             var foundTeam = Repository.GetTask(taskName);
             IMember foundMember = Repository.GetMember(memberName);
             if (foundMember.IsAssignedToATeam == true)

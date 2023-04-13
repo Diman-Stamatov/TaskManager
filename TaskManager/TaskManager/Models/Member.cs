@@ -55,6 +55,7 @@ namespace TaskManager.Models
             tasks.Add(task);
             Log(Message(task, Name));
         }
+
         public void RemoveTask(ITask task)
         {
             tasks.Remove(task);
