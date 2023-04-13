@@ -43,18 +43,12 @@ namespace TaskManager.Models
 
         public IList<IMember> Members
         {
-            get
-            {
-                return new List<IMember>(this.members);
-            }            
+            get => new List<IMember>(members);            
         }
 
         public IList<IBoard> Boards
         {
-            get
-            {
-                return new List<IBoard>(this.boards);
-            }
+            get => new List<IBoard>(boards);            
         }
 
         public void CreateBoard(string boardName)
@@ -65,7 +59,13 @@ namespace TaskManager.Models
             boards.Add(board);
             Log(Message(board, teamName));
         }
-
+        public void AddTeamMember(IMember member)
+        {
+            ValidateDuplicateTeamMember(member.Name, Members);
+            members.Add(member);
+            member.AssignToATeam();
+            Log(Message(member, Name));            
+        }
         public string ShowBoards()
         {
             var allBoardsInfo = new StringBuilder();
@@ -78,7 +78,6 @@ namespace TaskManager.Models
             }
             return allBoardsInfo.ToString();
         }
-
         private void Log(string newEvent)
         {
             hystoryLog.Add(AddDate(newEvent));
@@ -94,13 +93,6 @@ namespace TaskManager.Models
         private string Message(IMember member, string name)
         {
             return $"{member.Name} was added in team: {name}";
-        }
-        public void AddTeamMember(IMember member)
-        {
-            ValidateDuplicateTeamMember(member.Name, Members);
-            members.Add(member);
-            member.AssignToATeam();
-            Log(Message(member, Name));            
         }
 
     }
