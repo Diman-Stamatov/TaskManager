@@ -9,8 +9,6 @@ namespace TaskManager.Commands
 {
     internal class ShowAllTeamsCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
 
         public ShowAllTeamsCommand(IRepository repository)
             : base(repository)

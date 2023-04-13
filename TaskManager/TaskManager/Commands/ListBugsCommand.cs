@@ -84,11 +84,11 @@ namespace TaskManager.Commands
                         break;
                     case "SortedSeverity":
                         bugsFixed = task.
-                    Where(bug => bug.Status == BugStatusType.Fixed).
-                    OrderBy(bug => bug.Severity == SeverityType.Critical).
-                    ThenBy(bug => bug.Severity == SeverityType.Major).
-                    ThenBy(bug => bug.Severity == SeverityType.Minor).
-                    ToList();
+                        Where(bug => bug.Status == BugStatusType.Fixed).
+                        OrderBy(bug => bug.Severity == SeverityType.Critical).
+                        ThenBy(bug => bug.Severity == SeverityType.Major).
+                        ThenBy(bug => bug.Severity == SeverityType.Minor).
+                        ToList();
                         break;
                 }
 
@@ -124,11 +124,11 @@ namespace TaskManager.Commands
                         break;
                     case "SortedSeverity":
                         bugsAssignee = task.
-                    Where(bug => bug.Assignee.IsAssignedToATeam).
-                    OrderBy(bug => bug.Severity == SeverityType.Critical).
-                    ThenBy(bug => bug.Severity == SeverityType.Major).
-                    ThenBy(bug => bug.Severity == SeverityType.Minor).
-                    ToList();
+                        Where(bug => bug.Assignee.IsAssignedToATeam).
+                        OrderBy(bug => bug.Severity == SeverityType.Critical).
+                        ThenBy(bug => bug.Severity == SeverityType.Major).
+                        ThenBy(bug => bug.Severity == SeverityType.Minor).
+                        ToList();
                         break;
                 }
 

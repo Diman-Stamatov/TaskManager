@@ -25,7 +25,7 @@ namespace TaskManager.Models
             Priority = priority;
             Size = size;
             status = InitialStatus;
-            Log(Message("Story", id, title, priority, size));
+            Log(Message(GetType().Name, id, title, priority, size));
         }
         public PriorityType Priority
         {
@@ -59,7 +59,7 @@ namespace TaskManager.Models
             {
                 ValidateAssignee(assignee, value);
                 assignee = value;
-                Log(Message("Story", value, Title, Id));
+                Log(Message(GetType().Name, value, Title, Id));
             }
         }
 
@@ -151,15 +151,13 @@ namespace TaskManager.Models
             status--;
             Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
         }
-        //ToDo      AssignStory() ? има и AssignBug()
-        public void AssignTask(IMember member)
+
+        public void Assigne(IMember member)
         {
             ValidateAssignee(Assignee, member);
-            
             assignee = member;
-            Log(Message("Story", member, title, Id));
+            Log(Message(GetType().Name, member, title, Id));
         }
-
         public override string ToString()
         {
             StringBuilder storyInfo = new StringBuilder();

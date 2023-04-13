@@ -26,12 +26,28 @@ namespace TaskManager.Commands
 
             if (fulterByCommand == "FilterNew")
             {
+                List<Feedback> feedbackNew = null;
 
-               List<Feedback> feedbackNew = task.
-               Where(feedback => feedback.Status == FeedbackStatusType.New).
-               OrderBy(story => story.Title).
-               ThenBy(story => story.Rating).
-               ToList();
+                switch (sortByCommand)
+                {
+                    case "SortedTitle":
+                        feedbackNew = task.
+                        Where(feedback => feedback.Status == FeedbackStatusType.New).
+                        OrderBy(story => story.Title).ToList();
+                        break;                   
+                    case "SortedRating":
+                        feedbackNew = task.
+                        Where(feedback => feedback.Status == FeedbackStatusType.New).
+                        OrderBy(story => story.Rating).
+                        ToList();
+                        break;                    
+
+                }
+
+                if (feedbackNew == null)
+                {
+                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                }
 
                 foreach (Feedback bug in feedbackNew)
                 {
@@ -41,11 +57,28 @@ namespace TaskManager.Commands
             }
             else if (fulterByCommand == "FilterUnscheduled")
             {
-                List<Feedback> feedbackUnscheduled = task.
-               Where(feedback => feedback.Status == FeedbackStatusType.Unscheduled).
-               OrderBy(story => story.Title).
-               ThenBy(story => story.Rating).
-               ToList();
+                List<Feedback> feedbackUnscheduled = null;
+
+                switch (sortByCommand)
+                {
+                    case "SortedTitle":
+                        feedbackUnscheduled = task.
+                        Where(feedback => feedback.Status == FeedbackStatusType.Unscheduled).
+                        OrderBy(story => story.Title).ToList();
+                        break;
+                    case "SortedRating":
+                        feedbackUnscheduled = task.
+                        Where(feedback => feedback.Status == FeedbackStatusType.Unscheduled).
+                        OrderBy(story => story.Rating).
+                        ToList();
+                        break;
+
+                }
+
+                if (feedbackUnscheduled == null)
+                {
+                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                }
 
                 foreach (Feedback bug in feedbackUnscheduled)
                 {
@@ -56,6 +89,35 @@ namespace TaskManager.Commands
             }
             else if (fulterByCommand == "FilterScheduled")
             {
+                List<Feedback> feedbackNew = null;
+
+                switch (sortByCommand)
+                {
+                    case "SortedTitle":
+                        feedbackNew = task.
+                        Where(feedback => feedback.Status == FeedbackStatusType.New).
+                        OrderBy(story => story.Title).ToList();
+                        break;
+                    case "SortedRating":
+                        feedbackNew = task.
+                        Where(feedback => feedback.Status == FeedbackStatusType.New).
+                        OrderBy(story => story.Rating).
+                        ToList();
+                        break;
+
+                }
+
+                if (feedbackNew == null)
+                {
+                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                }
+
+                foreach (Feedback bug in feedbackNew)
+                {
+                    stringBuilder.Append(bug);
+                    StringGenerator('*', 15);
+                }
+
                 List<Feedback> feedbackScheduled = task.
                Where(feedback => feedback.Status == FeedbackStatusType.Scheduled).
                OrderBy(story => story.Title).

@@ -22,6 +22,7 @@ namespace TaskManager.Commands
         {
             ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
             string title = CommandParameters[0];
+
             string description = CommandParameters[1];
             PriorityType priority = ParsePriorityTypeParameter(CommandParameters[2], "Priority");
             SeverityType severity = ParseSeverityTypeParameter(CommandParameters[3], "Serverity");

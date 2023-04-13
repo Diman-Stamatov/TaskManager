@@ -22,10 +22,7 @@ namespace TaskManager.Core
         private readonly IList<ITeam> teams = new List<ITeam>();
         private readonly IList<IMember> members = new List<IMember>();
         private readonly IList<ITask> tasks = new List<ITask>();
-        //ToDo Removed boards from Repository
-        //ToDo в Bug класа има метод "AssignTask" за добавяне на Assignee
-        //ToDo в Feedback класа има метод "AssignTask" за добавяне на Assignee
-        //ToDo AssignBug() и AssignStory(), а имаме 1 команда AssignTask
+        //ToDo Removed boards from Repository        
 
         public IList<ITeam> Teams
         {

@@ -35,7 +35,7 @@ namespace TaskManager.Models
             Status = InitialBugStatus;
             Severity = severity;
             stepsToReproduce = new List<string>();
-            Log(Message("Bug", Id, title, priority, severity));
+            Log(Message(GetType().Name, Id, title, priority, severity));
         }
 
         public PriorityType Priority
@@ -71,18 +71,22 @@ namespace TaskManager.Models
         public IMember Assignee
         {
             get => assignee;
-            
+            set
+            {
+                ValidateAssignee(assignee, value);
+                assignee = value;
+                Log(Message(GetType().Name, value, Title, Id));
+            }
         }
 
-        public void AddStepsToReproduce(string allStepsToReproduceAsOneString)
+        public void AddStepsToReproduce(string stepOfReproduce)
         {
-            ValidateStringNotNullOrEmpty(allStepsToReproduceAsOneString,"Step to reproduce can not be null or empty.");
-            stepsToReproduce = allStepsToReproduceAsOneString.Split(';').ToList();
+            ValidateStringNotNullOrEmpty(stepOfReproduce,"Step to reproduce can not be null or empty.");
+            int number = stepsToReproduce.Count;
+            string completeStep = $"{++number}. {stepOfReproduce}";
+            stepsToReproduce.Add(completeStep);
+            Log($"[{completeStep}] was added to 'Steps to reproduce'");
             
-            foreach (var step in stepsToReproduce)
-            {
-            Log($"[{stepsToReproduce}] was added to 'Steps to reproduce'");
-            }
         }
 
         public IList<string> StepsToReproduce
@@ -96,14 +100,13 @@ namespace TaskManager.Models
             ValidateAssignee(Assignee, member);
             bool isAssigned = assignee == null;            
             assignee = member;
-            Log(Message("Bug", isAssigned, member, title, Id));
+            Log(Message(GetType().Name, member, title, Id));
         }
-        public void UnassignTask(IMember member)
+        public void Assigne(IMember member)
         {
             ValidateAssignee(Assignee, member);
-            bool isAssigned = assignee == null;
             assignee = member;
-            Log(Message("Bug", isAssigned, member, title, Id));
+            Log(Message(GetType().Name, member, title, Id));
         }
 
         public void AdvancePriority()
@@ -164,6 +167,7 @@ namespace TaskManager.Models
 
             status--;
             Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+
         }
 
         public void AdvanceSeverity()
@@ -221,5 +225,6 @@ namespace TaskManager.Models
             bugInfo.AppendLine($"Assigned to: {Assignee.Name}");
             return bugInfo.ToString().Trim();
         }
+
     }
 }
