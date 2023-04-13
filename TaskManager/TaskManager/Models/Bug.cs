@@ -75,7 +75,7 @@ namespace TaskManager.Models
             {
                 ValidateAssignee(assignee, value);
                 assignee = value;
-                Log(Message(GetType().Name, value, Title, Id));
+                Log(Message(GetType().Name, value, Title, Id, false));
             }
         }
 
@@ -100,13 +100,7 @@ namespace TaskManager.Models
             ValidateAssignee(Assignee, member);
             bool isAssigned = assignee == null;            
             assignee = member;
-            Log(Message(GetType().Name, member, title, Id));
-        }
-        public void Assigne(IMember member)
-        {
-            ValidateAssignee(Assignee, member);
-            assignee = member;
-            Log(Message(GetType().Name, member, title, Id));
+            Log(Message(GetType().Name, member, title, Id, isAssigned));
         }
 
         public void AdvancePriority()
@@ -226,5 +220,9 @@ namespace TaskManager.Models
             return bugInfo.ToString().Trim();
         }
 
+        public void Unassign(IMember task)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
