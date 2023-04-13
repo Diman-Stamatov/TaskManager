@@ -37,7 +37,7 @@ namespace TaskManager.Commands
                 string errorMessage = $"{memberName} is already assigned to a team!";
                 throw new InvalidUserInputException(errorMessage);
             }
-            foundTeam.();
+            //foundTeam.();
 
             return $"{memberName} was successfully assigned to Team \"{teamName}\".";
         }

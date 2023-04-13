@@ -102,7 +102,8 @@ namespace TaskManager.Utilities
                 currentValueName, nextValueName, assigneeName);
             return logMessage;
         }
-        public static string GenerateAdvanceMethodMessage(Type type, int currentValue, string propertyName,string className, int id)
+
+        public static string GenerateAdvanceMethodMessage(Type type, int currentValue, string propertyName, string className, int id)
         {
             int nextValue = currentValue + 1;
             string nextValueName = "";
@@ -181,15 +182,11 @@ namespace TaskManager.Utilities
             return logMessage;
         }
 
-        public static string Message(SizeType value)
-        {
-            return $"SizeType set to: {value}";
-        }
         public static string Message(IComment comment)
         {
             return $"Author: {comment.Author} added comment: \"{comment.Content}\"";
         }
-        public static string Message(string type, bool isAssigned, IMember member, string title, int id)
+        public static string Message(string type, IMember member, string title, int id, bool isAssigned)
         {
             string action;
             if (isAssigned == true)
@@ -201,6 +198,10 @@ namespace TaskManager.Utilities
                 action = "assigned to";
             }
             return $"{member.Name} was {action} {type} with title:{title} and Id:{id}";
+        }
+        public static string Message(string type, IMember member, string title, int id)
+        {
+            return $"{member.Name} was assigned to {type} with title:{title} and Id:{id}";
         }
         public static string Message(string type, int id, string title, PriorityType priority, SizeType size)
         {
