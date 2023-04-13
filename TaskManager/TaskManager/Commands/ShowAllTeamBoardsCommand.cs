@@ -21,9 +21,9 @@ namespace TaskManager.Commands
             foreach (var team in teams)
             {
                 boardDisplay.AppendLine(team.Name);
-                for (int i = 0; i < team.Members.Count; i++)
+                for (int i = 0; i < team.Boards.Count; i++)
                 {
-                    boardDisplay.Append(team.Members[i].FullInfo());
+                    boardDisplay.Append(team.Boards);
                 }
                 boardDisplay.AppendLine(StringGenerator('*', 15));
             }
