@@ -37,23 +37,30 @@ namespace TaskManager.Commands
                 throw new InvalidUserInputException(errorMessage);
             }
             var foundBug = (IBug)foundTask;
+            string className = ExpectedTaskTypeName;
+            if (foundBug.Assignee == null)
+            {
+                string errorMessage = $"The specified {className} has to be assigned to someone first!";
+                throw new InvalidUserInputException(errorMessage);
+            }
             var type = foundBug.GetType();
             int currentValue = (int)foundBug.Priority;
             string propertyName = ManipulatedPropertyName;
-            string className = ExpectedTaskTypeName;            
-
+            var taskAssignee = foundBug.Assignee;
+            string assigneeName = taskAssignee.Name;
             string commandMessage;
             if (changeDirection == ExpectedAdvanceParameter)
             {
                 foundBug.AdvancePriority();
-                commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id);
+                commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id, assigneeName);
             }
             else
             {
                 foundBug.RevertPriority();
-                commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id);
+                commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id, assigneeName);
             }            
             
+            taskAssignee.Log(commandMessage);
             return commandMessage;
         }
     }

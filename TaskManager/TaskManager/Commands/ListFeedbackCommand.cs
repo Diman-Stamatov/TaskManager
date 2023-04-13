@@ -27,8 +27,7 @@ namespace TaskManager.Commands
             if (fulterByCommand == "FilterNew")
             {
 
-                switch()
-                List<Feedback> feedbackNew = task.
+               List<Feedback> feedbackNew = task.
                Where(feedback => feedback.Status == FeedbackStatusType.New).
                OrderBy(story => story.Title).
                ThenBy(story => story.Rating).

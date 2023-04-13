@@ -47,14 +47,15 @@ namespace TaskManager.Commands
             else if (foundTask.GetType() == typeof(Bug))
             {
                 IBug foundBug = (IBug)foundTask;
-                foundBug.Assignee = foundMember;
-                foundMember.AssignToATeam();
+                foundBug.AssignTask = foundMember;  
+                foundMember.AddTask(foundBug);
                 return string.Format(successMessage, taskTypeName, taskId, assigneeName);
             }
             else
             {
                 IStory foundStory = (IStory)foundTask;
                 foundStory.Assignee = foundMember;
+                foundMember.AddTask(foundStory);
                 return string.Format(successMessage, taskTypeName, taskId, assigneeName);
             }
         }

@@ -71,12 +71,7 @@ namespace TaskManager.Models
         public IMember Assignee
         {
             get => assignee;
-            set
-            {
-                ValidateAssignee(assignee, value);
-                assignee = value;
-                Log(Message("Bug", value, Title, Id));
-            }
+            
         }
 
         public void AddStepsToReproduce(string allStepsToReproduceAsOneString)
@@ -99,8 +94,16 @@ namespace TaskManager.Models
         public void AssignTask(IMember member)
         {
             ValidateAssignee(Assignee, member);
+            bool isAssigned = assignee == null;            
             assignee = member;
-            Log(Message("Bug", member, title, Id));
+            Log(Message("Bug", isAssigned, member, title, Id));
+        }
+        public void UnassignTask(IMember member)
+        {
+            ValidateAssignee(Assignee, member);
+            bool isAssigned = assignee == null;
+            assignee = member;
+            Log(Message("Bug", isAssigned, member, title, Id));
         }
 
         public void AdvancePriority()

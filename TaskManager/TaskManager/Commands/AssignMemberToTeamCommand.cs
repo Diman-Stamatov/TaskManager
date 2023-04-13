@@ -38,6 +38,7 @@ namespace TaskManager.Commands
                 throw new InvalidUserInputException(errorMessage);
             }
             foundTeam.AddTeamMember(foundMember);
+            foundMember.AssignToATeam();
             
             return $"{memberName} was successfully assigned to Team \"{teamName}\".";
         }

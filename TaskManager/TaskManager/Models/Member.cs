@@ -50,13 +50,18 @@ namespace TaskManager.Models
             get => isAssignedToATeam;
         }
 
-        public void AddTask(Task task)
+        public void AddTask(ITask task)
         {
             tasks.Add(task);
             Log(Message(task, Name));
         }
+        public void RemoveTask(ITask task)
+        {
+            tasks.Remove(task);
+            Log(Message(task, Name));
+        }
 
-        private void Log(string newEvent)
+        public void Log(string newEvent)
         {
             activityLog.Add(AddDate(newEvent));
         }       
@@ -118,7 +123,7 @@ namespace TaskManager.Models
         {
             return $"Member with name: {name} was created";
         }
-        private string Message(Task task, string name)
+        private string Message(ITask task, string name)
         {
             return $"{GetType().Name} with title: {task.Title} Id: {task.Id} was assigned to {Name}";
         }
