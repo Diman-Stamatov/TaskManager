@@ -11,7 +11,7 @@ namespace TaskManager.Commands
 {
     public class CreateBugcommand : BaseCommand
     {
-        public const int MinimumNumberOfArguments = 5;
+        public const int MinimumNumberOfArguments = 4;
 
         public CreateBugcommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)

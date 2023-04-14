@@ -7,15 +7,15 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager
 {
-    internal class StartUp
+    public class StartUp
+
     {
         static void Main(string[] args)
         {
-            //    IRepository repository = new Repository();
-            //    ICommandFactory commandFactory = new CommandFactory(repository);
-            //    IEngine engine = new Core.Engine(commandFactory);
-            //    engine.Start();
-
+            IRepository repository = new Repository();
+            ICommandFactory commandFactory = new CommandFactory(repository);
+            IEngine engine = new Core.Engine(commandFactory);
+            engine.Start();
 
         }
     }
