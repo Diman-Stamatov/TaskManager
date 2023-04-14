@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Models.Enums;
 using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
@@ -43,7 +44,8 @@ namespace TaskManager.Commands
                 string errorMessage = $"The specified {className} has to be assigned to someone first!";
                 throw new InvalidUserInputException(errorMessage);
             }
-            var type = foundBug.GetType();
+            
+            var type = typeof(PriorityType);
             int currentValue = (int)foundBug.Priority;
             string propertyName = ManipulatedPropertyName;
             var taskAssignee = foundBug.Assignee;
@@ -52,12 +54,12 @@ namespace TaskManager.Commands
             if (changeDirection == ExpectedAdvanceParameter)
             {
                 foundBug.AdvancePriority();
-                commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id, assigneeName);
+                commandMessage = GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, id);
             }
             else
             {
                 foundBug.RevertPriority();
-                commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id, assigneeName);
+                commandMessage = GenerateRevertMethodMessage(type, currentValue, propertyName, className, id);
             }            
             
             taskAssignee.Log(commandMessage);

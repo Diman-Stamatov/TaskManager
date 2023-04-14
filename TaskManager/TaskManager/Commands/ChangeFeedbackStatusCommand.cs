@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Core.Interfaces;
+using TaskManager.Models.Enums;
 
 namespace TaskManager.Commands
 {
@@ -37,7 +38,7 @@ namespace TaskManager.Commands
                 throw new InvalidUserInputException(errorMessage);
             }
             var foundFeedback = (IFeedback)foundTask;
-            var type = foundFeedback.GetType();
+            var type = typeof(FeedbackStatusType);
             int currentValue = (int)foundFeedback.Status;
             string propertyName = ManipulatedPropertyName;
             string className = ExpectedTaskTypeName;

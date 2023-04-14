@@ -35,6 +35,7 @@ namespace TaskManager.Commands
                 throw new InvalidUserInputException(errorMessage);
             }
             var foundFeedback = (IFeedback)foundTask;
+            foundFeedback.Rating = rating;
             
             return $"Successfully changed the rating of Feedback ID number {id} to {rating}.";
         }

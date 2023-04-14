@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Core.Interfaces;
+using TaskManager.Models.Enums;
 
 namespace TaskManager.Commands
 {
@@ -43,7 +44,7 @@ namespace TaskManager.Commands
                 string errorMessage = $"The specified {className} has to be assigned to someone first!";
                 throw new InvalidUserInputException(errorMessage);
             }
-            var type = foundStory.GetType();
+            var type = typeof(PriorityType);
             int currentValue = (int)foundStory.Priority;
             string propertyName = ManipulatedPropertyName;
             var taskAssignee = foundStory.Assignee;
