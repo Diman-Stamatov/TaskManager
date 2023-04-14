@@ -7,9 +7,9 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    public class ShowAllMembersCommand:BaseCommand
+    public class ShowAllMembersCommand : BaseCommand
     {
-       
+
         public ShowAllMembersCommand(IRepository repository)
             : base(repository)
         {
@@ -17,17 +17,15 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            var teams = Repository.Teams; 
+            var members = Repository.Members;
             StringBuilder memberDisplay = new StringBuilder();
-            foreach (var team in teams)
+
+            for (int i = 0; i < members.Count; i++)
             {
-                memberDisplay.AppendLine(team.Name);
-                for (int i = 0; i < team.Members.Count; i++)
-                {
-                    memberDisplay.AppendLine(team.Members[i].FullInfo());
-                }
-                memberDisplay.AppendLine(StringGenerator('*', 15));
+                memberDisplay.AppendLine($"{i + 1}. Member name: {members[i].Name}.");
             }
+            memberDisplay.AppendLine(StringGenerator('*', 15));
+
             return memberDisplay.ToString().Trim();
         }
     }
