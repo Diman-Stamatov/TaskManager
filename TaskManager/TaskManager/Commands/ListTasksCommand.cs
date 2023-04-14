@@ -10,7 +10,7 @@ namespace TaskManager.Commands
 {
     public class ListTasksCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments =1;
+        public const int ExpectedNumberOfArguments = 1;
 
         public ListTasksCommand(IList<string> commandParameters, IRepository repository)
              : base(commandParameters, repository)
@@ -37,6 +37,7 @@ namespace TaskManager.Commands
                 foreach (ITask task in filterTasks)
                 {
                     taskDisplay.AppendLine($"Task - {task.Title}");
+                    taskDisplay.AppendLine(StringGenerator('.', 25));
                 }
             }
             return taskDisplay.ToString().Trim();

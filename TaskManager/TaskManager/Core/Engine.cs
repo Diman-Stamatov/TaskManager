@@ -19,6 +19,7 @@ namespace TaskManager.Core
     {
         private const string TerminationCommand = "Exit";
         private const string EmptyCommandError = "Command cannot be empty.";
+        private const string ReportSeparator = "####################";
 
         private readonly ICommandFactory commandFactory;
 
@@ -48,6 +49,7 @@ namespace TaskManager.Core
                     ICommand command = (ICommand)commandFactory.Create(inputLine);
                     string result = command.Execute();
                     Console.WriteLine(result.Trim());
+                    Console.WriteLine(ReportSeparator);
                 }
                 catch (Exception ex)
                 {

@@ -106,6 +106,11 @@ namespace TaskManager.Commands
                     break;
             }
 
+            if (taskDisplay.Length == 0)
+            {
+                throw new InvalidUserInputException("There is no information that meets the conditions!");
+            }
+
             return taskDisplay.ToString().Trim();
         }
     }
