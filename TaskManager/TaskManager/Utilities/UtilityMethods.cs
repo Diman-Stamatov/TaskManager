@@ -268,7 +268,7 @@ namespace TaskManager.Utilities
         }
         public static string AddDate(string newEvent)
         {
-            return $"{newEvent} : [{DateTime.Now.ToString("yyyyMMdd|HH:mm:ss.ffff")}]";
+            return $"{newEvent} : [{DateTime.Now.ToString("dd.MM.yyyy|HH:mm:ss")}]";
         }
     }
 }
