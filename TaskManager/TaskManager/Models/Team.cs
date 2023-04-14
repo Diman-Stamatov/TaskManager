@@ -4,8 +4,6 @@ using System.Linq;
 using System.Text;
 using TaskManager.Models.Enums;
 using TaskManager.Models.Contracts;
-using static TaskManager.Utilities.UtilityMethods;
-using static TaskManager.Utilities.Validation;
 using System.Reflection.Metadata;
 using System.Xml.Linq;
 
@@ -19,14 +17,14 @@ namespace TaskManager.Models
         private string name;
         private IList<IMember> members;
         private IList<IBoard> boards;
-        private readonly IList<string> hystoryLog;
+        private readonly IList<string> historyLog;
 
         public Team(string name)
         {
             Name = name;
             members = new List<IMember>();
             boards = new List<IBoard>();
-            hystoryLog = new List<string>();
+            historyLog = new List<string>();
             Log(Message(Name));
         }
         public string Name
@@ -73,7 +71,7 @@ namespace TaskManager.Models
         public string ShowBoards()
         {
             var allBoardsInfo = new StringBuilder();
-            string lineSeperator = StringGenerator('-', 10);
+            string lineSeperator = GenerateString('-', 10);
             allBoardsInfo.AppendLine($"Team \"{Name}\" boards:");
             for (int board = 0; board < Boards.Count; board++)
             {
@@ -84,8 +82,38 @@ namespace TaskManager.Models
         }
         private void Log(string newEvent)
         {
-            hystoryLog.Add(AddDate(newEvent));
+            historyLog.Add(AddDate(newEvent));
         }
+        public void ShowHistoryLog()
+        {
+            string lineSeperator = GenerateString('-', 10);
+            Console.WriteLine(lineSeperator);
+            Console.WriteLine($"Team \"{Name}\" activity history:");
+            foreach (var loggedEvent in historyLog)
+            {
+                Console.WriteLine(loggedEvent);
+            }
+            Console.WriteLine(lineSeperator);
+        }
+        public void ShowTeamMembers()
+        {
+            string lineSeperator = GenerateString('-', 10);
+            Console.WriteLine(lineSeperator);
+            Console.WriteLine($"Members assigned to Team \"{Name}\":");
+            if (members.Count == 0)
+            {
+                Console.WriteLine($"No members have been assigned to Team \"{Name}\" yet!");
+            }
+            else
+            {
+                foreach (var member in members)
+                {
+                    Console.WriteLine(member.ToString());
+                }
+            }            
+            Console.WriteLine(lineSeperator);
+        }
+
         private string Message(string name)
         {
             return $"Team with name: {name} was created";

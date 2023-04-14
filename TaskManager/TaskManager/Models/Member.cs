@@ -74,16 +74,16 @@ namespace TaskManager.Models
             StringBuilder taskOutput = new StringBuilder();
             int num = 1;
             taskOutput.AppendLine("Tasks:");
-            taskOutput.AppendLine(StringGenerator('-', 10));
+            taskOutput.AppendLine(GenerateString('-', 10));
             foreach (var task in tasks)
             {
                 taskOutput.AppendLine($"{num++}. {task.ToString()}");
-                taskOutput.AppendLine(StringGenerator('-', 10));
+                taskOutput.AppendLine(GenerateString('-', 10));
             }
             return taskOutput.ToString().Trim();
         }
 
-        public string ActivityLog()
+        public string ShowActivityLog()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Member {Name}");
@@ -100,7 +100,7 @@ namespace TaskManager.Models
             StringBuilder memberOutput = new StringBuilder();
             memberOutput.AppendLine($"Member: {Name}");
             memberOutput.Append(PrintTasks());
-            memberOutput.Append(ActivityLog());
+            memberOutput.Append(ShowActivityLog());
             return memberOutput.ToString().Trim();
         }
 

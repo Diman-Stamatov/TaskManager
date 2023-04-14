@@ -87,6 +87,18 @@ namespace TaskManager.Models
             return boardInfo;
         }
 
+        public void ShowActivityHistory()
+        {
+            string lineSeperator = GenerateString('-', 10);
+            Console.WriteLine(lineSeperator);
+            Console.WriteLine($"Board \"{Name}\" activity history:");            
+            foreach (var loggedEvent in activityHistory)
+            {
+                Console.WriteLine(loggedEvent);
+            }
+            Console.WriteLine(lineSeperator);
+        }
+
         
     }
 }

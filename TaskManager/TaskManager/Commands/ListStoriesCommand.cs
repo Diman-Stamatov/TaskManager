@@ -59,7 +59,7 @@ namespace TaskManager.Commands
                 foreach (Story bug in storyNotDone)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    GenerateString('*', 15);
                 }
             }
             else if (filterByCommand == "FilterInProgress")
@@ -97,7 +97,7 @@ namespace TaskManager.Commands
                 foreach (Story bug in storyInProgress)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    GenerateString('*', 15);
                 }
 
             }
@@ -136,7 +136,7 @@ namespace TaskManager.Commands
                 foreach (Story bug in storyDone)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    GenerateString('*', 15);
                 }
 
             }
@@ -175,7 +175,7 @@ namespace TaskManager.Commands
                 foreach (Story bug in storyAssignee)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    GenerateString('*', 15);
                 }
 
             }
