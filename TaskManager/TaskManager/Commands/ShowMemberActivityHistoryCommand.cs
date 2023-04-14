@@ -26,7 +26,7 @@ namespace TaskManager.Commands
         private string ShowMemberActivityHistory(string memberName)
         {
             var foundMember = Repository.GetMember(memberName);
-            Console.WriteLine(foundMember.ActivityLog()); 
+            Console.WriteLine(foundMember.ShowActivityLog()); 
             return $"Successfully displayed {memberName}'s activity history.";
         }
     }

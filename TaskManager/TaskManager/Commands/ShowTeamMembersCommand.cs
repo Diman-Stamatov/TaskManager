@@ -9,9 +9,7 @@ namespace TaskManager.Commands
 {
    public class ShowTeamMembersCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
+        public const int MinimumNumberOfArguments = 1;
         public ShowTeamMembersCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
@@ -19,7 +17,19 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            return "";
+            ValidateArgumentsCount(CommandParameters, MinimumNumberOfArguments);
+
+            string teamName = CommandParameters[0];
+
+            return ShowTeamMembers(teamName);
+        }
+
+        private string ShowTeamMembers(string teamName)
+        {
+            var foundTeam = Repository.GetTeam(teamName);
+            foundTeam.ShowTeamMembers();
+
+            return $"Successfully displayed the activity history of the members assigned to team \"{teamName}\".";
         }
     }
 }

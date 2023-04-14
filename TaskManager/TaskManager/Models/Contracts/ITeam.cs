@@ -16,6 +16,7 @@ namespace TaskManager.Models.Contracts
         void AddTeamMember(IMember member);
         IBoard GetBoard(string boardName);
         void ShowHistoryLog();
+        void ShowTeamMembers();
 
     }
 }

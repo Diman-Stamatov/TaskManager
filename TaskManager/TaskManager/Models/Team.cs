@@ -95,7 +95,24 @@ namespace TaskManager.Models
             }
             Console.WriteLine(lineSeperator);
         }
-
+        public void ShowTeamMembers()
+        {
+            string lineSeperator = GenerateString('-', 10);
+            Console.WriteLine(lineSeperator);
+            Console.WriteLine($"Members assigned to Team \"{Name}\":");
+            if (members.Count == 0)
+            {
+                Console.WriteLine($"No members have been assigned to Team \"{Name}\" yet!");
+            }
+            else
+            {
+                foreach (var member in members)
+                {
+                    Console.WriteLine(member.ToString());
+                }
+            }            
+            Console.WriteLine(lineSeperator);
+        }
 
         private string Message(string name)
         {
