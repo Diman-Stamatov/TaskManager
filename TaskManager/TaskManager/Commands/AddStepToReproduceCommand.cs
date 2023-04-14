@@ -33,7 +33,7 @@ namespace TaskManager.Commands
         private string AddStepToReproduce(int id, string stepToReproduce)
         {
             var foundTask = Repository.GetTask(id);
-            if (foundTask.GetType() is IBug)
+            if (foundTask.GetType() == typeof(IBug))
             {
                 var foundBug = (IBug)foundTask;
                 foundBug.AddStepToReproduce(stepToReproduce);

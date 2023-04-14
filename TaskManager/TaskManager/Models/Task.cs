@@ -120,7 +120,7 @@ namespace TaskManager.Models
             sb.AppendLine($"Task: {GetType().Name}");
             sb.AppendLine($"Title: {Title}");
             sb.AppendLine($"Description: {Description}");
-            return sb.ToString().Trim();        
+            return sb.ToString();        
         }
     }
 }

@@ -234,6 +234,7 @@ namespace TaskManager.Models
             bugInfo.AppendLine($"Saverity: {Severity}");
             bugInfo.AppendLine($"Status: {Status}");
             bugInfo.AppendLine($"Assigned to: {Assignee.Name}");
+            //Todo assignee is null
             return bugInfo.ToString().Trim();
         }
 
