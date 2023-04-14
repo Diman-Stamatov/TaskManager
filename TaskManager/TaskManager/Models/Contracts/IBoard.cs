@@ -13,5 +13,6 @@ namespace TaskManager.Models.Contracts
         IList<string> ActivityHistory { get; }
         void AddTask(ITask task);
         void Log(string newEvent);
+        void ShowActivityHistory();
     }
 }

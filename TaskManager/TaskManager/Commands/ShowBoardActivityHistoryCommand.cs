@@ -9,15 +9,31 @@ namespace TaskManager.Commands
 {
     public class ShowBoardActivityHistoryCommand : BaseCommand
     {
+        public const int MinimumNumberOfArguments = 2;
 
-        public ShowBoardActivityHistoryCommand(IRepository repository)
-            : base(repository)
+
+        public ShowBoardActivityHistoryCommand(IList<string> commandParameters, IRepository repository)
+            : base(commandParameters, repository)
         {
         }
 
         public override string Execute()
         {
-            return "";
+            ValidateArgumentsCount(CommandParameters, MinimumNumberOfArguments);
+
+            string teamName = CommandParameters[0];
+            string boardName = CommandParameters[1];
+
+            return ShowBoardActivityHistory(teamName, boardName);
+        }
+
+        private string ShowBoardActivityHistory(string teamName, string boardName)
+        {
+            var foundTeam = Repository.GetTeam(teamName);
+            var foundBoard = foundTeam.GetBoard(boardName);
+            foundBoard.ShowActivityHistory();
+
+            return $"Successfully displayed the activity history of team \"{teamName}\"'s \"{boardName}\" board.";
         }
     }
 }

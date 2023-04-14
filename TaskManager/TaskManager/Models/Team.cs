@@ -73,7 +73,7 @@ namespace TaskManager.Models
         public string ShowBoards()
         {
             var allBoardsInfo = new StringBuilder();
-            string lineSeperator = StringGenerator('-', 10);
+            string lineSeperator = GenerateString('-', 10);
             allBoardsInfo.AppendLine($"Team \"{Name}\" boards:");
             for (int board = 0; board < Boards.Count; board++)
             {

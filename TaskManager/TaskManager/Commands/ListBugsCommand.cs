@@ -62,7 +62,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsActive)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    GenerateString('*', 15);
                 }
             }
             else if (filterByCommand == "FilterFixed")
@@ -100,7 +100,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsFixed)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    GenerateString('*', 15);
                 }
 
 
@@ -140,7 +140,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsAssignee)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    GenerateString('*', 15);
                 }
             }
 
