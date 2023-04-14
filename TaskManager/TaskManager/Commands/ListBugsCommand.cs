@@ -41,15 +41,14 @@ namespace TaskManager.Commands
                     bugsActive = task.
                     Where(bug => bug.Status == BugStatusType.Active).
                     OrderBy(bug => bug.Priority == PriorityType.High).
-                    ThenBy(bug => bug.Priority == PriorityType.Medium).
-                    ThenBy(bug => bug.Priority == PriorityType.Low).ToList();
+                    ThenBy(bug => bug.Priority == PriorityType.Medium)
+                    .ToList();
                         break;
                     case "SortedSeverity":
                         bugsActive = task.
                     Where(bug => bug.Status == BugStatusType.Active).
                     OrderBy(bug => bug.Severity == SeverityType.Critical).
                     ThenBy(bug => bug.Severity == SeverityType.Major).
-                    ThenBy(bug => bug.Severity == SeverityType.Minor).
                     ToList();
                         break;
                 }
@@ -62,7 +61,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsActive)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
             }
             else if (filterByCommand == "FilterFixed")
@@ -100,7 +99,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsFixed)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
 
 
@@ -120,14 +119,13 @@ namespace TaskManager.Commands
                         Where(bug => bug.Assignee.TeamAssignedTo != null).
                         OrderBy(bug => bug.Priority == PriorityType.High).
                         ThenBy(bug => bug.Priority == PriorityType.Medium).
-                        ThenBy(bug => bug.Priority == PriorityType.Low).ToList();
+                        ToList();
                         break;
                     case "SortedSeverity":
                         bugsAssignee = task.
                         Where(bug => bug.Assignee.TeamAssignedTo != null).
                         OrderBy(bug => bug.Severity == SeverityType.Critical).
                         ThenBy(bug => bug.Severity == SeverityType.Major).
-                        ThenBy(bug => bug.Severity == SeverityType.Minor).
                         ToList();
                         break;
                 }
@@ -140,7 +138,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsAssignee)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
             }
 

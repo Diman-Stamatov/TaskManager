@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TaskManager.Core.Interfaces;
+using TaskManager.Models;
+using TaskManager.Models.Contracts;
 using TaskManager.Models.Enums;
 
 namespace TaskManager.Commands
@@ -27,7 +29,7 @@ namespace TaskManager.Commands
             {
                 case "Active":
                     tasksTypeBug = tasksTypeBug.
-                    Where(bug => bug.Status == BugStatusType.Active).
+                    Where(bug => bug.Status == BugStatusType.Active && bug.Assignee.TeamAssignedTo != null).
                     OrderBy(bug => bug.Title).
                     ToList();
 
@@ -38,7 +40,7 @@ namespace TaskManager.Commands
                     break;               
                 case "Fixed":
                     tasksTypeBug = tasksTypeBug.
-                    Where(bug => bug.Status == BugStatusType.Fixed).
+                    Where(bug => bug.Status == BugStatusType.Fixed && bug.Assignee.TeamAssignedTo != null).
                     OrderBy(bug => bug.Title).
                     ToList();
 
@@ -49,7 +51,7 @@ namespace TaskManager.Commands
                     break;               
                 case "NotDone":
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Status == StoryStatusType.NotDone).
+                    Where(story => story.Status == StoryStatusType.NotDone && story.Assignee.TeamAssignedTo != null).
                     OrderBy(story => story.Title).
                     ToList();
 
@@ -60,7 +62,7 @@ namespace TaskManager.Commands
                     break;                
                 case "InProgres":
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Status == StoryStatusType.InProgress).
+                    Where(story => story.Status == StoryStatusType.InProgress && story.Assignee.TeamAssignedTo != null).
                     OrderBy(story => story.Title).
                     ToList();
 
@@ -71,7 +73,7 @@ namespace TaskManager.Commands
                     break;               
                 case "Done":
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Status == StoryStatusType.Done).
+                    Where(story => story.Status == StoryStatusType.Done && story.Assignee.TeamAssignedTo != null).
                     OrderBy(story => story.Title).
                     ToList();
 
@@ -82,12 +84,12 @@ namespace TaskManager.Commands
                     break;                
                 default:
                     tasksTypeBug = tasksTypeBug.
-                    Where(bug => bug.Assignee.Name == comand).
+                    Where(bug => bug.Assignee.Name == comand && bug.Assignee.TeamAssignedTo != null).
                     OrderBy(bug => bug.Title).
                     ToList();
 
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Assignee.Name == comand).
+                    Where(story => story.Assignee.Name == comand && story.Assignee.TeamAssignedTo != null).
                     OrderBy(story => story.Title).
                     ToList();
 

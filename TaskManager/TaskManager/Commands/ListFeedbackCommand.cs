@@ -52,7 +52,7 @@ namespace TaskManager.Commands
                 foreach (Feedback bug in feedbackNew)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
             }
             else if (fulterByCommand == "FilterUnscheduled")
@@ -83,7 +83,7 @@ namespace TaskManager.Commands
                 foreach (Feedback bug in feedbackUnscheduled)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
 
             }
@@ -115,7 +115,7 @@ namespace TaskManager.Commands
                 foreach (Feedback bug in feedbackNew)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
 
                 List<Feedback> feedbackScheduled = task.
@@ -141,7 +141,7 @@ namespace TaskManager.Commands
                 foreach (Feedback bug in feedbackDone)
                 {
                     stringBuilder.Append(bug);
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
             }
 

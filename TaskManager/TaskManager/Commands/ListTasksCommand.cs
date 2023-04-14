@@ -27,7 +27,7 @@ namespace TaskManager.Commands
                 List<ITask> tasks = Repository.Tasks.OrderBy(task => task.Title).ToList();
                 foreach (ITask task in tasks)
                 {
-                    taskDisplay.Append(task.Title);
+                    taskDisplay.AppendLine($"Task - {task.Title}");
                 }
             }
             else
@@ -35,7 +35,7 @@ namespace TaskManager.Commands
                 List<ITask> filterTasks = Repository.Tasks.Where(task => task.Title == comand).ToList();
                 foreach (ITask task in filterTasks)
                 {
-                    taskDisplay.Append(task.Title);
+                    taskDisplay.AppendLine($"Task - {task.Title}");
                 }
             }
             return taskDisplay.ToString().Trim();
