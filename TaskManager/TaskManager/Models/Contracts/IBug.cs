@@ -21,5 +21,6 @@ namespace TaskManager.Models.Contracts
         void RevertSeverity(); 
         void Assign(IMember member);
         void Unassign();
+        void AddStepToReproduce(string stepOfReproduce);
     }
 }

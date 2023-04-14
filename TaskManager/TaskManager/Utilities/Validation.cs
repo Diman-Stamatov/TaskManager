@@ -44,6 +44,14 @@ namespace TaskManager.Utilities
                 throw new InvalidUserInputException(errorMessage);
             }
         }
+        public static void ValidateArgumentsCount(int actualArgumentsCount, int minimumArgumentsCount)        {
+            
+            string errorMessage = String.Format(InvalidArgumentsCountMessage, minimumArgumentsCount, actualArgumentsCount);
+            if (actualArgumentsCount < minimumArgumentsCount )
+            {
+                throw new InvalidUserInputException(errorMessage);
+            }
+        }
 
         public static void ValidateStringPropertyLength(string value, string className, string propertyName,
             int minLength, int maxLength)

@@ -8,6 +8,7 @@ namespace TaskManager.Commands.Types
 {
     public enum CommandType
     {
+        AddStepToReproduce,
         AddTaskComment,
         AddTaskToBoard,
         AssignTask,

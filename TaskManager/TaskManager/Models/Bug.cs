@@ -79,7 +79,7 @@ namespace TaskManager.Models
             get => teamAssignedTo;
         }
 
-        public void AddStepsToReproduce(string stepOfReproduce)
+        public void AddStepToReproduce(string stepOfReproduce)
         {
             ValidateStringNotNullOrEmpty(stepOfReproduce,"Step to reproduce can not be null or empty.");
             int number = stepsToReproduce.Count;
