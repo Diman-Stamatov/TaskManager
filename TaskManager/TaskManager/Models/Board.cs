@@ -89,7 +89,7 @@ namespace TaskManager.Models
 
         public void ShowActivityHistory()
         {
-            string lineSeperator = GenerateString('-', 10);
+            string lineSeperator = StringGenerator('-', 10);
             Console.WriteLine(lineSeperator);
             Console.WriteLine($"Board \"{Name}\" activity history:");            
             foreach (var loggedEvent in activityHistory)

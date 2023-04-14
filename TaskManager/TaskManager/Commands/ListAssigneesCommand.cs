@@ -31,7 +31,7 @@ namespace TaskManager.Commands
             foreach (var assignee in assignees)
             {
                 stringBuilder.Append(assignee);
-                GenerateString('*', 15);
+                StringGenerator('*', 15);
             }
             return stringBuilder.ToString().Trim();
         }

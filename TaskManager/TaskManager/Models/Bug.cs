@@ -216,11 +216,11 @@ namespace TaskManager.Models
             StringBuilder bugInfo = new StringBuilder();
             int number = 1;
             bugInfo.AppendLine($"List of steps to reproduce it:");
-            bugInfo.AppendLine(GenerateString('=', 10));
+            bugInfo.AppendLine(StringGenerator('=', 10));
             foreach (var step in stepsToReproduce)
             {
                 bugInfo.AppendLine($"{number++}. {step}");
-                bugInfo.AppendLine(GenerateString('=', 10));
+                bugInfo.AppendLine(StringGenerator('=', 10));
             }
             return bugInfo.ToString().Trim();
         }

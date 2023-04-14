@@ -44,13 +44,15 @@ namespace TaskManager.Core
                     {
                         break;
                     }
-                    // Не е ок.
+                    // ToDo Не е ок.
                     ICommand command = (ICommand)commandFactory.Create(inputLine);
                     string result = command.Execute();
                     Console.WriteLine(result.Trim());
                 }
                 catch (Exception ex)
                 {
+
+                    //ToDo
                     if (!string.IsNullOrEmpty(ex.Message))
                     {
                         Console.WriteLine(ex.Message);

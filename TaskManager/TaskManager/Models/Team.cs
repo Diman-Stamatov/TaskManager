@@ -71,7 +71,7 @@ namespace TaskManager.Models
         public string ShowBoards()
         {
             var allBoardsInfo = new StringBuilder();
-            string lineSeperator = GenerateString('-', 10);
+            string lineSeperator = StringGenerator('-', 10);
             allBoardsInfo.AppendLine($"Team \"{Name}\" boards:");
             for (int board = 0; board < Boards.Count; board++)
             {
@@ -86,7 +86,7 @@ namespace TaskManager.Models
         }
         public void ShowHistoryLog()
         {
-            string lineSeperator = GenerateString('-', 10);
+            string lineSeperator = StringGenerator('-', 10);
             Console.WriteLine(lineSeperator);
             Console.WriteLine($"Team \"{Name}\" activity history:");
             foreach (var loggedEvent in historyLog)
@@ -97,7 +97,7 @@ namespace TaskManager.Models
         }
         public void ShowTeamMembers()
         {
-            string lineSeperator = GenerateString('-', 10);
+            string lineSeperator = StringGenerator('-', 10);
             Console.WriteLine(lineSeperator);
             Console.WriteLine($"Members assigned to Team \"{Name}\":");
             if (members.Count == 0)

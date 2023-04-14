@@ -10,10 +10,10 @@ namespace TaskManager.Models.Contracts
     {
         string Name { get; }
         IList<ITask> Tasks { get; }
-        bool IsAssignedToATeam { get; }
-        object TeamAssignedTo { get; }
+ 
+        string TeamAssignedTo { get; }
 
-        void AssignToATeam();
+        void AssignToTeam(string teamName);
         void Log(string newEvent);
         void AddTask(ITask task);
         void RemoveTask(ITask task);

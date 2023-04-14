@@ -262,7 +262,7 @@ namespace TaskManager.Utilities
             string commandNames = String.Join(", ", Enum.GetNames(typeof(StoryStatusType)));
             return commandNames;
         }
-        public static string GenerateString(char simbol, int num)
+        public static string StringGenerator(char simbol, int num)
         {
             return new string(simbol, num);
         }

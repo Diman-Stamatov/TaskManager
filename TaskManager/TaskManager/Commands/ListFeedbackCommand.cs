@@ -127,7 +127,7 @@ namespace TaskManager.Commands
                 foreach (Feedback bug in feedbackScheduled)
                 {
                     stringBuilder.Append(bug);
-                    GenerateString('*', 15);
+                    StringGenerator('*', 15);
                 }
             }
             else if (fulterByCommand == "FilterDone")

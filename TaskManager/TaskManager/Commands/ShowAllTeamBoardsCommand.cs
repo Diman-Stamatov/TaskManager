@@ -25,7 +25,7 @@ namespace TaskManager.Commands
                 {
                     boardDisplay.AppendLine($"{team.Boards[i].Name} - Task Count {team.Boards[i].Tasks.Count}");
                 }
-                boardDisplay.AppendLine(GenerateString('*', 15));
+                boardDisplay.AppendLine(StringGenerator('*', 15));
             }
             return boardDisplay.ToString().Trim();
         }
