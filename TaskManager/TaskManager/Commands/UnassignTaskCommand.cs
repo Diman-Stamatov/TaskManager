@@ -42,6 +42,13 @@ namespace TaskManager.Commands
             {
                 IBug foundBug = (IBug)foundTask;
                 int id = foundBug.Id;
+                if (foundBug.Assignee == null)
+                {
+                    string typeName = foundBug.GetType().Name;
+                    string errormessage = $"{typeName} ID number {id} is not assigned to anyone yet!";
+                    throw new InvalidUserInputException(errormessage);
+                }
+                
                 taskTypeName = foundBug.GetType().Name;
                 assigneeName = foundBug.Assignee.Name;
                 successMessage = string.Format(successMessage, taskTypeName, id, assigneeName);

@@ -23,6 +23,7 @@ namespace TaskManager.Commands
         public override string Execute()
         {
             string filterByCommand = CommandParameters[0];
+
             string sortByCommand = CommandParameters[1];
             var task = Repository.Tasks.OfType<Bug>().ToList();
             StringBuilder stringBuilder = new StringBuilder();
@@ -51,16 +52,18 @@ namespace TaskManager.Commands
                     ThenBy(bug => bug.Severity == SeverityType.Major).
                     ToList();
                         break;
+                    default:
+                    throw new InvalidUserInputException("The input sort command is incorrect!");
                 }
 
-                if (bugsActive == null)
+                if (bugsActive.Count == 0)
                 {
-                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
                 }
 
                 foreach (Bug bug in bugsActive)
                 {
-                    stringBuilder.Append(bug);
+                    stringBuilder.AppendLine(bug.ToString());
                     stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
             }
@@ -89,16 +92,18 @@ namespace TaskManager.Commands
                         ThenBy(bug => bug.Severity == SeverityType.Minor).
                         ToList();
                         break;
+                    default:
+                        throw new InvalidUserInputException("The input sort command is incorrect!");
                 }
 
-                if (bugsFixed == null)
+                if (bugsFixed.Count == 0)
                 {
-                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
                 }
 
                 foreach (Bug bug in bugsFixed)
                 {
-                    stringBuilder.Append(bug);
+                    stringBuilder.AppendLine(bug.ToString());
                     stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
 
@@ -111,35 +116,41 @@ namespace TaskManager.Commands
                 {
                     case "SortedTitle":
                         bugsAssignee = task.
-                        Where(bug => bug.Assignee.TeamAssignedTo != null).
+                        Where(bug => bug.Assignee != null).
                         OrderBy(bug => bug.Title).ToList(); ;
                         break;
                     case "SortedPriority":
                         bugsAssignee = task.
-                        Where(bug => bug.Assignee.TeamAssignedTo != null).
+                        Where(bug => bug.Assignee != null).
                         OrderBy(bug => bug.Priority == PriorityType.High).
                         ThenBy(bug => bug.Priority == PriorityType.Medium).
                         ToList();
                         break;
                     case "SortedSeverity":
                         bugsAssignee = task.
-                        Where(bug => bug.Assignee.TeamAssignedTo != null).
+                        Where(bug => bug.Assignee != null).
                         OrderBy(bug => bug.Severity == SeverityType.Critical).
                         ThenBy(bug => bug.Severity == SeverityType.Major).
                         ToList();
                         break;
+                    default:                    
+                        throw new InvalidUserInputException("The input sort command is incorrect!");
                 }
 
-                if (bugsAssignee == null)
+                if (bugsAssignee.Count == 0)
                 {
-                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
                 }
 
                 foreach (Bug bug in bugsAssignee)
                 {
-                    stringBuilder.Append(bug);
+                    stringBuilder.AppendLine(bug.ToString());
                     stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
+            }
+            else
+            {
+                throw new InvalidUserInputException("The input filter command is incorrect!");
             }
 
             return stringBuilder.ToString().Trim();

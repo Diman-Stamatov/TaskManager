@@ -44,7 +44,7 @@ namespace TaskManager.Core
                 case CommandType.ChangeFeedbackRating:
                     return new ChangeFeedbackRatingCommand(commandParameters, repository);
                 case CommandType.ChangeFeedbackStatus:
-                    return new CreateFeedbackCommand(commandParameters, repository);
+                    return new ChangeFeedbackStatusCommand(commandParameters, repository);
                 case CommandType.ChangeStoryPriority:
                     return new ChangeStoryPriorityCommand(commandParameters, repository);
                 case CommandType.ChangeStorySize:
@@ -114,7 +114,7 @@ namespace TaskManager.Core
         // the method will return a list of ["Assignee", "John"].
         private IList<string> ExtractCommandParameters(string commandLine)
         {
-            IList<string> parameters = commandLine.Split(SplitCommandSymbol).ToList();
+            IList<string> parameters = commandLine.Split(SplitCommandSymbol, StringSplitOptions.RemoveEmptyEntries).ToList();
             parameters.RemoveAt(0);
             return parameters;
         }
