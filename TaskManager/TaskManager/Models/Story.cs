@@ -74,9 +74,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             priority++;
-            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public void RevertPriority()
@@ -89,9 +90,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            
+            string assigneeName = Assignee.Name;
+
             priority--;
-            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public void AdvanceSize()
@@ -104,9 +106,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             size++;
-            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public void RevertSize()
@@ -119,9 +122,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-            
+            string assigneeName = Assignee.Name;
+
             size--;
-            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
         public override void AdvanceStatus()
         {
@@ -133,9 +137,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             status++;
-            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public override void RevertStatus()
@@ -148,9 +153,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
-           
+            string assigneeName = Assignee.Name;
+
             status--;
-            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public void Assign(IMember member)

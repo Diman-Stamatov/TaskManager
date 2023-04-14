@@ -25,30 +25,34 @@ namespace TaskManager.Core
 
             switch (commandType)
             {
+                case CommandType.AddStepToReproduce:
+                    return new AddStepToReproduceCommand(commandParameters, repository);
                 case CommandType.AddTaskComment:
                     return new AddTaskCommentCommand(commandParameters, repository);
+                case CommandType.AddTaskToBoard:
+                    return new AddTaskToBoardCommand(commandParameters, repository);
                 case CommandType.AssignMemberToTeam:
                     return new AssignMemberToTeamCommand(commandParameters, repository);
                 case CommandType.AssignTask:
                     return new AssignTaskCommand(commandParameters, repository);
                 case CommandType.ChangeBugPriority:
-                    return new CreateTeamCommand(commandParameters, repository);
+                    return new ChangeBugPriorityCommand(commandParameters, repository);
                 case CommandType.ChangeBugSeverity:
                     return new ChangeBugSeverityCommand(commandParameters, repository);
                 case CommandType.ChangeBugStatus:
                     return new ChangeBugStatusCommand(commandParameters, repository);
                 case CommandType.ChangeFeedbackRating:
-                    return new ListAssigneesCommand(repository);
+                    return new ChangeFeedbackRatingCommand(commandParameters, repository);
                 case CommandType.ChangeFeedbackStatus:
                     return new CreateFeedbackCommand(commandParameters, repository);
                 case CommandType.ChangeStoryPriority:
-                    return new CreateMemberCommand(commandParameters, repository);
+                    return new ChangeStoryPriorityCommand(commandParameters, repository);
                 case CommandType.ChangeStorySize:
-                    return new CreateBugcommand(commandParameters, repository);
+                    return new ChangeStorySizeCommand(commandParameters, repository);
                 case CommandType.ChangeStoryStatus:
-                    return new CreateBoardCommand(commandParameters, repository);
+                    return new ChangeStoryStatusCommand(commandParameters, repository);
                 case CommandType.CreateBoard:
-                    return new CreateStoryCommand(commandParameters, repository);
+                    return new CreateBoardCommand(commandParameters, repository);
                 case CommandType.CreateBug:
                     return new CreateBugcommand(commandParameters, repository);
                 case CommandType.CreateFeedback:

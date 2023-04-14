@@ -124,9 +124,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             priority++;
-            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public void RevertPriority()
@@ -139,9 +140,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             priority--;
-            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public override void AdvanceStatus()
@@ -154,9 +156,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             Status++;
-            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public override void RevertStatus()
@@ -169,9 +172,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             status--;
-            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
 
         }
 
@@ -185,9 +189,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             Severity++;
-            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateAdvanceMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public void RevertSeverity()
@@ -200,9 +205,10 @@ namespace TaskManager.Models
 
             string className = GetType().Name;
             int taskId = Id;
+            string assigneeName = Assignee.Name;
 
             Severity--;
-            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId));
+            Log(GenerateRevertMethodMessage(type, currentValue, propertyName, className, taskId, assigneeName));
         }
 
         public string StepsToReproduseDisplay()
