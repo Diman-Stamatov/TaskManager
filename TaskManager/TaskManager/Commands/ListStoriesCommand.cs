@@ -147,19 +147,19 @@ namespace TaskManager.Commands
                 {
                     case "SortedTitle":
                         storyAssignee = task.
-                        Where(story => story.Assignee.IsAssignedToATeam).
+                        Where(story => story.Assignee.TeamAssignedTo != null).
                         OrderBy(story => story.Title).ToList(); ;
                         break;
                     case "SortedPriority":
                         storyAssignee = task.
-                        Where(story => story.Assignee.IsAssignedToATeam).
+                        Where(story => story.Assignee.TeamAssignedTo != null).
                         OrderBy(story => story.Priority == PriorityType.High).
                         ThenBy(story => story.Priority == PriorityType.Medium).
                         ThenBy(story => story.Priority == PriorityType.Low).ToList();
                         break;
                     case "SortedSize":
                         storyAssignee = task.
-                        Where(story => story.Assignee.IsAssignedToATeam).
+                        Where(story => story.Assignee.TeamAssignedTo != null).
                         OrderBy(story => story.Size == SizeType.Large).
                         ThenBy(story => story.Size == SizeType.Medium).
                         ThenBy(story => story.Size == SizeType.Small).

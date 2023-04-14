@@ -17,7 +17,7 @@ namespace TaskManager.Commands
         public override string Execute()
         {
             var assignees = Repository.Members.
-                Where(member => member.IsAssignedToATeam==true).
+                Where(member => member.TeamAssignedTo != null).
                 OrderBy(member => member.Name).
                 ToList();
 
