@@ -38,7 +38,7 @@ namespace TaskManager.Commands
         public string CreateStory(string title, string description, PriorityType priority, SizeType size)
         {
             var newStory = Repository.CreateStory(title, description, priority, size);
-            return $"Story with ID {newStory.Id} was successfully created";
+            return $"A story titled {title} with ID {newStory.Id} was successfully created";
         }
     }
 }

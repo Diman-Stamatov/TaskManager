@@ -34,8 +34,8 @@ namespace TaskManager.Commands
         public string CreateFeedback(string title, string description, int rating)
         {
             var newFeedback = Repository.CreateFeedback(title, description, rating);
-            return $"Feedback with name {title} was successfully created";
-            //ToDo
+            return $"A feedback titled {title} with ID number {newFeedback.Id} was successfully created";
+            
         }
     }
 }

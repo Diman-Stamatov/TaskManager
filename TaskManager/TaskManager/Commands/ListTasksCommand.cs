@@ -19,6 +19,7 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
+            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
             string comand = CommandParameters[0];
             StringBuilder taskDisplay = new StringBuilder();
 

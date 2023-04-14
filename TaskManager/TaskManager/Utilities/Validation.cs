@@ -161,7 +161,11 @@ namespace TaskManager.Utilities
 
         public static void ValidateAssignMethod(IMember currentAssignee, IMember newAssignee, string taskteam)
         {
-            string currentName = currentAssignee.Name;
+            string currentName = "";
+            if (currentAssignee != null)
+            {
+                currentName = currentAssignee.Name;
+            }            
             string newName = newAssignee.Name;
 
             if (newAssignee.TeamAssignedTo == null)

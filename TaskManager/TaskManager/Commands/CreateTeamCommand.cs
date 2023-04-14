@@ -26,7 +26,7 @@ namespace TaskManager.Commands
         public string CreateTeam(string teamName)
         {
             Repository.CreateTeam(teamName);
-            return $"Team with name {teamName} was successfully created";
+            return $"A team with the name {teamName} was successfully created";
         }
     }
 }
