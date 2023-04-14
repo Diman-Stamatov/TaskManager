@@ -87,10 +87,10 @@ namespace TaskManager.Models
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Member {Name}");
-            sb.AppendLine("Activities");
-            foreach (var task in Tasks)
+            sb.AppendLine("Activities");            
+            foreach (var loggedActivity in activityLog)
             {
-                sb.AppendLine(task.PrintChangesLog());
+                sb.AppendLine(loggedActivity);
             }
             return sb.ToString();
         }
