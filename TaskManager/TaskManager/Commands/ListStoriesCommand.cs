@@ -49,16 +49,18 @@ namespace TaskManager.Commands
                         ThenBy(story => story.Size == SizeType.Small).
                         ToList();
                         break;
+                    default:
+                        throw new InvalidUserInputException("The input sort command is incorrect!");
                 }
 
-                if (storyNotDone == null)
+                if (storyNotDone.Count == 0)
                 {
-                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
                 }
 
-                foreach (Story bug in storyNotDone)
+                foreach (Story story in storyNotDone)
                 {
-                    stringBuilder.Append(bug);
+                    stringBuilder.AppendLine(story.ToString());
                     StringGenerator('*', 15);
                 }
             }
@@ -87,16 +89,18 @@ namespace TaskManager.Commands
                         ThenBy(story => story.Size == SizeType.Small).
                         ToList();
                         break;
+                    default:
+                        throw new InvalidUserInputException("The input sort command is incorrect!");
                 }
 
-                if (storyInProgress == null)
+                if (storyInProgress.Count == 0)
                 {
-                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
                 }
 
-                foreach (Story bug in storyInProgress)
+                foreach (Story story in storyInProgress)
                 {
-                    stringBuilder.Append(bug);
+                    stringBuilder.AppendLine(story.ToString());
                     StringGenerator('*', 15);
                 }
 
@@ -126,16 +130,18 @@ namespace TaskManager.Commands
                         ThenBy(story => story.Size == SizeType.Small).
                         ToList();
                         break;
+                    default:
+                        throw new InvalidUserInputException("The input sort command is incorrect!");
                 }
 
-                if (storyDone == null)
+                if (storyDone.Count == 0)
                 {
-                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
                 }
 
-                foreach (Story bug in storyDone)
+                foreach (Story story in storyDone)
                 {
-                    stringBuilder.Append(bug);
+                    stringBuilder.AppendLine(story.ToString());
                     StringGenerator('*', 15);
                 }
 
@@ -147,37 +153,43 @@ namespace TaskManager.Commands
                 {
                     case "SortedTitle":
                         storyAssignee = task.
-                        Where(story => story.Assignee.TeamAssignedTo != null).
+                        Where(story => story.Assignee != null).
                         OrderBy(story => story.Title).ToList(); ;
                         break;
                     case "SortedPriority":
                         storyAssignee = task.
-                        Where(story => story.Assignee.TeamAssignedTo != null).
+                        Where(story => story.Assignee != null).
                         OrderBy(story => story.Priority == PriorityType.High).
                         ThenBy(story => story.Priority == PriorityType.Medium).
                         ThenBy(story => story.Priority == PriorityType.Low).ToList();
                         break;
                     case "SortedSize":
                         storyAssignee = task.
-                        Where(story => story.Assignee.TeamAssignedTo != null).
+                        Where(story => story.Assignee != null).
                         OrderBy(story => story.Size == SizeType.Large).
                         ThenBy(story => story.Size == SizeType.Medium).
                         ThenBy(story => story.Size == SizeType.Small).
                         ToList();
                         break;
+                    default:
+                        throw new InvalidUserInputException("The input sort command is incorrect!");
                 }
 
-                if (storyAssignee == null)
+                if (storyAssignee.Count == 0)
                 {
-                    throw new InvalidUserInputException("The filtering or sorting commands are incorrect.");
+                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
                 }
 
-                foreach (Story bug in storyAssignee)
+                foreach (Story story in storyAssignee)
                 {
-                    stringBuilder.Append(bug);
+                    stringBuilder.AppendLine(story.ToString());
                     StringGenerator('*', 15);
                 }
 
+            }
+            else
+            {
+                throw new InvalidUserInputException("The input filter command is incorrect!");
             }
 
             return stringBuilder.ToString().Trim();
