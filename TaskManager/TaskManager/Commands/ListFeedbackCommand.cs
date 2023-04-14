@@ -71,7 +71,7 @@ namespace TaskManager.Commands
                     case "SortedRating":
                         feedbackUnscheduled = task.
                         Where(feedback => feedback.Status == FeedbackStatusType.Unscheduled).
-                        OrderBy(story => story.Rating).
+                        OrderByDescending(story => story.Rating).
                         ToList();
                         break;
                     default:

@@ -21,7 +21,7 @@ namespace TaskManager.Commands
             StringBuilder boardDisplay = new StringBuilder();
             foreach (var team in teams)
             {
-                boardDisplay.AppendLine($"Team - {team.Name}");
+                boardDisplay.AppendLine($"Team - {team.Name} - have {team.Members.Count} members.");
 
             }
             return boardDisplay.ToString().Trim();
