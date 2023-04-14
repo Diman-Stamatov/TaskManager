@@ -10,8 +10,6 @@ namespace TaskManager.Commands
     public class ShowBoardActivityHistoryCommand : BaseCommand
     {
         public const int MinimumNumberOfArguments = 2;
-
-
         public ShowBoardActivityHistoryCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {

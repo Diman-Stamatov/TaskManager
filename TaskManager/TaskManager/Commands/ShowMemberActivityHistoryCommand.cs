@@ -9,17 +9,25 @@ namespace TaskManager.Commands
 {
     public class ShowMemberActivityHistoryCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 0;
-        //Трябва да решим, колко параметъра ще приема тази команда
-
+        public const int MinimumNumberOfArguments = 1;
         public ShowMemberActivityHistoryCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
         {
         }
-
         public override string Execute()
         {
-            return "";
+            ValidateArgumentsCount(CommandParameters, MinimumNumberOfArguments);
+
+            string memberName = CommandParameters[0];            
+
+            return ShowMemberActivityHistory(memberName);
+        }
+
+        private string ShowMemberActivityHistory(string memberName)
+        {
+            var foundMember = Repository.GetMember(memberName);
+            Console.WriteLine(foundMember.ActivityLog()); 
+            return $"Successfully displayed {memberName}'s activity history.";
         }
     }
 }
