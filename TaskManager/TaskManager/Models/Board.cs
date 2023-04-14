@@ -78,7 +78,7 @@ namespace TaskManager.Models
         
         private string Message(ITask task)
         {
-            return $"{task.GetType} with title {task.Title} and {task.Id} is added at board: {Name}";
+            return $"{task.GetType().Name} with title {task.Title} and ID number {task.Id} is added at board: {Name}";
         }
         public override string ToString()
         {
