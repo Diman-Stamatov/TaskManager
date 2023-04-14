@@ -11,7 +11,7 @@ namespace TaskManager.Commands
 {
     public class CreateStoryCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
+        public const int MinimumNumberOfArguments = 4;
 
         public CreateStoryCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -20,11 +20,18 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
+            int numberOfArguments = CommandParameters.Count;
+            ValidateArgumentsCount(numberOfArguments, MinimumNumberOfArguments);
+
             string title = CommandParameters[0];
-            string description = CommandParameters[1];
-            PriorityType priority = ParsePriorityTypeParameter(CommandParameters[2], "Priority");
-            SizeType size = ParseSizeTypeParameter(CommandParameters[3], "SizeType");
+            CommandParameters.RemoveAt(0);
+            int lastIndex = CommandParameters.Count - 1;
+            SizeType size = ParseSizeTypeParameter(CommandParameters[lastIndex], "SizeType");
+            CommandParameters.RemoveAt(lastIndex);
+            lastIndex = CommandParameters.Count - 1;
+            PriorityType priority = ParsePriorityTypeParameter(CommandParameters[lastIndex], "Priority");
+            CommandParameters.RemoveAt(lastIndex);
+            string description = string.Join(" ", CommandParameters);    
 
             return CreateStory(title, description, priority, size);
         }

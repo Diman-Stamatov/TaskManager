@@ -14,7 +14,7 @@ namespace TaskManager.Commands
 {
     public class AddTaskCommentCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 3;
+        public const int MinimumNumberOfArguments = 3;
         
 
         public AddTaskCommentCommand(IList<string> commandParameters, IRepository repository)
@@ -24,11 +24,16 @@ namespace TaskManager.Commands
 
          public override string Execute()
         {
-            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
+            int numberOfArguments = CommandParameters.Count;
+            ValidateArgumentsCount(numberOfArguments, MinimumNumberOfArguments);
 
             int taskId = ParseIntParameter(CommandParameters[0], "ID");
-            string content = CommandParameters[1];
-            string author = CommandParameters[2];           
+            CommandParameters.RemoveAt(0);
+            int lastIndex = CommandParameters.Count - 1;
+            string author = CommandParameters[lastIndex];
+            CommandParameters.RemoveAt(lastIndex);
+            string content = string.Join(" ", CommandParameters);
+                      
 
             return AddTaskComment(taskId, content, author);
         }

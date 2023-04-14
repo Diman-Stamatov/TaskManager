@@ -11,7 +11,7 @@ namespace TaskManager.Commands
 {
     public class CreateBugcommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 5;
+        public const int MinimumNumberOfArguments = 5;
 
         public CreateBugcommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -20,12 +20,17 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            ValidateArgumentsCount(CommandParameters, ExpectedNumberOfArguments);
-            string title = CommandParameters[0];
+            int numberOfArguments = CommandParameters.Count;
+            ValidateArgumentsCount(numberOfArguments, MinimumNumberOfArguments);
 
-            string description = CommandParameters[1];
-            PriorityType priority = ParsePriorityTypeParameter(CommandParameters[2], "Priority");
-            SeverityType severity = ParseSeverityTypeParameter(CommandParameters[3], "Serverity");
+            string title = CommandParameters[0];
+            CommandParameters.RemoveAt(0);
+            int lastIndex = CommandParameters.Count-1;
+            SeverityType severity = ParseSeverityTypeParameter(CommandParameters[lastIndex], "Serverity");
+            CommandParameters.RemoveAt(lastIndex);
+            lastIndex = CommandParameters.Count - 1;
+            PriorityType priority = ParsePriorityTypeParameter(CommandParameters[lastIndex], "Priority");
+            string description = string.Join(" ", CommandParameters);
 
             return CreateBug(title, description, priority, severity);
         }

@@ -9,8 +9,8 @@ using TaskManager.Core.Interfaces;
 namespace TaskManager.Commands
 {
     public class CreateTeamCommand : BaseCommand
-    {                           //ToDo 2 ли са аргументите?
-        public const int ExpectedNumberOfArguments = 2;
+    {                           
+        public const int ExpectedNumberOfArguments = 1;
 
         public CreateTeamCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
