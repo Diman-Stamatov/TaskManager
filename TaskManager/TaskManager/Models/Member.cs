@@ -140,7 +140,7 @@ namespace TaskManager.Models
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Member {Name} - Tasks {tasks.Count}");
-            return sb.ToString();
+            return sb.ToString().Trim();
         }
         
     }
