@@ -62,7 +62,7 @@ namespace TaskManager.Commands
                     break;                
                 case "InProgres":
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Status == StoryStatusType.InProgress && story.Assignee.TeamAssignedTo != null).
+                    Where(story => story.Status == StoryStatusType.InProgress && story.Assignee != null).
                     OrderBy(story => story.Title).
                     ToList();
 
@@ -73,7 +73,7 @@ namespace TaskManager.Commands
                     break;               
                 case "Done":
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Status == StoryStatusType.Done && story.Assignee.TeamAssignedTo != null).
+                    Where(story => story.Status == StoryStatusType.Done && story.Assignee != null).
                     OrderBy(story => story.Title).
                     ToList();
 
@@ -84,12 +84,12 @@ namespace TaskManager.Commands
                     break;                
                 default:
                     tasksTypeBug = tasksTypeBug.
-                    Where(bug => bug.Assignee.Name == comand && bug.Assignee.TeamAssignedTo != null).
+                    Where(bug => bug.Assignee.Name == comand && bug.Assignee != null).
                     OrderBy(bug => bug.Title).
                     ToList();
 
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Assignee.Name == comand && story.Assignee.TeamAssignedTo != null).
+                    Where(story => story.Assignee.Name == comand && story.Assignee != null).
                     OrderBy(story => story.Title).
                     ToList();
 
