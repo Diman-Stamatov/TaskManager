@@ -29,7 +29,7 @@ namespace TaskManager.Commands
             {
                 case "Active":
                     tasksTypeBug = tasksTypeBug.
-                    Where(bug => bug.Status == BugStatusType.Active && bug.Assignee.TeamAssignedTo != null).
+                    Where(bug => bug.Status == BugStatusType.Active && bug.Assignee != null).
                     OrderBy(bug => bug.Title).
                     ToList();
 
@@ -40,7 +40,7 @@ namespace TaskManager.Commands
                     break;               
                 case "Fixed":
                     tasksTypeBug = tasksTypeBug.
-                    Where(bug => bug.Status == BugStatusType.Fixed && bug.Assignee.TeamAssignedTo != null).
+                    Where(bug => bug.Status == BugStatusType.Fixed && bug.Assignee != null).
                     OrderBy(bug => bug.Title).
                     ToList();
 
@@ -51,7 +51,7 @@ namespace TaskManager.Commands
                     break;               
                 case "NotDone":
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Status == StoryStatusType.NotDone && story.Assignee.TeamAssignedTo != null).
+                    Where(story => story.Status == StoryStatusType.NotDone && story.Assignee != null).
                     OrderBy(story => story.Title).
                     ToList();
 
