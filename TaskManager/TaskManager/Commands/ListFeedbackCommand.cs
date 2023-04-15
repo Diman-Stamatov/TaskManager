@@ -38,7 +38,7 @@ namespace TaskManager.Commands
                     case "SortedRating":
                         feedbackNew = task.
                         Where(feedback => feedback.Status == FeedbackStatusType.New).
-                        OrderBy(story => story.Rating).
+                        OrderByDescending(story => story.Rating).
                         ToList();
                         break;
                     default:
@@ -105,7 +105,7 @@ namespace TaskManager.Commands
                     case "SortedRating":
                         feedbackScheduled = task.
                         Where(feedback => feedback.Status == FeedbackStatusType.Scheduled).
-                        OrderBy(story => story.Rating).
+                        OrderByDescending(story => story.Rating).
                         ToList();
                         break;
                     default:
@@ -140,7 +140,7 @@ namespace TaskManager.Commands
                     case "SortedRating":
                         feedbackDone = task.
                         Where(feedback => feedback.Status == FeedbackStatusType.Done).
-                        OrderBy(story => story.Rating).
+                        OrderByDescending(story => story.Rating).
                         ToList();
                         break;
                     default:

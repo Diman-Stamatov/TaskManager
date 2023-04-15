@@ -41,15 +41,13 @@ namespace TaskManager.Commands
                     case "SortedPriority":
                     bugsActive = task.
                     Where(bug => bug.Status == BugStatusType.Active).
-                    OrderBy(bug => bug.Priority == PriorityType.High).
-                    ThenBy(bug => bug.Priority == PriorityType.Medium)
+                    OrderByDescending(bug => bug.Priority)
                     .ToList();
                         break;
                     case "SortedSeverity":
                         bugsActive = task.
                     Where(bug => bug.Status == BugStatusType.Active).
-                    OrderBy(bug => bug.Severity == SeverityType.Critical).
-                    ThenBy(bug => bug.Severity == SeverityType.Major).
+                    OrderByDescending(bug => bug.Severity).
                     ToList();
                         break;
                     default:
@@ -80,16 +78,13 @@ namespace TaskManager.Commands
                     case "SortedPriority":
                         bugsFixed = task.
                         Where(bug => bug.Status == BugStatusType.Fixed).
-                        OrderBy(bug => bug.Priority == PriorityType.High).
-                        ThenBy(bug => bug.Priority == PriorityType.Medium).
-                        ThenBy(bug => bug.Priority == PriorityType.Low).ToList();
+                        OrderByDescending(bug => bug.Priority).
+                        ToList();
                         break;
                     case "SortedSeverity":
                         bugsFixed = task.
                         Where(bug => bug.Status == BugStatusType.Fixed).
-                        OrderBy(bug => bug.Severity == SeverityType.Critical).
-                        ThenBy(bug => bug.Severity == SeverityType.Major).
-                        ThenBy(bug => bug.Severity == SeverityType.Minor).
+                        OrderByDescending(bug => bug.Severity).
                         ToList();
                         break;
                     default:
@@ -122,15 +117,13 @@ namespace TaskManager.Commands
                     case "SortedPriority":
                         bugsAssignee = task.
                         Where(bug => bug.Assignee != null).
-                        OrderBy(bug => bug.Priority == PriorityType.High).
-                        ThenBy(bug => bug.Priority == PriorityType.Medium).
+                        OrderByDescending(bug => bug.Priority).
                         ToList();
                         break;
                     case "SortedSeverity":
                         bugsAssignee = task.
                         Where(bug => bug.Assignee != null).
-                        OrderBy(bug => bug.Severity == SeverityType.Critical).
-                        ThenBy(bug => bug.Severity == SeverityType.Major).
+                        OrderByDescending(bug => bug.Severity).
                         ToList();
                         break;
                     default:                    

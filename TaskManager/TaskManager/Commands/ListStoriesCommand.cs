@@ -37,16 +37,13 @@ namespace TaskManager.Commands
                     case "SortedPriority":
                         storyNotDone = task.
                         Where(story => story.Status == StoryStatusType.NotDone).
-                        OrderBy(story => story.Priority == PriorityType.High).
-                        ThenBy(story => story.Priority == PriorityType.Medium).
-                        ThenBy(story => story.Priority == PriorityType.Low).ToList();
+                        OrderByDescending(story => story.Priority).
+                        ToList();
                         break;
                     case "SortedSize":
                         storyNotDone = task.
                         Where(story => story.Status == StoryStatusType.NotDone).
-                        OrderBy(story => story.Size == SizeType.Large).
-                        ThenBy(story => story.Size == SizeType.Medium).
-                        ThenBy(story => story.Size == SizeType.Small).
+                        OrderByDescending(story => story.Size).
                         ToList();
                         break;
                     default:
@@ -61,7 +58,7 @@ namespace TaskManager.Commands
                 foreach (Story story in storyNotDone)
                 {
                     stringBuilder.AppendLine(story.ToString());
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
             }
             else if (filterByCommand == "FilterInProgress")
@@ -77,16 +74,12 @@ namespace TaskManager.Commands
                     case "SortedPriority":
                         storyInProgress = task.
                         Where(story => story.Status == StoryStatusType.InProgress).
-                        OrderBy(story => story.Priority == PriorityType.High).
-                        ThenBy(story => story.Priority == PriorityType.Medium).
-                        ThenBy(story => story.Priority == PriorityType.Low).ToList();
+                        OrderByDescending(story => story.Priority).ToList();
                         break;
                     case "SortedSize":
                         storyInProgress = task.
                         Where(story => story.Status == StoryStatusType.InProgress).
-                        OrderBy(story => story.Size == SizeType.Large).
-                        ThenBy(story => story.Size == SizeType.Medium).
-                        ThenBy(story => story.Size == SizeType.Small).
+                        OrderByDescending(story => story.Size).
                         ToList();
                         break;
                     default:
@@ -101,7 +94,7 @@ namespace TaskManager.Commands
                 foreach (Story story in storyInProgress)
                 {
                     stringBuilder.AppendLine(story.ToString());
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
 
             }
@@ -118,16 +111,12 @@ namespace TaskManager.Commands
                     case "SortedPriority":
                         storyDone = task.
                         Where(story => story.Status == StoryStatusType.Done).
-                        OrderBy(story => story.Priority == PriorityType.High).
-                        ThenBy(story => story.Priority == PriorityType.Medium).
-                        ThenBy(story => story.Priority == PriorityType.Low).ToList();
+                        OrderByDescending(story => story.Priority).ToList();
                         break;
                     case "SortedSize":
                         storyDone = task.
                         Where(story => story.Status == StoryStatusType.Done).
-                        OrderBy(story => story.Size == SizeType.Large).
-                        ThenBy(story => story.Size == SizeType.Medium).
-                        ThenBy(story => story.Size == SizeType.Small).
+                        OrderByDescending(story => story.Size).
                         ToList();
                         break;
                     default:
@@ -142,7 +131,7 @@ namespace TaskManager.Commands
                 foreach (Story story in storyDone)
                 {
                     stringBuilder.AppendLine(story.ToString());
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine(StringGenerator('*', 15));
                 }
 
             }
@@ -159,16 +148,13 @@ namespace TaskManager.Commands
                     case "SortedPriority":
                         storyAssignee = task.
                         Where(story => story.Assignee != null).
-                        OrderBy(story => story.Priority == PriorityType.High).
-                        ThenBy(story => story.Priority == PriorityType.Medium).
-                        ThenBy(story => story.Priority == PriorityType.Low).ToList();
+                        OrderByDescending(story => story.Priority).
+                        ToList();
                         break;
                     case "SortedSize":
                         storyAssignee = task.
                         Where(story => story.Assignee != null).
-                        OrderBy(story => story.Size == SizeType.Large).
-                        ThenBy(story => story.Size == SizeType.Medium).
-                        ThenBy(story => story.Size == SizeType.Small).
+                        OrderByDescending(story => story.Size).
                         ToList();
                         break;
                     default:
@@ -183,7 +169,7 @@ namespace TaskManager.Commands
                 foreach (Story story in storyAssignee)
                 {
                     stringBuilder.AppendLine(story.ToString());
-                    StringGenerator('*', 15);
+                    stringBuilder.AppendLine( StringGenerator('*', 15));
                 }
 
             }
