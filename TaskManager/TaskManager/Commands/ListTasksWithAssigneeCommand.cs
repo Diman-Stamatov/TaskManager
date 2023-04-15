@@ -35,7 +35,8 @@ namespace TaskManager.Commands
 
                     foreach(var bug in tasksTypeBug)
                     {
-                        taskDisplay.Append(bug);
+                        taskDisplay.AppendLine(bug.ToString());
+                        taskDisplay.AppendLine(StringGenerator('*', 15));
                     }
                     break;               
                 case "Fixed":
@@ -46,7 +47,8 @@ namespace TaskManager.Commands
 
                     foreach (var bug in tasksTypeBug)
                     {
-                        taskDisplay.Append(bug);
+                        taskDisplay.AppendLine(bug.ToString());
+                        taskDisplay.AppendLine(StringGenerator('*', 15));
                     }
                     break;               
                 case "NotDone":
@@ -57,7 +59,8 @@ namespace TaskManager.Commands
 
                     foreach (var story in tasksTypeStory)
                     {
-                        taskDisplay.Append(story);
+                        taskDisplay.AppendLine(story.ToString());
+                        taskDisplay.AppendLine(StringGenerator('*', 15));
                     }
                     break;                
                 case "InProgres":
@@ -68,7 +71,8 @@ namespace TaskManager.Commands
 
                     foreach (var story in tasksTypeStory)
                     {
-                        taskDisplay.Append(story);
+                        taskDisplay.AppendLine(story.ToString());
+                        taskDisplay.AppendLine(StringGenerator('*', 15));
                     }
                     break;               
                 case "Done":
@@ -79,7 +83,8 @@ namespace TaskManager.Commands
 
                     foreach (var story in tasksTypeStory)
                     {
-                        taskDisplay.Append(story);
+                        taskDisplay.AppendLine(story.ToString());
+                        taskDisplay.AppendLine(StringGenerator('*', 15));
                     }
                     break;                
                 default:
@@ -95,12 +100,14 @@ namespace TaskManager.Commands
 
                     foreach(var story in tasksTypeStory)
                     {
-                        taskDisplay.Append(story);
+                        taskDisplay.AppendLine(story.ToString());
+                        taskDisplay.AppendLine(StringGenerator('*', 15));
                     }
 
                     foreach(var bug in tasksTypeBug)
                     {
-                        taskDisplay.Append(bug);
+                        taskDisplay.AppendLine(bug.ToString());
+                        taskDisplay.AppendLine(StringGenerator('*', 15));
                     }
 
                     break;

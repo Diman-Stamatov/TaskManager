@@ -30,6 +30,7 @@ namespace TaskManager.Commands
             foundTeam.ShowHistoryLog();            
 
             return $"Successfully displayed team \"{teamName}\"'s activity history.";
+            //ToDo да вслючим сепаратор?
         }
     }
 }

@@ -24,6 +24,7 @@ namespace TaskManager.Commands
                 for (int i = 0; i < team.Boards.Count; i++)
                 {
                     boardDisplay.AppendLine($"{team.Boards[i].Name} - Task Count {team.Boards[i].Tasks.Count}");
+                    //ToDo ако няма board да изписва нещо
                 }
                 boardDisplay.AppendLine(StringGenerator('*', 15));
             }
