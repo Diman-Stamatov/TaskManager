@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager.Tests.Utilities
 {
-    internal static class TasksData
+    public static class TasksData
     {
         internal const int TaskTitleMinLenght = 10;
         internal const int TaskTitleMaxLenght = 50;

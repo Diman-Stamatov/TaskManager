@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TaskManager.Tests.Models
 {
     [TestClass]
-    internal class TeamTests
+    public class TeamTests
     {
     }
 }

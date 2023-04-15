@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TaskManager.Tests.Commands
 {
     [TestClass]
-    internal class ListFeedbackTests
+    public class ListFeedbackTests
     {
     }
 }
