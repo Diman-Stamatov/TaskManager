@@ -10,7 +10,7 @@ namespace TaskManager.Commands
 {
     public class ListFeedbackCommand : BaseCommand
     {
-        public const int ExpectedNumberOfArguments = 2;
+        public const int MinimumNumberOfArguments = 1;
 
         public ListFeedbackCommand(IList<string> commandParameters, IRepository repository)
             : base(commandParameters, repository)
@@ -19,148 +19,64 @@ namespace TaskManager.Commands
 
         public override string Execute()
         {
-            string fulterByCommand = CommandParameters[0];
-            string sortByCommand = CommandParameters[1];
-            var task = Repository.Tasks.OfType<Feedback>().ToList();
+            int argumentsCount = CommandParameters.Count;
+            ValidateArgumentsCount(argumentsCount, MinimumNumberOfArguments);
+            
+            var feedbacks = Repository.Tasks.OfType<Feedback>().ToList();
             StringBuilder stringBuilder = new StringBuilder();
-
-            if (fulterByCommand == "FilterNew")
+            for (int index = 0; index < argumentsCount; index++)
             {
-                List<Feedback> feedbackNew = null;
-
-                switch (sortByCommand)
+                string command = CommandParameters[index];
+                switch (command)
                 {
-                    case "SortedTitle":
-                        feedbackNew = task.
+                    case "SortByTitle":
+                        feedbacks = feedbacks.
+                        OrderBy(feedback => feedback.Title).ToList();
+                        break;
+                    case "SortByRating":
+                        feedbacks = feedbacks.                        
+                        OrderByDescending(feedback => feedback.Rating).
+                        ToList();
+                        break;
+                    case "FilterNew":
+                        feedbacks = feedbacks.
                         Where(feedback => feedback.Status == FeedbackStatusType.New).
-                        OrderBy(story => story.Title).ToList();
-                        break;                   
-                    case "SortedRating":
-                        feedbackNew = task.
-                        Where(feedback => feedback.Status == FeedbackStatusType.New).
-                        OrderByDescending(story => story.Rating).
                         ToList();
                         break;
-                    default:
-                        throw new InvalidUserInputException("The input sort command is incorrect!");
-
-                }
-
-                if (feedbackNew.Count == 0)
-                {
-                    throw new InvalidUserInputException("None of the logged feedback correspond to your search parameters!");
-                }
-
-                foreach (Feedback feedback in feedbackNew)
-                {
-                    stringBuilder.AppendLine(feedback.ToString());
-                    stringBuilder.AppendLine(GenerateString('*', 15));
-                }
-            }
-            else if (fulterByCommand == "FilterUnscheduled")
-            {
-                List<Feedback> feedbackUnscheduled = null;
-
-                switch (sortByCommand)
-                {
-                    case "SortedTitle":
-                        feedbackUnscheduled = task.
+                    case "FilterUnscheduled":
+                        feedbacks = feedbacks.
                         Where(feedback => feedback.Status == FeedbackStatusType.Unscheduled).
-                        OrderBy(story => story.Title).ToList();
+                        ToList();
                         break;
-                    case "SortedRating":
-                        feedbackUnscheduled = task.
-                        Where(feedback => feedback.Status == FeedbackStatusType.Unscheduled).
-                        OrderByDescending(story => story.Rating).
+                    case "FilterScheduled":
+                        feedbacks = feedbacks.
+                        Where(feedback => feedback.Status == FeedbackStatusType.Scheduled).
+                        ToList();
+                        break;
+                    case "FilterDone":
+                        feedbacks = feedbacks.
+                        Where(feedback => feedback.Status == FeedbackStatusType.Done).
                         ToList();
                         break;
                     default:
-                        throw new InvalidUserInputException("The input sort command is incorrect!");
-
-                }
-
-                if (feedbackUnscheduled.Count == 0)
-                {
-                    throw new InvalidUserInputException("None of the logged feedback correspond to your search parameters!");
-                }
-
-                foreach (Feedback feedback in feedbackUnscheduled)
-                {
-                    stringBuilder.AppendLine(feedback.ToString());
-                    stringBuilder.AppendLine(GenerateString('*', 15));
+                        throw new InvalidUserInputException("The input command was incorrect!");
                 }
 
             }
-            else if (fulterByCommand == "FilterScheduled")
+
+            if (feedbacks.Count == 0)
             {
-                List<Feedback> feedbackScheduled = null;
-
-                switch (sortByCommand)
-                {
-                    case "SortedTitle":
-                        feedbackScheduled = task.
-                        Where(feedback => feedback.Status == FeedbackStatusType.Scheduled).
-                        OrderBy(story => story.Title).ToList();
-                        break;
-                    case "SortedRating":
-                        feedbackScheduled = task.
-                        Where(feedback => feedback.Status == FeedbackStatusType.Scheduled).
-                        OrderByDescending(story => story.Rating).
-                        ToList();
-                        break;
-                    default:
-                        throw new InvalidUserInputException("The input sort command is incorrect!");
-
-                }
-
-                if (feedbackScheduled.Count == 0)
-                {
-                    throw new InvalidUserInputException("None of the logged feedbacks correspond to your search parameters!");
-                }
-
-                foreach (Feedback feedback in feedbackScheduled)
-                {
-                    stringBuilder.AppendLine(feedback.ToString());
-                    stringBuilder.AppendLine(GenerateString('*', 15));
-                }
-
+                throw new InvalidUserInputException("None of the logged feedback correspond to your search parameters!");
             }
-            else if (fulterByCommand == "FilterDone")
+
+            foreach (Feedback feedback in feedbacks)
             {
-
-                List<Feedback> feedbackDone = null;
-
-                switch (sortByCommand)
-                {
-                    case "SortedTitle":
-                        feedbackDone = task.
-                        Where(feedback => feedback.Status == FeedbackStatusType.Done).
-                        OrderBy(story => story.Title).ToList();
-                        break;
-                    case "SortedRating":
-                        feedbackDone = task.
-                        Where(feedback => feedback.Status == FeedbackStatusType.Done).
-                        OrderByDescending(story => story.Rating).
-                        ToList();
-                        break;
-                    default:
-                        throw new InvalidUserInputException("The input sort command is incorrect!");
-
-                }
-
-                if (feedbackDone.Count == 0)
-                {
-                    throw new InvalidUserInputException("None of the logged feedbacks correspond to your search parameters!");
-                }
-
-                foreach (Feedback feedback in feedbackDone)
-                {
-                    stringBuilder.AppendLine(feedback.ToString());
-                    stringBuilder.AppendLine(GenerateString('*', 15));
-                }
+                stringBuilder.AppendLine(feedback.ToString());
+                stringBuilder.AppendLine(GenerateString('*', 15));
             }
 
             return stringBuilder.ToString().Trim();
         }
+            
     }
 }
