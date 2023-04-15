@@ -36,7 +36,7 @@ namespace TaskManager.Commands
                     case "SortedTitle":
                     bugsActive = task.
                     Where(bug => bug.Status == BugStatusType.Active).
-                    OrderBy(bug => bug.Title).ToList();;
+                    OrderBy(bug => bug.Title).ToList();
                         break;
                     case "SortedPriority":
                     bugsActive = task.

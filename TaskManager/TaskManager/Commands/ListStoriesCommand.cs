@@ -55,7 +55,7 @@ namespace TaskManager.Commands
 
                 if (storyNotDone.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                    throw new InvalidUserInputException("None of the logged stories correspond to your search parameters!");
                 }
 
                 foreach (Story story in storyNotDone)
@@ -95,7 +95,7 @@ namespace TaskManager.Commands
 
                 if (storyInProgress.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                    throw new InvalidUserInputException("None of the logged stories correspond to your search parameters!");
                 }
 
                 foreach (Story story in storyInProgress)
@@ -136,7 +136,7 @@ namespace TaskManager.Commands
 
                 if (storyDone.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                    throw new InvalidUserInputException("None of the logged stories correspond to your search parameters!");
                 }
 
                 foreach (Story story in storyDone)
@@ -177,7 +177,7 @@ namespace TaskManager.Commands
 
                 if (storyAssignee.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                    throw new InvalidUserInputException("None of the logged stories correspond to your search parameters!");
                 }
 
                 foreach (Story story in storyAssignee)

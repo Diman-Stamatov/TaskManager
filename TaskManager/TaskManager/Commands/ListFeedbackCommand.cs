@@ -48,7 +48,7 @@ namespace TaskManager.Commands
 
                 if (feedbackNew.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                    throw new InvalidUserInputException("None of the logged feedback correspond to your search parameters!");
                 }
 
                 foreach (Feedback feedback in feedbackNew)
@@ -81,7 +81,7 @@ namespace TaskManager.Commands
 
                 if (feedbackUnscheduled.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                    throw new InvalidUserInputException("None of the logged feedback correspond to your search parameters!");
                 }
 
                 foreach (Feedback feedback in feedbackUnscheduled)
@@ -115,7 +115,7 @@ namespace TaskManager.Commands
 
                 if (feedbackScheduled.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                    throw new InvalidUserInputException("None of the logged feedbacks correspond to your search parameters!");
                 }
 
                 foreach (Feedback feedback in feedbackScheduled)
@@ -150,7 +150,7 @@ namespace TaskManager.Commands
 
                 if (feedbackDone.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                    throw new InvalidUserInputException("None of the logged feedbacks correspond to your search parameters!");
                 }
 
                 foreach (Feedback feedback in feedbackDone)
