@@ -14,7 +14,7 @@ namespace TaskManager.Models
 {
     public class Story : Task, IStory
     {
-        private const StoryStatusType InitialStatus = StoryStatusType.NotDone;
+        private const StoryStatusType InitialStoryStatus = StoryStatusType.NotDone;
 
         private PriorityType priority;
         private SizeType size;
@@ -26,7 +26,7 @@ namespace TaskManager.Models
         {
             Priority = priority;
             Size = size;
-            status = InitialStatus;
+            status = InitialStoryStatus;
             Log(Message(GetType().Name, id, title, priority, size));
         }
         public PriorityType Priority

@@ -12,8 +12,8 @@ namespace TaskManager.Models
 {
     public class Member : IMember
     {
-        private const int MinNameLength = 5;
-        private const int MaxNameLength = 15;
+        private const int MemberNameMinLength = 5;
+        private const int MemberNameMaxLength = 15;
 
         private readonly IList<ITask> tasks;
         private readonly List<string> activityLog;
@@ -38,10 +38,9 @@ namespace TaskManager.Models
                  value,
                  GetType().Name,
                  GetMethodName(),
-                 MinNameLength,
-                 MaxNameLength);
-                name = value;
-                
+                 MemberNameMinLength,
+                 MemberNameMaxLength);
+                 name = value;                
             }
         }
 

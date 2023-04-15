@@ -15,13 +15,15 @@ namespace TaskManager.Models
     {
         private const int RatingMinValue = 0;
         private const int RatingMaxValue = 10;
+        private const FeedbackStatusType InitialFeedbackStatus = FeedbackStatusType.New;
+
         private int rating;
-        private const FeedbackStatusType InitialStatus = FeedbackStatusType.New;
+        
         public Feedback(int id, string title, string description, int rating)
             : base(id, title, description)
         {
             Rating = rating;
-            Status = InitialStatus;
+            Status = InitialFeedbackStatus;
             Log(Message("Feedback", id, title, rating));
         }
 

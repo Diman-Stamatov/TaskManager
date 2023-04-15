@@ -12,12 +12,12 @@ namespace TaskManager.Models
 {
     public class Comment : IComment
     {
-        private string errorContentMessage = "The content can`t be null or empty!";
-        private string errorAuthorMessage = "The author can`t be null or empty!";
+        private string InvalidContentMessage = "Please specify the comment's contents!";
+        private string InvalidAuthorMessage = "Please specify the comment's author!";
         public Comment(string author, string content)
         {
-            ValidateStringNotNullOrEmpty(content, errorContentMessage);
-            ValidateStringNotNullOrEmpty(author, errorAuthorMessage);
+            ValidateStringNotNullOrEmpty(content, InvalidContentMessage);
+            ValidateStringNotNullOrEmpty(author, InvalidAuthorMessage);
             Author = author;
             Content = content;
         }

@@ -15,8 +15,8 @@ namespace TaskManager.Models
     {
         private const int TaskTitleMinLenght = 10;
         private const int TaskTitleMaxLenght = 50;
-        private const int DiscriptionNameMinLenght = 10;
-        private const int discriptionNameMaxLenght = 500;
+        private const int DiscriptionMinLenght = 10;
+        private const int DiscriptionMaxLenght = 500;
 
         private readonly IList<string> changesLog;      
         private readonly IList<IComment> comments;
@@ -59,8 +59,8 @@ namespace TaskManager.Models
                  value,
                  GetType().Name,
                  GetMethodName(),
-                 DiscriptionNameMinLenght,
-                 discriptionNameMaxLenght);
+                 DiscriptionMinLenght,
+                 DiscriptionMaxLenght);
                 description = value;              
             }
         }
