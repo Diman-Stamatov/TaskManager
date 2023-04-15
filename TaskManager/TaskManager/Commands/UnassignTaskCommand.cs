@@ -7,7 +7,7 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    internal class UnassignTaskCommand : BaseCommand
+    public class UnassignTaskCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 1;
 

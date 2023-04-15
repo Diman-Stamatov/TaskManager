@@ -8,7 +8,7 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Commands
 {
-    internal class ListFeedbackCommand : BaseCommand
+    public class ListFeedbackCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 2;
 

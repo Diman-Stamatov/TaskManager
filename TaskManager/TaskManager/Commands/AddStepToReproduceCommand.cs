@@ -8,7 +8,7 @@ using TaskManager.Core;
 
 namespace TaskManager.Commands
 {
-    internal class AddStepToReproduceCommand:BaseCommand
+    public class AddStepToReproduceCommand:BaseCommand
     {
         public const int MinimumNumberOfArguments = 2;
 

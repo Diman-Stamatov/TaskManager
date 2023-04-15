@@ -8,7 +8,7 @@ using TaskManager.Models.Enums;
 
 namespace TaskManager.Commands
 {
-    internal class ChangeStoryStatusCommand:BaseCommand
+    public class ChangeStoryStatusCommand:BaseCommand
     {
         public const int ExpectedNumberOfArguments = 2;
         public const string ExpectedAdvanceParameter = "advance";

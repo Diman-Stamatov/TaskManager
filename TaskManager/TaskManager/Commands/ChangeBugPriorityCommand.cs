@@ -8,7 +8,7 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    internal class ChangeBugPriorityCommand :BaseCommand
+    public class ChangeBugPriorityCommand :BaseCommand
     {
         public const int ExpectedNumberOfArguments = 2;
         public const string ExpectedAdvanceParameter = "advance";

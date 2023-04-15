@@ -8,7 +8,7 @@ using TaskManager.Core;
 
 namespace TaskManager.Commands
 {
-    internal class AssignMemberToTeamCommand : BaseCommand
+    public class AssignMemberToTeamCommand : BaseCommand
     {
         public const int ExpectedNumberOfArguments = 2;
 

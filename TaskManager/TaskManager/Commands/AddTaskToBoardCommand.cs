@@ -8,7 +8,7 @@ using TaskManager.Core;
 
 namespace TaskManager.Commands
 {
-    internal class AddTaskToBoardCommand :BaseCommand
+    public class AddTaskToBoardCommand :BaseCommand
     {
         public const int ExpectedNumberOfArguments = 3;
 

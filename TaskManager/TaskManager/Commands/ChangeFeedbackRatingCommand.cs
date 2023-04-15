@@ -7,7 +7,7 @@ using TaskManager.Core.Interfaces;
 
 namespace TaskManager.Commands
 {
-    internal class ChangeFeedbackRatingCommand :BaseCommand
+    public class ChangeFeedbackRatingCommand :BaseCommand
     {
         public const int ExpectedNumberOfArguments = 2;        
         public const string ExpectedTaskTypeName = "Feedback";        
