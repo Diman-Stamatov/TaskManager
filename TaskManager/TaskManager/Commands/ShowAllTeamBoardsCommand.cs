@@ -20,15 +20,9 @@ namespace TaskManager.Commands
             StringBuilder boardDisplay = new StringBuilder();
             foreach (var team in teams)
             {
-                boardDisplay.AppendLine(team.Name);
-                for (int i = 0; i < team.Boards.Count; i++)
-                {
-                    boardDisplay.AppendLine($"{team.Boards[i].Name} - Task Count {team.Boards[i].Tasks.Count}");
-                    //ToDo ако няма board да изписва нещо
-                }
-                boardDisplay.AppendLine(StringGenerator('*', 15));
+                team.ShowBoards();
             }
-            return boardDisplay.ToString().Trim();
+            return "Successfully displayed every Team's Boards.";
         }
     }
 }

@@ -29,7 +29,7 @@ namespace TaskManager.Commands
                 foreach (ITask task in tasks)
                 {
                     taskDisplay.AppendLine(task.ToString());
-                    taskDisplay.AppendLine(StringGenerator('.', 25));
+                    taskDisplay.AppendLine(GenerateString('.', 25));
                 }
             }
             else
@@ -38,7 +38,7 @@ namespace TaskManager.Commands
                 foreach (ITask task in filterTasks)
                 {
                     taskDisplay.AppendLine(task.ToString());
-                    taskDisplay.AppendLine(StringGenerator('.', 25));
+                    taskDisplay.AppendLine(GenerateString('.', 25));
                 }
             }
             return taskDisplay.ToString().Trim();

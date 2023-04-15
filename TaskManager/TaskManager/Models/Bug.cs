@@ -216,11 +216,11 @@ namespace TaskManager.Models
             StringBuilder bugInfo = new StringBuilder();
             int number = 1;
             bugInfo.AppendLine($"List of steps to reproduce it:");
-            bugInfo.AppendLine(StringGenerator('=', 10));
+            bugInfo.AppendLine(GenerateString('=', 10));
             foreach (var step in stepsToReproduce)
             {
                 bugInfo.AppendLine($"{number++}. {step}");
-                bugInfo.AppendLine(StringGenerator('=', 10));
+                bugInfo.AppendLine(GenerateString('=', 10));
             }
             return bugInfo.ToString().Trim();
         }
@@ -233,8 +233,16 @@ namespace TaskManager.Models
             bugInfo.AppendLine($"Priority: {Priority}");
             bugInfo.AppendLine($"Saverity: {Severity}");
             bugInfo.AppendLine($"Status: {Status}");
-            bugInfo.AppendLine($"Assigned to: {Assignee.Name}");
-            //Todo assignee is null
+            if (Assignee == null)
+            {
+                bugInfo.AppendLine($"Assigned to: Nobody yet");
+            }
+            else
+            {
+                bugInfo.AppendLine($"Assigned to: {Assignee.Name}");
+            }
+            
+            
             return bugInfo.ToString().Trim();
         }
 

@@ -185,14 +185,14 @@ namespace TaskManager.Models
             storyInfo.AppendLine($"Priority: {Priority}");
             storyInfo.AppendLine($"Size: {Size}");
             storyInfo.AppendLine($"Status: {Status}");
-            //Todo когато няма мембър гъми 
+            
             if (Assignee != null)
             {
                 storyInfo.AppendLine($"Assigned to: {Assignee.Name}");
             }
             else
             {
-                storyInfo.AppendLine("Task is not assigned!");
+                storyInfo.AppendLine($"Assigned to: Nobody yet.");
             }
          
             return storyInfo.ToString().Trim();

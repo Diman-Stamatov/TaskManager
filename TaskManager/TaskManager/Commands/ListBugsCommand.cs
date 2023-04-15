@@ -62,7 +62,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsActive)
                 {
                     stringBuilder.AppendLine(bug.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
             }
             else if (filterByCommand == "FilterFixed")
@@ -99,7 +99,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsFixed)
                 {
                     stringBuilder.AppendLine(bug.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
 
 
@@ -138,7 +138,7 @@ namespace TaskManager.Commands
                 foreach (Bug bug in bugsAssignee)
                 {
                     stringBuilder.AppendLine(bug.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
             }
             else

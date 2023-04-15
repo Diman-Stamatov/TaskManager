@@ -24,7 +24,7 @@ namespace TaskManager.Commands
             {
                 memberDisplay.AppendLine($"{i + 1}. Member name: {members[i].Name}.");
             }
-            memberDisplay.AppendLine(StringGenerator('*', 15));
+            memberDisplay.AppendLine(GenerateString('*', 15));
 
             return memberDisplay.ToString().Trim();
         }

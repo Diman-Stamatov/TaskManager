@@ -20,7 +20,7 @@ namespace TaskManager.Utilities
         private const string RevertMethodLogMessage = "The {0} of {1} ID {2} was reverted from {3} to {4} by {5}.";
         private const string AdvanceMethodLogMessageNoAssignee = "The {0} of {1} ID {2} was advanced from {3} to {4}.";
         private const string RevertMethodLogMessageNoAssignee = "The {0} of {1} ID {2} was reverted from {3} to {4}.";
-        //ToDo no steps print
+        
         public static string GenerateAdvanceMethodMessage(Type type, int currentValue, string propertyName,
             string className, int id, string assigneeName)
         {
@@ -262,7 +262,7 @@ namespace TaskManager.Utilities
             string commandNames = String.Join(", ", Enum.GetNames(typeof(StoryStatusType)));
             return commandNames;
         }
-        public static string StringGenerator(char simbol, int num)
+        public static string GenerateString(char simbol, int num)
         {
             return new string(simbol, num);
         }

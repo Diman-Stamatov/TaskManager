@@ -46,24 +46,23 @@ namespace TaskManager.Core
                     {
                         break;
                     }
-                    // ToDo Не е ок.
-                    ICommand command = (ICommand)commandFactory.Create(inputLine);
+                    
+                    ICommand command = commandFactory.Create(inputLine);
                     string result = command.Execute();
                     Console.WriteLine(result.Trim());
                     Console.WriteLine(ReportSeparator);
                 }
-                catch (Exception ex)
+                catch (DuplicateEntryException exception)
                 {
-
-                    //ToDo
-                    if (!string.IsNullOrEmpty(ex.Message))
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                    else
-                    {
-                        Console.WriteLine(ex);
-                    }
+                    Console.WriteLine(exception.Message);
+                }
+                catch (EntryNotFoundException exception)
+                {
+                    Console.WriteLine(exception.Message);
+                }
+                catch (InvalidUserInputException exception)
+                {
+                    Console.WriteLine(exception.Message);
                 }
             }
         }

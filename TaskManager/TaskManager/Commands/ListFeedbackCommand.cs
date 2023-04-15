@@ -54,7 +54,7 @@ namespace TaskManager.Commands
                 foreach (Feedback feedback in feedbackNew)
                 {
                     stringBuilder.AppendLine(feedback.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
             }
             else if (fulterByCommand == "FilterUnscheduled")
@@ -87,7 +87,7 @@ namespace TaskManager.Commands
                 foreach (Feedback feedback in feedbackUnscheduled)
                 {
                     stringBuilder.AppendLine(feedback.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
 
             }
@@ -121,7 +121,7 @@ namespace TaskManager.Commands
                 foreach (Feedback feedback in feedbackScheduled)
                 {
                     stringBuilder.AppendLine(feedback.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
 
             }
@@ -156,7 +156,7 @@ namespace TaskManager.Commands
                 foreach (Feedback feedback in feedbackDone)
                 {
                     stringBuilder.AppendLine(feedback.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
             }
 

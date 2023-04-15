@@ -91,11 +91,11 @@ namespace TaskManager.Models
             StringBuilder sb= new StringBuilder();
             int number = 1;
             sb.AppendLine("Comments:");
-            sb.AppendLine(StringGenerator('*', 10));
+            sb.AppendLine(GenerateString('*', 10));
             foreach (var comment in Comments)
             {
                 sb.AppendLine($"{number++}. {comment}");
-                sb.AppendLine(StringGenerator('*', 10));
+                sb.AppendLine(GenerateString('*', 10));
             }
             return sb.ToString().Trim();
         }
@@ -105,11 +105,11 @@ namespace TaskManager.Models
             StringBuilder sb = new StringBuilder();
             int number = 1;
             sb.AppendLine("ChangesLog:");
-            sb.AppendLine(StringGenerator('=', 10));
+            sb.AppendLine(GenerateString('=', 10));
             foreach (var log in changesLog)
             {
                 sb.AppendLine($"{number++}. {log}");
-                sb.AppendLine(StringGenerator('=', 10));
+                sb.AppendLine(GenerateString('=', 10));
             }
             return sb.ToString().Trim();
         }

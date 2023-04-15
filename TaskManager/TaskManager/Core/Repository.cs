@@ -78,7 +78,7 @@ namespace TaskManager.Core
             if (TeamExists(name))
             {
                 string errorMessage = string.Format(DuplicateTeamMessage, name);
-                throw new InvalidOperationException(errorMessage);
+                throw new InvalidUserInputException(errorMessage);
             }
             teams.Add(team);
             return team;

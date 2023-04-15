@@ -58,7 +58,7 @@ namespace TaskManager.Commands
                 foreach (Story story in storyNotDone)
                 {
                     stringBuilder.AppendLine(story.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
             }
             else if (filterByCommand == "FilterInProgress")
@@ -94,7 +94,7 @@ namespace TaskManager.Commands
                 foreach (Story story in storyInProgress)
                 {
                     stringBuilder.AppendLine(story.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
 
             }
@@ -131,7 +131,7 @@ namespace TaskManager.Commands
                 foreach (Story story in storyDone)
                 {
                     stringBuilder.AppendLine(story.ToString());
-                    stringBuilder.AppendLine(StringGenerator('*', 15));
+                    stringBuilder.AppendLine(GenerateString('*', 15));
                 }
 
             }
@@ -169,7 +169,7 @@ namespace TaskManager.Commands
                 foreach (Story story in storyAssignee)
                 {
                     stringBuilder.AppendLine(story.ToString());
-                    stringBuilder.AppendLine( StringGenerator('*', 15));
+                    stringBuilder.AppendLine( GenerateString('*', 15));
                 }
 
             }
