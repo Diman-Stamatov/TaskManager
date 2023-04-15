@@ -23,7 +23,7 @@ namespace TaskManager.Commands
 
             if (assignees.Count == 0 )
             {
-                return "No Tasks are assigned!";
+                return "No Tasks have been assigned yet!";
             }
 
             StringBuilder stringBuilder = new StringBuilder();

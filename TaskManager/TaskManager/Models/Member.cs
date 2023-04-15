@@ -139,7 +139,7 @@ namespace TaskManager.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Member {Name} - Tasks {tasks.Count}");
+            sb.AppendLine($"Member: {Name} - Tasks taking care of: {tasks.Count}");
             return sb.ToString().Trim();
         }
         

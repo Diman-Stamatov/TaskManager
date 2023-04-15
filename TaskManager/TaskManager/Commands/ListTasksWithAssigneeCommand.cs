@@ -89,12 +89,12 @@ namespace TaskManager.Commands
                     break;                
                 default:
                     tasksTypeBug = tasksTypeBug.
-                    Where(bug => bug.Assignee.Name == comand && bug.Assignee != null).
+                    Where(bug => bug.Assignee != null && bug.Assignee.Name == comand).
                     OrderBy(bug => bug.Title).
                     ToList();
 
                     tasksTypeStory = tasksTypeStory.
-                    Where(story => story.Assignee.Name == comand && story.Assignee != null).
+                    Where(story => story.Assignee != null && story.Assignee.Name == comand).
                     OrderBy(story => story.Title).
                     ToList();
 
