@@ -25,8 +25,7 @@ namespace TaskManager.Tests.Commands
             this.repository = new Repository();
             this.commandFactory = new CommandFactory(this.repository);
             this.member = this.repository.CreateMember(ValidMemberName);
-            this.team = this.repository.CreateTeam(ValidTeamName);
-            /*this.team.AddTeamMember(member);*/
+            this.team = this.repository.CreateTeam(ValidTeamName);            
             this.bug = this.repository.CreateBug(ValidTaskTitle, ValidDescription, ValidPriority, ValidSeverity);
             this.story = this.repository.CreateStory(ValidTaskTitle, ValidDescription, ValidPriority, ValidSize);
             this.bug.Assign(member);
