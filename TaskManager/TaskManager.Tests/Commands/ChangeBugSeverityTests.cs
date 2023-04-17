@@ -14,8 +14,7 @@ namespace TaskManager.Tests.Commands
     {
         private IRepository repository;
         private ICommandFactory commandFactory;
-        private IMember member;
-        private ITeam team;
+        private IMember member;        
         private IBug bug;
         private IStory story;
 
@@ -24,8 +23,7 @@ namespace TaskManager.Tests.Commands
         {
             this.repository = new Repository();
             this.commandFactory = new CommandFactory(this.repository);
-            this.member = this.repository.CreateMember(ValidMemberName);
-            this.team = this.repository.CreateTeam(ValidTeamName);            
+            this.member = this.repository.CreateMember(ValidMemberName);                     
             this.bug = this.repository.CreateBug(ValidTaskTitle, ValidDescription, ValidPriority, ValidSeverity);
             this.story = this.repository.CreateStory(ValidTaskTitle, ValidDescription, ValidPriority, ValidSize);
             this.bug.Assign(member);
