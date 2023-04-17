@@ -210,7 +210,7 @@ namespace TaskManager.Utilities
         }
         public static string Message(string type, int id, string title, PriorityType priority, SeverityType severity)
         {
-            return $"{type} with title: \"{title}\" ID: {id} PriorityType: {priority} SizeType {severity} was created";
+            return $"{type} with title: \"{title}\" ID: {id} PriorityType: {priority} SeverityType {severity} was created";
         }
         public static string Message(string type, int id, string title, int rating)
         {

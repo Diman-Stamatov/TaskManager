@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TaskManager.Models.Contracts;
 using TaskManager.Models;
 using TaskManager.Exceptions;
+using Task = TaskManager.Models.Task;
+using System.Drawing;
 
 namespace TaskManager.Tests.Models
 {
@@ -21,6 +23,24 @@ namespace TaskManager.Tests.Models
             bug = GetTestBug();
             mockAssignee = GetTestMember();
             bug.Assign(mockAssignee);
+        }
+
+        [TestMethod]
+        public void Bug_Should_ImplementIBugInterface()
+        {
+            var type = typeof(Bug);
+            var isAssignable = typeof(IBug).IsAssignableFrom(type);
+
+            Assert.IsTrue(isAssignable, "Bug class does not implement IBug interface!");
+        }
+
+        [TestMethod]
+        public void Bug_Should_DeriveFromTask()
+        {
+            var type = typeof(Bug);
+            var isAssignable = typeof(Task).IsAssignableFrom(type);
+
+            Assert.IsTrue(isAssignable, "Motorcycle class does not derive from Vehicle base class!");
         }
 
         [TestMethod]
@@ -77,6 +97,15 @@ namespace TaskManager.Tests.Models
 
             Assert.AreEqual(1, bug.StepsToReproduce.Count);
             Assert.AreEqual("1. New step to reproduce", bug.StepsToReproduce[0]);
+        }
+        [TestMethod]
+        public void StepsToReproduce_Should_ReturnCopyOfTheCollection()
+        {
+            string newStep = "New step to reproduce";
+
+            bug.StepsToReproduce.Add(newStep);
+
+            Assert.AreEqual(0, bug.StepsToReproduce.Count);
         }
 
         [TestMethod]
@@ -246,20 +275,22 @@ namespace TaskManager.Tests.Models
             Assert.IsTrue(bug.ChangesHistory.Count != 0);
         }
 
-        /* public void LogHistory_SouldPrint()
+        [TestMethod]
+        public void StepsToReproduseDisplay_ShouldPrint()
         {
-            Issue issue = TestHelpers.GetValidIssue();
-            ConsoleLogger logger = new ConsoleLogger();
-            Board.AddItem(issue);
-            var result = new StringWriter();
-            Console.SetOut(result);
-            Board.LogHistory(logger);
+            string newStep = "New step to reproduce";
 
-            Assert.IsTrue(!string.IsNullOrEmpty(result.ToString()));
-        }*/
+            bug.AddStepToReproduce(newStep);
+            string steps =  bug.StepsToReproduseDisplay();
+            Assert.IsNotNull(steps);
+        }
 
-
-
+        [TestMethod]
+        public void ToString_Should_Return_Expected_String()
+        {
+            string output = bug.ToString();
+            Assert.IsNotNull(output);
+        }
 
     }
 }
