@@ -7,7 +7,7 @@ using TaskManager.Commands;
 using TaskManager.Core.Interfaces;
 using TaskManager.Core;
 using TaskManager.Exceptions;
-
+using TaskManager.Models.Contracts;
 
 namespace TaskManager.Tests.Commands
 {
