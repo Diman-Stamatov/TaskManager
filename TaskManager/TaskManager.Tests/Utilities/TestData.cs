@@ -10,10 +10,10 @@ namespace TaskManager.Tests.Utilities
 {
     public static class TasksData
     {
-        internal const int TaskTitleMinLenght = 10;
-        internal const int TaskTitleMaxLenght = 50;
-        internal const int DiscriptionMinLenght = 10;
-        internal const int DiscriptionMaxLenght = 500;
+        internal const int TaskTitleMinLength = 10;
+        internal const int TaskTitleMaxLength = 50;
+        internal const int DescriptionMinLength = 10;
+        internal const int DescriptionMaxLength = 500;
 
         internal const BugStatusType InitialBugStatus = BugStatusType.Active;
 
@@ -46,8 +46,8 @@ namespace TaskManager.Tests.Utilities
         }
 
         public static int ValidId = 1;
-        public static string ValidTaskTitle = GetTestString(TaskTitleMinLenght);
-        public static string ValidDescription = GetTestString(DiscriptionMinLenght);
+        public static string ValidTaskTitle = GetTestString(TaskTitleMinLength);
+        public static string ValidDescription = GetTestString(DescriptionMinLength);
         public static PriorityType ValidPriority = PriorityType.Low;
         public static SeverityType ValidSeverity = SeverityType.Minor;
         public static SizeType ValidSize = SizeType.Small;
