@@ -17,7 +17,7 @@ namespace TaskManager.Models
         private string name;
         private IList<ITask> tasks;
         private IList<string> activityHistory;
-
+        public string team;
         public Board(string name)
         {
             Name = name;
@@ -62,6 +62,16 @@ namespace TaskManager.Models
             int taskId = task.Id;
             string taskType = task.GetType().Name;
             ValidateDuplicateTask(taskId, Tasks, Name, taskType);
+            if (task is Bug)
+            {
+                var foundBug = (Bug)task;
+                foundBug.TeamAssignedTo = team;
+            }
+            else if(task is Story)
+            {
+                var foundStory = (Story)task;
+                foundStory.TeamAssignedTo = team;
+            }
             tasks.Add(task);
             Log(Message(task));
         }

@@ -55,6 +55,7 @@ namespace TaskManager.Models
             ValidateDuplicateBoard(boardName, Boards, teamName);
             var board = new Board(boardName);
             boards.Add(board);
+            board.team = Name;
             Log(Message(board, teamName));
         }
         public void AddTeamMember(IMember member)

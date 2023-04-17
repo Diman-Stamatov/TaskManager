@@ -40,8 +40,8 @@ namespace TaskManager.Tests.Models
 
         [TestMethod]
         [ExpectedException(typeof(InvalidUserInputException))]
-        [DataRow(TaskTitleMinLenght - 1)]
-        [DataRow(TaskTitleMaxLenght + 1)]
+        [DataRow(TaskTitleMinLength - 1)]
+        [DataRow(TaskTitleMaxLength + 1)]
 
         public void WhenAddInvalidTitile_ShouldThrowError(int testSize)
         {
@@ -55,8 +55,8 @@ namespace TaskManager.Tests.Models
 
         [TestMethod]
         [ExpectedException(typeof(InvalidUserInputException))]
-        [DataRow(DiscriptionMinLenght - 1)]
-        [DataRow(DiscriptionMaxLenght + 1)]
+        [DataRow(DescriptionMinLength - 1)]
+        [DataRow(DescriptionMaxLength + 1)]
 
         public void WhenAddInvalidDescription_ShouldThrowError(int testSize)
         {
@@ -224,8 +224,8 @@ namespace TaskManager.Tests.Models
         public void When_BugIsAssignedToTeam_PropertyShoildNotBeNull()
         {
             ITeam team = GetTestTeam();
-            IBoard board = GetTestBoard();
-            team.Boards.Add(board);
+            team.CreateBoard("BoardTeam");
+            Board board = (Board)team.Boards[0];
             board.AddTask(bug);
             Assert.IsNotNull(bug.TeamAssignedTo);
 

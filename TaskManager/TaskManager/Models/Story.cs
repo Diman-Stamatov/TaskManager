@@ -62,6 +62,7 @@ namespace TaskManager.Models
         public string TeamAssignedTo
         {
             get => teamAssignedTo;
+            set => teamAssignedTo = value;
         }
 
         public void AdvancePriority()
