@@ -22,5 +22,6 @@ namespace TaskManager.Models.Contracts
         void Assign(IMember member);
         void Unassign();
         void AddStepToReproduce(string stepOfReproduce);
+        string StepsToReproduseDisplay();
     }
 }
