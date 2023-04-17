@@ -16,7 +16,7 @@ namespace TaskManager.Tests.Models
         [TestMethod]
         [DataRow(MemberNameMinLength - 1)]        
         [DataRow(MemberNameMaxLength + 1)]        
-        public void Member_ShouldThrow_WhenMemberName_IsInvalidLength(int testSize)
+        public void Member_ShouldThrow_WhenName_IsInvalidLength(int testSize)
         {            
             string testName = GetTestString(testSize);
 
