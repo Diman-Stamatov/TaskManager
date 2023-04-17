@@ -8,6 +8,7 @@ using TaskManager.Core.Interfaces;
 using TaskManager.Core;
 using TaskManager.Exceptions;
 using TaskManager.Models.Contracts;
+using TaskManager.Commands.Contracts;
 
 namespace TaskManager.Tests.Commands
 {
