@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-
+using TaskManager.Models;
+using TaskManager.Models.Contracts;
 
 namespace TaskManager.Tests.Utilities
 {
@@ -45,14 +45,47 @@ namespace TaskManager.Tests.Utilities
             return new string('x', size);
         }
 
+        public static int ValidId = 1;
         public static string ValidTaskTitle = GetTestString(TaskTitleMinLenght);
         public static string ValidDescription = GetTestString(DiscriptionMinLenght);
+        public static PriorityType ValidPriority = PriorityType.Low;
+        public static SeverityType ValidSeverity = SeverityType.Minor;
+        public static SizeType ValidSize = SizeType.Small;
 
         public static string ValidBoardName = GetTestString(BoardNameMinLength);
 
         public static string ValidMemberName = GetTestString(MemberNameMinLength);
 
         public static string ValidTeamName = GetTestString(TeamNameMinLength);
+        public static IMember GetTestMember()
+        {
+            return new Member(ValidMemberName);
+        }
+        public static IBug GetTestBug()
+        {
+            return new Bug(ValidId, ValidTaskTitle, ValidDescription, ValidPriority, ValidSeverity);
+        }
+        public static IFeedback GetTestFeedback()
+        {
+            return new Feedback(ValidId, ValidTaskTitle, ValidDescription, RatingMinValue);
+        }
+        public static IStory GetTestStory()
+        {
+            return new Story(ValidId, ValidTaskTitle, ValidDescription, ValidPriority, ValidSize);
+        }
+
+        public static IBoard GetTestBoard()
+        {
+            return new Board(ValidBoardName);
+        }
+        public static ITeam GetTestTeam()
+        {
+            return new Team(ValidTeamName);
+        }
+        public static IComment GetTestComment()
+        {
+            return new Comment(ValidMemberName, ValidDescription);
+        }
     }
     /*[TestMethod]
     [DataRow(AssigneeMaxLength + 1)]
