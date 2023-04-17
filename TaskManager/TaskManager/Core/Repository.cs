@@ -8,7 +8,9 @@ using TaskManager.Models.Contracts;
 using TaskManager.Models.Enums;
 using TaskManager.Core.Interfaces;
 using TaskManager.Exceptions;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleTo("TaskManager.Tests")]
 namespace TaskManager.Core
 {
     internal class Repository : IRepository
