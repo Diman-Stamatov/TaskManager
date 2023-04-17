@@ -49,25 +49,6 @@ namespace TaskManager.Tests.Commands
             Assert.IsTrue(result[2].Contains("Cccccccccc"));
         }
 
-        /*[TestMethod]
-    public void Execute_ReturnsSortedAssignees_WhenThereAreAssignees()
-    {
-        // Arrange
-        var member1 = repository.CreateMember("B");
-        var member2 = repository.CreateMember("C");
-        var member3 = repository.CreateMember("A");
-        member1.TeamAssignedTo = repository.CreateTeam("Team1");
-        member2.TeamAssignedTo = repository.CreateTeam("Team2");
-        member3.TeamAssignedTo = repository.CreateTeam("Team1");
-        var command = new ListAssigneesCommand(repository);
-
-        // Act
-        var result = command.Execute();
-
-        // Assert
-        Assert.AreEqual("A***************\nB***************\nC***************", result);
-    }*/
-
 
     }
 }
