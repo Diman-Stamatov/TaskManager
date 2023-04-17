@@ -106,7 +106,7 @@ namespace TaskManager.Core
         public IStory CreateStory(string title, string description, PriorityType priority, SizeType size)
         {
             int nextId = tasks.Count();
-            var story = new Story(nextId, title, description, priority, size);
+            var story = new Story(++nextId, title, description, priority, size);
             tasks.Add(story);
             return story;
         }
