@@ -54,4 +54,17 @@ namespace TaskManager.Tests.Utilities
 
         public static string ValidTeamName = GetTestString(TeamNameMinLength);
     }
+    /*[TestMethod]
+    [DataRow(AssigneeMaxLength + 1)]
+    [DataRow(AssigneeMaxLength + 2)]
+    [DataRow(AssigneeMinLength - 1)]
+    [DataRow(AssigneeMinLength - 2)]
+    public void Task_ShouldThrow_WhenAssigneeIsInvalidLength(int testSize)
+    {
+        string validTitle = GetTestString(TitleMaxLength);
+        string testAssignee = GetTestString(testSize);
+
+        Assert.ThrowsException<ArgumentException>(() =>
+        new Task(validTitle, testAssignee, ValidDate));
+    }*/
 }
