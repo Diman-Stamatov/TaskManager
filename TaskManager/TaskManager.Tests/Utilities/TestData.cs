@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManager.Core.Interfaces;
+using TaskManager.Core;
 using TaskManager.Models;
 using TaskManager.Models.Contracts;
 
@@ -85,6 +87,11 @@ namespace TaskManager.Tests.Utilities
         public static IComment GetTestComment()
         {
             return new Comment(ValidMemberName, ValidDescription);
+        }
+
+        public static IRepository GetTestRepository()
+        {
+            return new Repository();
         }
     }
     /*[TestMethod]
