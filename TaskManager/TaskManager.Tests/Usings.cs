@@ -1,5 +1,8 @@
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 global using TaskManager.Models.Enums;
+global using TaskManager.Models.Contracts;
+global using TaskManager.Models;
+global using TaskManager.Commands.Contracts;
 global using static TaskManager.Tests.Utilities.TasksData;
 global using static TaskManager.Tests.Utilities.BoardData;
 global using static TaskManager.Tests.Utilities.MemberData;

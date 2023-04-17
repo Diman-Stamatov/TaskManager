@@ -216,8 +216,14 @@ namespace TaskManager.Models
         {
             StringBuilder bugInfo = new StringBuilder();
             int number = 1;
+            
             bugInfo.AppendLine($"List of steps to reproduce it:");
             bugInfo.AppendLine(GenerateString('=', 10));
+            if (stepsToReproduce.Count == 0)
+            {
+                bugInfo.AppendLine("No steps to reproduce added yet!");
+                bugInfo.AppendLine(GenerateString('=', 10));
+            }
             foreach (var step in stepsToReproduce)
             {
                 bugInfo.AppendLine($"{number++}. {step}");
