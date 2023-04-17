@@ -48,9 +48,9 @@ namespace TaskManager.Tests.Utilities
         public static int ValidId = 1;
         public static string ValidTaskTitle = GetTestString(TaskTitleMinLenght);
         public static string ValidDescription = GetTestString(DiscriptionMinLenght);
-        public static PriorityType ValidPriority = PriorityType.Low;
-        public static SeverityType ValidSeverity = SeverityType.Minor;
-        public static SizeType ValidSize = SizeType.Small;
+        public static PriorityType ValidPriority = PriorityType.Medium;
+        public static SeverityType ValidSeverity = SeverityType.Major;
+        public static SizeType ValidSize = SizeType.Medium;
 
         public static string ValidBoardName = GetTestString(BoardNameMinLength);
 
