@@ -242,7 +242,7 @@ namespace TaskManager.Models
             bugInfo.AppendLine($"Status: {Status}");
             if (Assignee == null)
             {
-                bugInfo.AppendLine($"Assigned to: Nobody yet");
+                bugInfo.AppendLine($"Assigned to: Nobody yet.");
             }
             else
             {
