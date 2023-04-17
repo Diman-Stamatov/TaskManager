@@ -20,5 +20,6 @@ namespace TaskManager.Models.Contracts
         string FullInfo();
         string ShowActivityLog();
         string PrintTasks();
+        IComment CreateComment(string content);
     }
 }

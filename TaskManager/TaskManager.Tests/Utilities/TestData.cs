@@ -10,10 +10,10 @@ namespace TaskManager.Tests.Utilities
 {
     public static class TasksData
     {
-        internal const int TaskTitleMinLenght = 10;
-        internal const int TaskTitleMaxLenght = 50;
-        internal const int DiscriptionMinLenght = 10;
-        internal const int DiscriptionMaxLenght = 500;
+        internal const int TaskTitleMinLength = 10;
+        internal const int TaskTitleMaxLength = 50;
+        internal const int DescriptionMinLength = 10;
+        internal const int DescriptionMaxLength = 500;
 
         internal const BugStatusType InitialBugStatus = BugStatusType.Active;
 
