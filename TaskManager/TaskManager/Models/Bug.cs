@@ -77,6 +77,7 @@ namespace TaskManager.Models
         public string TeamAssignedTo
         {
             get => teamAssignedTo;
+            private set => teamAssignedTo = value;  
         }
 
         public void AddStepToReproduce(string stepOfReproduce)

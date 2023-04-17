@@ -172,13 +172,6 @@ namespace TaskManager.Tests.Models
 
         public void AdvancePriority_ShouldThrowException_WhenOutsideEnum()
         {
-            int id = 1;
-            string title = ValidTaskTitle;
-            string description = ValidDescription;
-            PriorityType priority = PriorityType.Medium;
-            SeverityType severity = SeverityType.Major;
-            Bug bug = new Bug(id, title, description, priority, severity);
-            bug.Assign(mockAssignee);
             bug.AdvancePriority();
             bug.AdvancePriority();
         }
@@ -188,13 +181,6 @@ namespace TaskManager.Tests.Models
 
         public void RevertPriority_ShouldThrowException_WhenOutsideEnum()
         {
-            int id = 1;
-            string title = ValidTaskTitle;
-            string description = ValidDescription;
-            PriorityType priority = PriorityType.Medium;
-            SeverityType severity = SeverityType.Major;
-            Bug bug = new Bug(id, title, description, priority, severity);
-            bug.Assign(mockAssignee);
             bug.RevertPriority();
             bug.RevertPriority();
         }
@@ -204,13 +190,6 @@ namespace TaskManager.Tests.Models
 
         public void AdvanceSeverity_ShouldThrowException_WhenOutsideEnum()
         {
-            int id = 1;
-            string title = ValidTaskTitle;
-            string description = ValidDescription;
-            PriorityType priority = PriorityType.Medium;
-            SeverityType severity = SeverityType.Major;
-            Bug bug = new Bug(id, title, description, priority, severity);
-            bug.Assign(mockAssignee);
             bug.AdvanceSeverity();
             bug.AdvanceSeverity();
         }
@@ -220,15 +199,67 @@ namespace TaskManager.Tests.Models
 
         public void RevertSeverity_ShouldThrowException_WhenOutsideEnum()
         {
-            int id = 1;
-            string title = ValidTaskTitle;
-            string description = ValidDescription;
-            PriorityType priority = PriorityType.Medium;
-            SeverityType severity = SeverityType.Major;
-            Bug bug = new Bug(id, title, description, priority, severity);
-            bug.Assign(mockAssignee);
             bug.RevertSeverity();
             bug.RevertSeverity();
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUserInputException))]
+        public void RevertStatus_ShouldThrowException_WhenOutsideEnum()
+        {
+            bug.AdvanceStatus();
+            bug.RevertStatus();
+            bug.RevertStatus();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUserInputException))]
+        public void AdvancedStatus_ShouldThrowException_WhenOutsideEnum()
+        {
+            bug.AdvanceStatus();
+            bug.AdvanceStatus();
+        }
+
+        [TestMethod]
+        public void When_BugIsAssignedToTeam_PropertyShoildNotBeNull()
+        {
+            ITeam team = GetTestTeam();
+            IBoard board = GetTestBoard();
+            team.Boards.Add(board);
+            board.AddTask(bug);
+            Assert.IsNotNull(bug.TeamAssignedTo);
+
+        }
+
+        [TestMethod]
+        public void AddComment_ShoulAddItToTheListOfCommentsBug()
+        {
+            bug.AddComment(GetTestComment());
+            Assert.IsTrue(bug.Comments.Count() != 0);
+        }
+
+        [TestMethod]
+
+        public void ActionConserningBug_ShouldBeAddToLog()
+        {
+            bug.AddComment(GetTestComment());
+            Assert.IsTrue(bug.ChangesHistory.Count != 0);
+        }
+
+        /* public void LogHistory_SouldPrint()
+        {
+            Issue issue = TestHelpers.GetValidIssue();
+            ConsoleLogger logger = new ConsoleLogger();
+            Board.AddItem(issue);
+            var result = new StringWriter();
+            Console.SetOut(result);
+            Board.LogHistory(logger);
+
+            Assert.IsTrue(!string.IsNullOrEmpty(result.ToString()));
+        }*/
+
+
+
+
     }
 }
