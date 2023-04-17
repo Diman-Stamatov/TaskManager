@@ -40,7 +40,7 @@ namespace TaskManager.Tests.Models
             var type = typeof(Bug);
             var isAssignable = typeof(Task).IsAssignableFrom(type);
 
-            Assert.IsTrue(isAssignable, "Motorcycle class does not derive from Vehicle base class!");
+            Assert.IsTrue(isAssignable, "Bug class does not derive from Task base class!");
         }
 
         [TestMethod]
@@ -268,7 +268,6 @@ namespace TaskManager.Tests.Models
         }
 
         [TestMethod]
-
         public void ActionConserningBug_ShouldBeAddToLog()
         {
             bug.AddComment(GetTestComment());
@@ -286,10 +285,18 @@ namespace TaskManager.Tests.Models
         }
 
         [TestMethod]
-        public void ToString_Should_Return_Expected_String()
+        public void ToString_Should_Return_String()
         {
             string output = bug.ToString();
             Assert.IsNotNull(output);
+        }
+
+        [TestMethod]
+        public void WhenBugIsNotAssigne_OutputShouldContaune()
+        {
+            IBug unassigneBug = GetTestBug();
+            string output = unassigneBug.ToString();
+            Assert.IsTrue(output.Contains("Assigned to: Nobody yet."));
         }
 
     }
