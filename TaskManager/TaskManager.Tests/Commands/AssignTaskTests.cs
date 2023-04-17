@@ -17,6 +17,8 @@ namespace TaskManager.Tests.Commands
         private IMember member;
         private ITeam team;
         private IBug bug;
+        private IStory story;
+        private IFeedback feedback;
 
         [TestInitialize]
         public void InitTest()
@@ -24,10 +26,10 @@ namespace TaskManager.Tests.Commands
             this.repository = new Repository();
             this.commandFactory = new CommandFactory(this.repository);
             this.member = this.repository.CreateMember(ValidMemberName);
-            this.team = this.repository.CreateTeam(ValidTeamName);
-            this.team.AddTeamMember(member);
+            this.team = this.repository.CreateTeam(ValidTeamName);            
             this.bug = this.repository.CreateBug(ValidTaskTitle, ValidDescription, ValidPriority, ValidSeverity);
-
+            this.story = this.repository.CreateStory(ValidTaskTitle, ValidDescription, ValidPriority, ValidSize);
+            this.feedback = this.repository.CreateFeedback(ValidTaskTitle, ValidDescription, RatingMinValue);
         }
 
         [TestMethod]
@@ -41,7 +43,8 @@ namespace TaskManager.Tests.Commands
         [TestMethod]
         public void Command_ShouldThrow_WhenIdIsInvalid()
         {
-            ICommand command = this.commandFactory.Create($"AssignTask 2 {ValidMemberName}");
+            this.team.AddTeamMember(member);
+            ICommand command = this.commandFactory.Create($"AssignTask 4 {ValidMemberName}");
             Assert.ThrowsException<EntryNotFoundException>(() =>
             command.Execute());
         }
@@ -55,9 +58,30 @@ namespace TaskManager.Tests.Commands
         }
 
         [TestMethod]
-        public void Command_ShouldAdd_WhenDataIsValid()
+        public void Command_ShouldThrow_WhenAssigneeNotOnATeam()
         {
-            ICommand command = this.commandFactory.Create($"AssignTask 1 {ValidMemberName}");            
+            
+            ICommand command = this.commandFactory.Create($"AssignTask 1 {ValidMemberName}");
+            Assert.ThrowsException<InvalidUserInputException>(() =>
+            command.Execute());
+        }
+
+        [TestMethod]
+        public void Command_ShouldThrow_WhenTaskIsFeedback()
+        {
+            this.team.AddTeamMember(member);
+            ICommand command = this.commandFactory.Create($"AssignTask 3 {ValidMemberName}");
+            Assert.ThrowsException<InvalidUserInputException>(() =>
+            command.Execute());
+        }
+
+        [TestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        public void Command_ShouldAdd_WhenDataIsValid(int testValue)
+        {
+            this.team.AddTeamMember(member);
+            ICommand command = this.commandFactory.Create($"AssignTask {testValue} {ValidMemberName}");            
             command.Execute();
             Assert.AreEqual(1, this.member.Tasks.Count);
         }
