@@ -71,7 +71,7 @@ namespace TaskManager.Tests.Commands
         }
 
         [TestMethod]
-        public void ShouldReturn_BugsSortedByRating()
+        public void ShouldReturn_FeedbackSortedByRating()
         {
             repository.CreateFeedback(ValidTaskTitle, ValidDescription, 5);
             repository.CreateFeedback(ValidTaskTitle, ValidDescription, 4);

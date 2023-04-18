@@ -87,7 +87,7 @@ namespace TaskManager.Tests.Commands
         }
 
         [TestMethod]
-        public void ShouldReturn_BugsSortedBySize()
+        public void ShouldReturn_StoriesSortedBySize()
         {
             repository.CreateStory(ValidTaskTitle, ValidDescription, PriorityType.Medium, SizeType.Medium);
             repository.CreateStory(ValidTaskTitle, ValidDescription, PriorityType.High, SizeType.Small);
