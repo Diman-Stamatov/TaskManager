@@ -74,7 +74,7 @@ namespace TaskManager.Commands
 
                 if (stories.Count == 0)
                 {
-                    throw new InvalidUserInputException("None of the logged stories correspond to your search parameters!");
+                    Console.WriteLine("None of the logged stories correspond to your search parameters!");
                 }
 
                 foreach (Story story in stories)

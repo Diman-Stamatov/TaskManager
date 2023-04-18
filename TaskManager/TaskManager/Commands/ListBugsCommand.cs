@@ -70,7 +70,7 @@ namespace TaskManager.Commands
             }
             if (bugs.Count == 0)
             {
-                throw new InvalidUserInputException("None of the logged bugs correspond to your search parameters!");
+                Console.WriteLine("None of the logged bugs correspond to your search parameters!");
             }
             foreach (Bug bug in bugs)
             {

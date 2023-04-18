@@ -115,7 +115,7 @@ namespace TaskManager.Commands
 
             if (taskDisplay.Length == 0)
             {
-                throw new InvalidUserInputException("There is no information that meets the conditions!");
+                Console.WriteLine("There is no information that meets the conditions!");
             }
 
             return taskDisplay.ToString().Trim();

@@ -66,7 +66,7 @@ namespace TaskManager.Commands
 
             if (feedbacks.Count == 0)
             {
-                throw new InvalidUserInputException("None of the logged feedback correspond to your search parameters!");
+                Console.WriteLine("None of the logged feedback correspond to your search parameters!");
             }
 
             foreach (Feedback feedback in feedbacks)

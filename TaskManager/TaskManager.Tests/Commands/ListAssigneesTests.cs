@@ -23,7 +23,7 @@ namespace TaskManager.Tests.Commands
         [TestInitialize]
         public void InitTest()
         {
-            this.repository = new Repository();
+            repository = new Repository();
             command = new ListAssigneesCommand(repository);
         }
 
