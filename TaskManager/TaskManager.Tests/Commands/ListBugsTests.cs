@@ -18,7 +18,8 @@ namespace TaskManager.Tests.Commands
         private ICommandFactory commandFactory;
         private ICommand command;
         List<string> list = new List<string>()
-        { "SortByPriority",
+        { 
+          "SortByPriority",
           "SortBySeverity",
           "FilterActive",
           "FilterFixed",
@@ -68,7 +69,7 @@ namespace TaskManager.Tests.Commands
         }
 
         [TestMethod]
-        public void Should_ShowMessage_When_ThereAreNoBugsMeetingTheConditions()
+        public void Should_ShowMessage_When_ThereAreNoBugsMeetsTheConditions()
         {
             repository.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.Low, SeverityType.Critical);
             command = commandFactory.Create($"ListBugs FilterFixed");
