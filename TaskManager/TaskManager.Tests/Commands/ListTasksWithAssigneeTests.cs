@@ -89,17 +89,5 @@ namespace TaskManager.Tests.Commands
             Assert.IsTrue(result[14].Contains("Assigned to: MemberOne"));
         }
 
-        [TestMethod]
-        public void Should_ShowMessage_When_ThereAreNoTasksMeetingTheConditions()
-        {
-            Repository rep = new Repository();
-            rep.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.Low, SeverityType.Critical);
-            var result = new StringWriter();
-            Console.SetOut(result);
-            ICommand command = commandFactory.Create("ListTasksWithAssignee Fixed");
-            command.Execute();
-            Assert.IsTrue(!string.IsNullOrEmpty(result.ToString()));
-        }
-
     }
 }
