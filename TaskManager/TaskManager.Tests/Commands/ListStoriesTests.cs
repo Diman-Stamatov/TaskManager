@@ -48,7 +48,6 @@ namespace TaskManager.Tests.Commands
         [TestMethod]
         public void Command_ShouldExecuteWithAllCorectInputs()
         {
-
             repository.CreateStory(ValidTaskTitle, ValidDescription, PriorityType.Medium, SizeType.Medium);
             repository.CreateStory(ValidTaskTitle, ValidDescription, PriorityType.High, SizeType.Small);
             repository.CreateStory(ValidTaskTitle, ValidDescription, PriorityType.Low, SizeType.Large);

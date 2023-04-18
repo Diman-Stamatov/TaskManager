@@ -46,9 +46,9 @@ namespace TaskManager.Tests.Commands
         }
 
         [TestMethod]
+
         public void Command_ShouldExecuteWithAllCorectInputs()
         {
-
             repository.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.Medium, SeverityType.Minor);
             repository.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.High, SeverityType.Major);
             repository.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.Low,SeverityType.Critical);
@@ -69,6 +69,7 @@ namespace TaskManager.Tests.Commands
         }
 
         [TestMethod]
+
         public void Should_ShowMessage_When_ThereAreNoBugsMeetsTheConditions()
         {
             repository.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.Low, SeverityType.Critical);
@@ -80,6 +81,7 @@ namespace TaskManager.Tests.Commands
         }
 
         [TestMethod]
+
         public void ShouldReturn_BugsSortedByTitle()
         {
             repository.CreateBug("Abaaaaaaaaaa", ValidDescription, PriorityType.Medium, SeverityType.Minor);
