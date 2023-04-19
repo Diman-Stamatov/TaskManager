@@ -19,11 +19,9 @@ namespace TaskManager.Tests.Commands
         public void InitTest()
         {
             repository = new Repository();
-            var board1 = repository.CreateBoard("BoarsOne");
-            var board2 = repository.CreateBoard("BoardTwo");
             Team team1 = (Team)repository.CreateTeam("Team1");
-            team1.Boards.Add(board1);
-            team1.Boards.Add(board2);
+            team1.CreateBoard("BoarsOne");
+            team1.CreateBoard("BoardTwo");
             commandFactory = new CommandFactory(repository);
         }
 
