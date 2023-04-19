@@ -49,6 +49,5 @@ namespace TaskManager.Tests.Commands
             Assert.IsTrue(result[2].Contains("Cccccccccc"));
         }
 
-
     }
 }
