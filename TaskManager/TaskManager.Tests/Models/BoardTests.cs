@@ -15,15 +15,15 @@ namespace TaskManager.Tests.Models
     [TestClass]
     public class BoardTests
     {
-        private IBoard board;
-        private static IBug mockBug;
-        private static IStory mockStory;
-        private static IFeedback mockFeedback;
+        private IBoard mockBoard;
+        private IBug mockBug;
+        private IStory mockStory;
+        private IFeedback mockFeedback;
 
         [TestInitialize]
         public void Initialize()
         {
-            board = GetTestBoard();
+            mockBoard = GetTestBoard();
             mockBug = GetTestBug();
             mockStory = GetTestStory();
             mockFeedback = GetTestFeedback();
@@ -62,34 +62,31 @@ namespace TaskManager.Tests.Models
         [TestMethod]
         public void TaskShouldAddBug_When_BugIsValid()
         {
-            board.AddTask(mockBug);
-            Assert.IsNotNull(board.Tasks);
-            Assert.AreEqual(1, board.Tasks.Count);
-            Assert.IsInstanceOfType(board.Tasks[0], typeof(Bug));
+            mockBoard.AddTask(mockBug);
+            Assert.AreEqual(1, mockBoard.Tasks.Count);
+            Assert.IsInstanceOfType(mockBoard.Tasks[0], typeof(Bug));
         }
 
         [TestMethod]
         public void TaskShoudAddStory_When_StoryIsValid()
         {
-            board.AddTask(mockStory);
-            Assert.IsNotNull(board.Tasks);
-            Assert.AreEqual(1, board.Tasks.Count());
-            Assert.IsInstanceOfType(board.Tasks[0], typeof(Story));
+            mockBoard.AddTask(mockStory);
+            Assert.AreEqual(1, mockBoard.Tasks.Count());
+            Assert.IsInstanceOfType(mockBoard.Tasks[0], typeof(Story));
         }
 
         [TestMethod]
         public void TaskShoudAddFeedback_When_FeedbackIsValid()
         {
-            board.AddTask(mockFeedback);
-            Assert.IsNotNull(board.Tasks);
-            Assert.AreEqual(1, board.Tasks.Count());
-            Assert.IsInstanceOfType(board.Tasks[0], typeof(Feedback));
+            mockBoard.AddTask(mockFeedback);
+            Assert.AreEqual(1, mockBoard.Tasks.Count());
+            Assert.IsInstanceOfType(mockBoard.Tasks[0], typeof(Feedback));
         }
 
         [TestMethod]
         public void ToString_Should_Return_String_Value()
         {
-            string output = board.ToString();
+            string output = mockBoard.ToString();
             Assert.IsNotNull(output);
             Assert.IsInstanceOfType(output, typeof(string));
         }
