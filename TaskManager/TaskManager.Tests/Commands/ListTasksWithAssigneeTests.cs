@@ -28,34 +28,7 @@ namespace TaskManager.Tests.Commands
         [TestInitialize]
         public void InitTest()
         {
-            repository = new Repository();
-            repository.CreateStory(ValidTaskTitle, ValidDescription, PriorityType.Medium, SizeType.Medium);
-            repository.CreateStory(ValidTaskTitle, ValidDescription, PriorityType.High, SizeType.Small);
-            repository.CreateStory(ValidTaskTitle, ValidDescription, PriorityType.Low, SizeType.Large);
-            repository.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.Medium, SeverityType.Minor);
-            repository.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.High, SeverityType.Major);
-            repository.CreateBug(ValidTaskTitle, ValidDescription, PriorityType.Low, SeverityType.Critical);
-            var member2 = repository.CreateMember("MemberOne");
-            var member3 = repository.CreateMember("SomeRandom");
-            Team team1 = (Team)repository.CreateTeam("Team1");
-            team1.AddTeamMember(member2);
-            team1.AddTeamMember(member3);
-            Story story = (Story)repository.Tasks[0];
-            story.Assign(member2);
-            Story story2 = (Story)repository.Tasks[1];
-            story2.Assign(member3);
-            story2.AdvanceStatus();
-            Story story3 = (Story)repository.Tasks[2];
-            story3.Assign(member3);
-            story3.AdvanceStatus();
-            story3.AdvanceStatus();
-            Bug bug = (Bug)repository.Tasks[3];
-            bug.Assign(member2);
-            bug.AdvanceStatus();
-            Bug bug2 = (Bug)repository.Tasks[4];
-            bug2.Assign(member3);
-            Bug bug3 = (Bug)repository.Tasks[5];
-            bug3.Assign(member2);
+            repository = GetTestRepository();
             commandFactory = new CommandFactory(repository);
 
         }
