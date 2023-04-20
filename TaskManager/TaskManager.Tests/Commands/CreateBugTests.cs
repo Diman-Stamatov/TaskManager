@@ -9,6 +9,11 @@ namespace TaskManager.Tests.Commands
     {
         private IRepository repository;
         private ICommandFactory commandFactory;
+        private ITeam mockTeam;
+        private IMember mockMember;
+        private IStory mockStory;
+        private IBug mockBug;
+        private IFeedback mockFeedback;
 
         [TestInitialize]
         public void Initialize()
