@@ -21,7 +21,7 @@ namespace TaskManager.Tests.Commands
             repository = new Repository();
             var member2 = repository.CreateMember("MemberOne");
             var member3 = repository.CreateMember("SomeRandom");
-            Team team1 = (Team)repository.CreateTeam("Team1"); 
+            var team1 = repository.CreateTeam("Team1"); 
             team1.AddTeamMember(member2);
             team1.AddTeamMember(member3);
             commandFactory = new CommandFactory(repository);
