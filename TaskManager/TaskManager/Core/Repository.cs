@@ -67,12 +67,6 @@ namespace TaskManager.Core
             return member;
         }
 
-        public IBoard CreateBoard(string name)
-        {
-            var board = new Board(name);
-            return board;
-        }
-
         public ITeam CreateTeam(string name)
         {
             var team = new Team(name);
