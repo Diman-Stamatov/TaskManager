@@ -19,12 +19,14 @@ namespace TaskManager.Tests.Commands
     {
         private IRepository repository;
         private ICommand command;
+        private ICommandFactory commandFactory;
 
         [TestInitialize]
         public void InitTest()
         {
             repository = new Repository();
             command = new ListAssigneesCommand(repository);
+            commandFactory = new CommandFactory(repository);
         }
 
         [TestMethod]
@@ -43,6 +45,7 @@ namespace TaskManager.Tests.Commands
             team1.AddTeamMember(member3);
             team1.AddTeamMember(member2);
             team1.AddTeamMember(member1);
+            ICommand command = commandFactory.Create("ListAssignees");
             List<string> result = command.Execute().Split(Environment.NewLine).ToList();
             Assert.IsTrue(result[0].Contains("Aaaaaaaaaa"));
             Assert.IsTrue(result[1].Contains("Bbbbbbbbbb"));
