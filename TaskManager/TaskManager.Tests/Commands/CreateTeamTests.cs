@@ -46,5 +46,14 @@ namespace TaskManager.Tests.Commands
             command.Execute();
             Assert.IsTrue(repository.MemberExists(ValidTeamName));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUserInputException))]
+        public void CommandShouldThrow_When_TeamaAlreadyExists()
+        {
+            ICommand command = commandFactory.Create($"CreateTeam {ValidTeamName}");
+            command.Execute();
+            command.Execute();
+        }
     }
 }

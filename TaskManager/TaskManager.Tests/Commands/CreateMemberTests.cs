@@ -47,5 +47,14 @@ namespace TaskManager.Tests.Commands
             Assert.AreEqual(1, repository.Members.Count);
             Assert.IsTrue(repository.MemberExists(ValidMemberName));
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUserInputException))]
+        public void CommandShouldThrow_When_MemberAlreadyExists()
+        {
+            ICommand command = commandFactory.Create($"CreateMember {ValidMemberName}");
+            command.Execute();
+            command.Execute();
+        }
     }
 }

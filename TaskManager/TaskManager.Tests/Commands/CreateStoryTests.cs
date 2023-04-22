@@ -46,5 +46,14 @@ namespace TaskManager.Tests.Commands
             command.Execute();
             Assert.IsTrue(repository.GetTask(1).Id == 1);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidUserInputException))]
+        public void CommandShouldThrow_When_StioryAlreadyExists()
+        {
+            ICommand command = commandFactory.Create($"CreateStory {ValidTaskTitle} {ValidDescription} {ValidPriority} {ValidSize} ");
+            command.Execute();
+            command.Execute();
+        }
     }
 }
