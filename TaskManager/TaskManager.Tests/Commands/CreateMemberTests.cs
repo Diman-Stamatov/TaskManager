@@ -49,7 +49,7 @@ namespace TaskManager.Tests.Commands
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidUserInputException))]
+        [ExpectedException(typeof(DuplicateEntryException))]
         public void CommandShouldThrow_When_MemberAlreadyExists()
         {
             ICommand command = commandFactory.Create($"CreateMember {ValidMemberName}");
