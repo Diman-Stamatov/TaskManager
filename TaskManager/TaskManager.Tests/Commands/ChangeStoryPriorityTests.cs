@@ -87,5 +87,17 @@ namespace TaskManager.Tests.Commands
             command.Execute();
         }
 
+        //[TestMethod]
+        //[ExpectedException(typeof(InvalidUserInputException))]
+        //public void Command_ShouldThrow_AssigneeIsNull()
+        //{
+        //    //ToDo не работи както и да го пробвам
+        //   //var unnassignedStory = repository.CreateStory(ValidTaskTitle, ValidDescription, ValidPriority, ValidSize);
+        //   //unnassignedStory.RevertPriority();
+        //    mockStory.Unassign();
+        //    mockStory.AdvancePriority();
+        //    mockStory.RevertPriority();
+
+        //}
     }
 }

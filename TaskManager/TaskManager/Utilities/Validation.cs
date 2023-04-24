@@ -82,15 +82,15 @@ namespace TaskManager.Utilities
                 throw new InvalidUserInputException(errorMessage);
             }
         }
-        public static void ValidateDuplicateTeam(string teamName, IList<ITeam> teams)
-        {
-            bool duplicateName = teams.Any(team=>team.Name == teamName);
-            if (duplicateName == true)
-            {
-                string errorMessage = string.Format(DuplicateTeamMessage, teamName);
-                throw new DuplicateEntryException(errorMessage);
-            }
-        }
+        //public static void ValidateDuplicateTeam(string teamName, IList<ITeam> teams)
+        //{
+        //    bool duplicateName = teams.Any(team=>team.Name == teamName);
+        //    if (duplicateName == true)
+        //    {
+        //        string errorMessage = string.Format(DuplicateTeamMessage, teamName);
+        //        throw new DuplicateEntryException(errorMessage);
+        //    }
+        //}
         public static void ValidateDuplicateTeamMember(string memberName, IList<IMember> members)
         {
             bool duplicateName = members.Any(member => member.Name == memberName);
@@ -100,15 +100,15 @@ namespace TaskManager.Utilities
                 throw new DuplicateEntryException(errorMessage);
             }
         }
-        public static void ValidateDuplicateEmpoyee(string employeeName, IList<IMember> employees)
-        {
-            bool duplicateName = employees.Any(member => member.Name == employeeName);
-            if (duplicateName == true)
-            {
-                string errorMessage = string.Format(DuplicateEmployeeMessage, employeeName);
-                throw new DuplicateEntryException(errorMessage);
-            }
-        }
+        //public static void ValidateDuplicateEmpoyee(string employeeName, IList<IMember> employees)
+        //{
+        //    bool duplicateName = employees.Any(member => member.Name == employeeName);
+        //    if (duplicateName == true)
+        //    {
+        //        string errorMessage = string.Format(DuplicateEmployeeMessage, employeeName);
+        //        throw new DuplicateEntryException(errorMessage);
+        //    }
+        //}
         public static void ValidateDuplicateBoard(string boardName, IList<IBoard> boards, string teamName)
         {
             bool duplicateBoardName = boards.Any(board => board.Name == boardName);
