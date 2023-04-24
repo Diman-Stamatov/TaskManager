@@ -42,7 +42,7 @@ namespace TaskManager.Tests.Commands
             ICommand command = commandFactory.Create("ChangeStoryPriority");
             command.Execute();
         }
-        // не му слагай човече и тествай дали хвърля правилната грешка
+       
 
         [TestMethod]
         [ExpectedException(typeof(InvalidUserInputException))]
